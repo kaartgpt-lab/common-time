@@ -1,5 +1,5 @@
 // App.jsx
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Link } from "react-router-dom";
 import { FaInstagram } from "react-icons/fa";
 import Home from "./Home.jsx";
 import TermsPage from "./Terms.jsx";
@@ -44,8 +44,8 @@ export default function App() {
       {/* Footer */}
       <footer style={footerStyles.footer}>
         <p>© {new Date().getFullYear()} Common Time • All rights reserved</p>
-        <a
-          href="/terms"
+        <Link
+          to="/terms"
           style={{
             color: "#0f172a",
             textDecoration: "none",
@@ -55,7 +55,7 @@ export default function App() {
           }}
         >
           Terms & Conditions
-        </a>
+        </Link>
       </footer>
     </div>
   );

@@ -1,0 +1,2 @@
+- [x] Edit src/App.jsx: Import Link from react-router-dom and replace <a href="/terms"> with <Link to="/terms"> in the footer
+- [ ] Test the navigation by running the app and clicking the Terms & Conditions link
