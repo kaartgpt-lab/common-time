@@ -1,4 +1,3 @@
-// App.jsx
 import { Routes, Route, Link } from "react-router-dom";
 import { FaInstagram } from "react-icons/fa";
 import Home from "./Home.jsx";
@@ -18,7 +17,12 @@ export default function App() {
               alt="Common Time Logo"
               style={{ height: "32px", width: "32px", objectFit: "contain" }}
             />
-            <div style={headerStyles.brand}>Common Time</div>
+            {/* Brand Name with two fonts */}
+            <div style={headerStyles.brand}>
+              <span style={headerStyles.commonText}>COMMON </span>
+              {"  "}
+              <span style={headerStyles.timeText}>TIME</span>
+            </div>
           </div>
           <nav style={headerStyles.headerSocials}>
             <a
@@ -68,7 +72,7 @@ const headerStyles = {
     top: 0,
     zIndex: 50,
     width: "100vw",
-    background: "#ffffff", // changed to white
+    background: "#ffffff",
     borderBottom: "1px solid #e5e7eb",
   },
   headerInner: {
@@ -81,13 +85,25 @@ const headerStyles = {
     gap: 12,
   },
   brand: {
-    fontFamily: '"Manrope", sans-serif',
-    fontWeight: 700,
-    letterSpacing: "-0.02em",
+    display: "flex",
+    alignItems: "center",
+    gap: "4px",
     fontSize: "var(--brand-size, 32px)",
     lineHeight: 1.1,
-    whiteSpace: "nowrap",
-    color: "#0f172a", // text black
+  },
+  commonText: {
+    fontFamily: '"Bai Jamjuree", sans-serif',
+    fontWeight: 200,
+    color: "#0f172a",
+    letterSpacing: "-0.02em",
+  },
+  timeText: {
+    fontFamily: '"Garet Book", sans-serif',
+    fontWeight: 900,
+    fontStyle: "italic",
+    color: "#0f172a",
+    opacity: 0.9,
+    letterSpacing: "-0.02em",
   },
   headerSocials: {
     display: "flex",
@@ -97,7 +113,7 @@ const headerStyles = {
   },
   socialLink: {
     fontSize: 18,
-    color: "#0f172a", // text black
+    color: "#0f172a",
     border: "1px solid #e5e7eb",
     borderRadius: "50%",
     width: "var(--social-size, 40px)",
@@ -114,8 +130,8 @@ const footerStyles = {
     fontFamily: '"Poppins", sans-serif',
     textAlign: "center",
     padding: "24px 0 36px",
-    color: "#0f172a", // changed to black
-    backgroundColor: "#ffffff", // changed to white
+    color: "#0f172a",
+    backgroundColor: "#ffffff",
     fontSize: 14,
     lineHeight: 1.5,
   },
