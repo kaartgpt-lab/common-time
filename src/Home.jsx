@@ -59,12 +59,14 @@ export default function Home() {
                 Common Time was created with a simple belief — that coffee can
                 be a lens to see the world through.
                 <br />
+                <br />
                 It's our way of exploring culture, design, people, and places —
                 one cup at a time. We started in Lodhi Colony, New Delhi — a
                 neighbourhood that reflects who we are: creative, curious, and
                 full of character. Here, we're building more than a café. We're
                 building a space where ideas meet craft, and everyday rituals
                 become experiences worth remembering.
+                <br />
                 <br />
                 The name Common Time isn't limited to coffee — it's an open
                 frame, a rhythm where many things can exist together. Art,
@@ -74,13 +76,18 @@ export default function Home() {
                 represents how modern coffee culture can be expressive,
                 intentional, and endlessly evolving.
                 <br />
+                <br />
                 For us, coffee is the beginning — not the boundary. Welcome to
                 Common Time — lets travel the world with coffee.
-                <br /> — Jaivardhan Bhatia & Sagar Bhatia, Common Time
+                <br />
+                <br />— Jaivardhan Bhatia & Sagar Bhatia, Common Time
               </p>
             </Accordion.Item>
             <Accordion.Item title="Location">
-              <p>2&3 meherkchand market , lodhi colony, New Delhi</p>
+              <p>
+                2&3 Meherkchand market <br /> Lodhi colony
+                <br /> New Delhi
+              </p>
             </Accordion.Item>
             <Accordion.Item title="Timings">
               <p>6am to 10pm everyday</p>
@@ -172,7 +179,7 @@ Accordion.Item = function AccordionItem({ title, children }) {
         }}
       >
         <div ref={innerRef} style={styles.panelInner}>
-          {children}
+          <p style={styles.panelInnerP}>{children.props.children}</p>
         </div>
       </div>
     </div>
@@ -251,6 +258,12 @@ const styles = {
     padding: "0 20px 18px",
     color: "#000000",
     fontFamily: '"Poppins", sans-serif',
+    display: "flex",
+    justifyContent: "center", // center horizontally
+  },
+  panelInnerP: {
+    maxWidth: 600, // limit width of paragraph
+    textAlign: "left", // center text inside paragraph
   },
 
   partners: {
