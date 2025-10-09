@@ -54,8 +54,42 @@ export default function Home() {
       <main style={styles.main}>
         <div style={styles.accordionWrap}>
           <Accordion>
+            <Accordion.Item title="Philosophy">
+              <p>
+                Common Time was created with a simple belief — that coffee can
+                be a lens to see the world through.
+                <br />
+                It's our way of exploring culture, design, people, and places —
+                one cup at a time. We started in Lodhi Colony, New Delhi — a
+                neighbourhood that reflects who we are: creative, curious, and
+                full of character. Here, we're building more than a café. We're
+                building a space where ideas meet craft, and everyday rituals
+                become experiences worth remembering.
+                <br />
+                The name Common Time isn't limited to coffee — it's an open
+                frame, a rhythm where many things can exist together. Art,
+                travel, design, music, conversations — all connected by a shared
+                sense of curiosity and taste. Our dream is to grow from this
+                corner of the city into a global movement. A brand that
+                represents how modern coffee culture can be expressive,
+                intentional, and endlessly evolving.
+                <br />
+                For us, coffee is the beginning — not the boundary. Welcome to
+                Common Time — lets travel the world with coffee.
+                <br /> — Jaivardhan Bhatia & Sagar Bhatia, Common Time
+              </p>
+            </Accordion.Item>
             <Accordion.Item title="Location">
-              <p>Lodhi Colony, New Delhi, India</p>
+              <p>2&3 meherkchand market , lodhi colony, New Delhi</p>
+            </Accordion.Item>
+            <Accordion.Item title="Timings">
+              <p>6am to 10pm everyday</p>
+            </Accordion.Item>
+            <Accordion.Item title="Contact">
+              <p>
+                +91 9838000017 <br />
+                hello@commontime.in
+              </p>
             </Accordion.Item>
           </Accordion>
         </div>

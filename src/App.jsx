@@ -73,7 +73,7 @@ const headerStyles = {
     zIndex: 50,
     width: "100vw",
     background: "#ffffff",
-    borderBottom: "1px solid #e5e7eb",
+    borderBottom: "1px solid #888889ff",
   },
   headerInner: {
     maxWidth: 1200,
