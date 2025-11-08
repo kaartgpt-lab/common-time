@@ -1,92 +1,54 @@
-import { useEffect, useRef, useState } from "react";
+import { useState, useRef, useEffect } from "react";
 
 export default function Home() {
   return (
-    <div style={styles.page}>
-      {/* Fonts + Responsive CSS Vars */}
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Poppins:wght@400;500;600&display=swap');
-
-        :root{
-          --brand-size: 24px;
-          --header-padding: 8px 12px;
-          --social-size: 38px;
-        }
-        @media (min-width: 480px){
-          :root{
-            --brand-size: 28px;
-            --header-padding: 10px 16px;
-            --social-size: 40px;
-          }
-        }
-        @media (min-width: 768px){
-          :root{
-            --brand-size: 32px;
-            --header-padding: 12px 20px;
-            --social-size: 42px;
-          }
-        }
-        @media (min-width: 1024px){
-          :root{
-            --brand-size: 36px;
-            --header-padding: 14px 24px;
-            --social-size: 44px;
-          }
-        }
-
-        ${baseCSS}
-      `}</style>
-
-      {/* Hero */}
-      <section style={styles.hero}>
+    <div className="font-poppins text-gray-900 bg-white leading-relaxed">
+      {/* Hero Section */}
+      <section className="relative w-screen h-[90vh] min-h-[380px] overflow-hidden">
         <img
           src="/commontimehero.png"
           alt="Common Time"
-          style={styles.heroImg}
+          className="w-full h-full object-cover"
         />
-        <div style={styles.heroOverlay}></div>
-        <div style={styles.heroContent}>
-          <p>designed for the everyday rituals</p>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/20 to-transparent"></div>
+
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 text-white">
+          <p className="font-[Garet_Book] font-black italic text-lg md:text-xl">
+            designed for the everyday rituals
+          </p>
         </div>
       </section>
 
       {/* Accordions */}
-      <main style={styles.main}>
-        <div style={styles.accordionWrap}>
+      <main className="w-screen px-4 md:px-6 lg:px-8 py-6">
+        <div className="font-[Bai_Jamjuree] font-light max-w-[1200px] mx-auto">
           <Accordion>
             <Accordion.Item title="Philosophy">
               <p>
                 Common Time was created with a simple belief — that coffee can
-                be a lens to see the world through.
-                <br />
-                <br />
-                It's our way of exploring culture, design, people, and places —
-                one cup at a time. We started in Lodhi Colony, New Delhi — a
-                neighbourhood that reflects who we are: creative, curious, and
-                full of character. Here, we're building more than a café. We're
-                building a space where ideas meet craft, and everyday rituals
-                become experiences worth remembering.
-                <br />
-                <br />
-                The name Common Time isn't limited to coffee — it's an open
-                frame, a rhythm where many things can exist together. Art,
-                travel, design, music, conversations — all connected by a shared
-                sense of curiosity and taste. Our dream is to grow from this
-                corner of the city into a global movement. A brand that
-                represents how modern coffee culture can be expressive,
-                intentional, and endlessly evolving.
-                <br />
-                <br />
-                For us, coffee is the beginning — not the boundary. Welcome to
-                Common Time — lets travel the world with coffee.
-                <br />
-                <br />— Jaivardhan Bhatia & Sagar Bhatia, Common Time
+                be a lens to see the world through. <br /> <br /> It's our way
+                of exploring culture, design, people, and places — one cup at a
+                time. We started in Lodhi Colony, New Delhi — a neighbourhood
+                that reflects who we are: creative, curious, and full of
+                character. Here, we're building more than a café. We're building
+                a space where ideas meet craft, and everyday rituals become
+                experiences worth remembering.
+                <br /> <br /> The name Common Time isn't limited to coffee —
+                it's an open frame, a rhythm where many things can exist
+                together. Art, travel, design, music, conversations — all
+                connected by a shared sense of curiosity and taste. Our dream is
+                to grow from this corner of the city into a global movement. A
+                brand that represents how modern coffee culture can be
+                expressive, intentional, and endlessly evolving.
+                <br /> <br /> For us, coffee is the beginning — not the
+                boundary. Welcome to Common Time — lets travel the world with
+                coffee.
+                <br /> <br /> — Jaivardhan Bhatia & Sagar Bhatia, Common Time
               </p>
             </Accordion.Item>
             <Accordion.Item title="Location">
               <p>
-                2&3 Meherkchand market <br /> Lodhi colony
-                <br /> New Delhi
+                2&3 Meharchand market <br /> Lodhi colony <br /> New Delhi
               </p>
             </Accordion.Item>
             <Accordion.Item title="Timings">
@@ -94,48 +56,82 @@ export default function Home() {
             </Accordion.Item>
             <Accordion.Item title="Contact">
               <p>
-                +91 9838000017 <br />
-                hello@commontime.in
+                +91 9838000017 <br /> hello@commontime.in
               </p>
             </Accordion.Item>
           </Accordion>
         </div>
+
+        {/* Partner Logos */}
+        <PartnerLogos />
       </main>
 
-      <div style={styles.textline} align="center">
-        <p>a concept by bhatia hospitality group</p>
+      {/* Footer Text */}
+      <div className="py-6 text-center text-gray-500 text-sm">
+        a concept by bhatia hospitality group
       </div>
     </div>
   );
 }
 
-/* ---------- Partner Logos (Clearbit, taller & no boxes) ---------- */
+/* ---------- Partner Logos ---------- */
+/* ---------- Partner Logos ---------- */
 function PartnerLogos() {
   const brands = [
-    "spotify.com",
-    "airbnb.com",
-    "netflix.com",
-    "nike.com",
-    "paypal.com",
-    "uber.com",
-    "github.com",
-    "slack.com",
+    {
+      name: "Instagram",
+      file: "/logos/lbb.jpg",
+      url: "https://www.instagram.com/p/DQeUg5qEgLo/?img_index=4&igsh=cHdjaDY1c2ZybDZx",
+    },
+    {
+      name: "Airbnb",
+      file: "/logos/foodtalkindia.jpg",
+      url: "https://www.instagram.com/p/DQcDapsElc2/?img_index=4&igsh=MXcxN3M5aDIxMDB2bA==",
+    },
+    {
+      name: "Netflix",
+      file: "/logos/ethospitality.svg",
+      url: "https://hospitality.economictimes.indiatimes.com/news/restaurants/common-time-debuts-in-lodhi-colony-new-delhi/125049847",
+    },
+    {
+      name: "Restaurant India",
+      file: "/logos/restaurantindia.png",
+      url: "https://www.restaurantindia.in/news/restaurant-india-news-common-time-debuts-in-lodhi-colony-at-new-delhi.n14295",
+    },
+    {
+      name: "StyleWire",
+      file: "/logos/thestylewire.png",
+      url: "https://thestylewire.in/2025/11/04/where-to-eat-stay-and-indulge-fresh-openings-across-india/",
+    },
+    {
+      name: "Another",
+      file: "/logos/restaurantindia.png",
+      url: "https://www.instagram.com/p/DQlgM5xjpAQ/",
+    },
   ];
 
   return (
-    <section style={styles.partners} aria-label="Partner logos">
-      <div style={styles.partnersInner}>
-        <p style={styles.partnersHeading}>In good company</p>
-        <div style={styles.partnerRow}>
-          {brands.map((domain, i) => (
-            <div key={i} style={styles.logoWrap}>
+    <section className="w-screen bg-white" aria-label="Partner logos">
+      <div className="max-w-[1200px] mx-auto py-6 px-4 md:px-6">
+        <p className="mb-3 text-xs uppercase tracking-widest text-gray-400 text-center md:text-left">
+          Listen in to what others are saying
+        </p>
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-8 items-center justify-items-center">
+          {brands.map((brand, i) => (
+            <a
+              key={i}
+              href={brand.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex justify-center items-center h-16 sm:h-20 md:h-24 w-full"
+            >
               <img
-                src={`https://logo.clearbit.com/${domain}`}
-                alt={domain.split(".")[0]}
-                style={styles.logoImg}
+                src={brand.file}
+                alt={brand.name}
+                className="max-h-8 sm:max-h-12 md:max-h-20 object-contain"
                 loading="lazy"
               />
-            </div>
+            </a>
           ))}
         </div>
       </div>
@@ -143,10 +139,15 @@ function PartnerLogos() {
   );
 }
 
-/* ---------- Accordion (plus/minus indicator) ---------- */
+/* ---------- Accordion ---------- */
 function Accordion({ children }) {
-  return <div style={styles.accordion}>{children}</div>;
+  return (
+    <div className="mt-2 mb-7 rounded-lg border border-white bg-white">
+      {children}
+    </div>
+  );
 }
+
 Accordion.Item = function AccordionItem({ title, children }) {
   const [open, setOpen] = useState(false);
   const [height, setHeight] = useState(0);
@@ -158,164 +159,28 @@ Accordion.Item = function AccordionItem({ title, children }) {
     setHeight(open ? innerRef.current.scrollHeight : 0);
   }, [open, children]);
 
-  const indicator = open ? "–" : "+"; // plus when closed, minus when open
-
   return (
-    <div style={styles.item}>
+    <div className="border-t border-gray-200">
       <button
         onClick={() => setOpen((o) => !o)}
         aria-expanded={open}
         aria-controls={id}
-        style={styles.itemBtn}
+        className="w-full flex justify-between items-center px-5 py-4 font-semibold text-lg text-gray-900 bg-white transition-colors"
       >
         <span>{title}</span>
-        <span style={styles.indicator}>{indicator}</span>
+        <span className="inline-block w-6 text-center text-2xl">
+          {open ? "–" : "+"}
+        </span>
       </button>
       <div
         id={id}
-        style={{
-          ...styles.panel,
-          maxHeight: height,
-        }}
+        style={{ maxHeight: height }}
+        className="overflow-hidden transition-[max-height] duration-200 ease-in-out"
       >
-        <div ref={innerRef} style={styles.panelInner}>
-          <p style={styles.panelInnerP}>{children.props.children}</p>
+        <div ref={innerRef} className="px-5 pb-4 flex justify-center">
+          <p className="max-w-xl text-left">{children.props.children}</p>
         </div>
       </div>
     </div>
   );
 };
-
-/* ---------- Styles ---------- */
-const styles = {
-  page: {
-    fontFamily: '"Poppins", sans-serif',
-    color: "#0f172a",
-    background: "#ffffff",
-    lineHeight: 1.6,
-  },
-
-  hero: {
-    position: "relative",
-    height: "90vh",
-    minHeight: 380,
-    width: "100vw",
-    overflow: "hidden",
-  },
-  heroImg: { width: "100%", height: "100%", objectFit: "cover" },
-  heroOverlay: {
-    position: "absolute",
-    inset: 0,
-    background:
-      "linear-gradient(to top, rgba(0,0,0,0.55), rgba(0,0,0,0.2) 90%, rgba(0,0,0,0))",
-  },
-  heroContent: {
-    position: "absolute",
-    inset: 0,
-    display: "grid",
-    placeItems: "center",
-    padding: "90px",
-    color: "#fff",
-    textAlign: "center",
-    fontSize: 18,
-  },
-
-  main: { width: "100vw", padding: "24px 16px" },
-  accordionWrap: { maxWidth: 1200, margin: "0 auto" },
-
-  accordion: {
-    marginTop: 8,
-    marginBottom: 28,
-    borderRadius: 16,
-    border: "1px solid #fff",
-    background: "#fff",
-  },
-  item: { borderTop: "1px solid #e5e7eb" },
-  itemBtn: {
-    width: "100%",
-    textAlign: "left",
-    background: "white",
-    border: "none",
-    padding: "18px 20px",
-    fontSize: 18,
-    fontWeight: 600,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-    color: "#0f172a",
-    outline: "none",
-    fontFamily: '"Manrope", sans-serif',
-  },
-  indicator: {
-    display: "inline-block",
-    width: 24,
-    textAlign: "center",
-    fontSize: 22,
-    lineHeight: 1,
-  },
-  panel: { transition: "max-height 240ms ease", overflow: "hidden" },
-  panelInner: {
-    padding: "0 20px 18px",
-    color: "#000000",
-    fontFamily: '"Poppins", sans-serif',
-    display: "flex",
-    justifyContent: "center", // center horizontally
-  },
-  panelInnerP: {
-    maxWidth: 600, // limit width of paragraph
-    textAlign: "left", // center text inside paragraph
-  },
-
-  partners: {
-    width: "100vw",
-    background: "#fff",
-  },
-  partnersInner: {
-    maxWidth: 1200,
-    margin: "0 auto",
-    padding: "22px 16px",
-  },
-  partnersHeading: {
-    margin: "0 0 12px",
-    fontSize: 13,
-    letterSpacing: "0.08em",
-    textTransform: "uppercase",
-    color: "#64748b",
-    fontFamily: '"Poppins", sans-serif',
-  },
-  partnerRow: {
-    display: "grid",
-    gridTemplateColumns: "repeat(4, minmax(0, 1fr))",
-    gap: 16,
-  },
-  logoWrap: {
-    height: 96,
-    display: "grid",
-    placeItems: "center",
-  },
-  logoImg: {
-    maxHeight: "80%",
-    width: "auto",
-    objectFit: "contain",
-  },
-
-  textline: {
-    padding: "24px 0",
-    fontSize: 14,
-    color: "#64748b",
-    textAlign: "center",
-  },
-};
-
-/* Base CSS */
-const baseCSS = `
-  *, *::before, *::after { box-sizing: border-box; }
-  body { margin: 0; }
-  img { max-width: 100%; display: block; }
-  button { cursor: pointer; font: inherit; }
-  a { text-decoration: none; }
-  ul { padding-left: 1rem; }
-
-  button:focus { outline: none; }
-  button:focus-visible { outline: none; }
-`;
