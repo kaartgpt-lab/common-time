@@ -77,7 +77,7 @@ export default function Home() {
   );
 }
 
-/* ---------- Partner Logos (Marquee) ---------- */
+/* ---------- Partner Logos (Fixed Marquee) ---------- */
 function PartnerLogos() {
   const brands = [
     {
@@ -113,14 +113,14 @@ function PartnerLogos() {
   ];
 
   return (
-    <section className="w-screen bg-white" aria-label="Partner logos">
-      <div className="max-w-[1200px] mx-auto py-10 px-4 md:px-6">
+    <section className="bg-white" aria-label="Partner logos">
+      <div className="max-w-[1200px] mx-auto py-10 px-4 md:px-6 overflow-hidden">
         <p className="mb-4 text-xs uppercase tracking-widest text-gray-400 text-center md:text-left">
           Listen in to what others are saying
         </p>
 
         {/* Marquee container */}
-        <div className="relative overflow-hidden">
+        <div className="relative w-full overflow-hidden">
           <div className="flex animate-marquee hover:[animation-play-state:paused]">
             {[...brands, ...brands].map((brand, i) => (
               <a
@@ -128,7 +128,7 @@ function PartnerLogos() {
                 href={brand.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-shrink-0 w-40 sm:w-48 md:w-56 flex justify-center items-center px-6"
+                className="flex-shrink-0 w-36 sm:w-44 md:w-52 flex justify-center items-center px-6"
               >
                 <img
                   src={brand.file}
@@ -141,7 +141,7 @@ function PartnerLogos() {
           </div>
         </div>
 
-        {/* Tailwind inline animation styles */}
+        {/* Scoped animation styles */}
         <style>{`
           @keyframes marquee {
             0% { transform: translateX(0); }
@@ -149,8 +149,8 @@ function PartnerLogos() {
           }
           .animate-marquee {
             display: flex;
-            width: calc(200%);
-            animation: marquee 30s linear infinite;
+            width: 200%;
+            animation: marquee 25s linear infinite;
           }
         `}</style>
       </div>
