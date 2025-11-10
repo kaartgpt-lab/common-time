@@ -10,11 +10,11 @@ export default function Home() {
           alt="Common Time"
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/20 to-transparent"></div>
+        <div className="absolute inset-0 bg-linear-to-t from-black/55 via-black/20 to-transparent"></div>
 
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 text-white">
           <p className="font-[Garet_Book] font-black italic text-lg md:text-xl">
-            designed for the everyday rituals
+            Designed for the moments between
           </p>
         </div>
       </section>
@@ -25,25 +25,28 @@ export default function Home() {
           <Accordion>
             <Accordion.Item title="Philosophy">
               <p>
-                Common Time was created with a simple belief — that coffee can
-                be a lens to see the world through. <br /> <br /> It's our way
-                of exploring culture, design, people, and places — one cup at a
-                time. We started in Lodhi Colony, New Delhi — a neighbourhood
-                that reflects who we are: creative, curious, and full of
-                character. Here, we're building more than a café. We're building
-                a space where ideas meet craft, and everyday rituals become
-                experiences worth remembering.
-                <br /> <br /> The name Common Time isn't limited to coffee —
-                it's an open frame, a rhythm where many things can exist
-                together. Art, travel, design, music, conversations — all
-                connected by a shared sense of curiosity and taste. Our dream is
-                to grow from this corner of the city into a global movement. A
-                brand that represents how modern coffee culture can be
-                expressive, intentional, and endlessly evolving.
-                <br /> <br /> For us, coffee is the beginning — not the
-                boundary. Welcome to Common Time — lets travel the world with
-                coffee.
-                <br /> <br /> — Jaivardhan Bhatia & Sagar Bhatia, Common Time
+                <span className="text-2xl">Hi, welcome to Common Time.</span>{" "}
+                <br /> <br />
+                We've always dreamt of building a brand that imagines coffee as
+                a lifestyle. Everything you see, taste, and feel here has been
+                thoughtfully created to offer an experience that feels universal
+                – yet always remains rooted in great products. <br /> We imagine
+                coffee for both purists and tourists. While we spend time
+                perfecting the details – from the beans to the milk to the exact
+                steaming temperature – we don't believe in overwhelming you. The
+                best coffee, after all, is the one you enjoy most. <br /> Common
+                Time is made for the moments between – intentionally serving
+                only bakes and coffee to create that gentle pause between your
+                meals, and to quietly become part of your daily ritual. <br />{" "}
+                Our bakes will keep evolving – always well done, balanced, and
+                never too sweet.
+                <br /> <br /> <span className="text-2xl">Why Lodhi?</span>{" "}
+                <br /> <br />
+                Because the neighbourhood mirrors who we are – creative,
+                curious, ever-evolving, and imperfect in the best way. <br />{" "}
+                This is just the beginning. The idea is to take Common Time
+                global, and to see the world through coffee. <br /> We hope you
+                have a great time.
               </p>
             </Accordion.Item>
             <Accordion.Item title="Location">
@@ -52,7 +55,7 @@ export default function Home() {
               </p>
             </Accordion.Item>
             <Accordion.Item title="Timings">
-              <p>6am to 10pm everyday</p>
+              <p>8am to 11pm everyday</p>
             </Accordion.Item>
             <Accordion.Item title="Contact">
               <p>
@@ -74,22 +77,21 @@ export default function Home() {
   );
 }
 
-/* ---------- Partner Logos ---------- */
-/* ---------- Partner Logos ---------- */
+/* ---------- Partner Logos (Marquee) ---------- */
 function PartnerLogos() {
   const brands = [
     {
-      name: "Instagram",
+      name: "LBB",
       file: "/logos/lbb.jpg",
       url: "https://www.instagram.com/p/DQeUg5qEgLo/?img_index=4&igsh=cHdjaDY1c2ZybDZx",
     },
     {
-      name: "Airbnb",
+      name: "Food Talk India",
       file: "/logos/foodtalkindia.jpg",
       url: "https://www.instagram.com/p/DQcDapsElc2/?img_index=4&igsh=MXcxN3M5aDIxMDB2bA==",
     },
     {
-      name: "Netflix",
+      name: "ET Hospitality",
       file: "/logos/ethospitality.svg",
       url: "https://hospitality.economictimes.indiatimes.com/news/restaurants/common-time-debuts-in-lodhi-colony-new-delhi/125049847",
     },
@@ -104,7 +106,7 @@ function PartnerLogos() {
       url: "https://thestylewire.in/2025/11/04/where-to-eat-stay-and-indulge-fresh-openings-across-india/",
     },
     {
-      name: "Another",
+      name: "Restaurant India",
       file: "/logos/restaurantindia.png",
       url: "https://www.instagram.com/p/DQlgM5xjpAQ/",
     },
@@ -112,28 +114,45 @@ function PartnerLogos() {
 
   return (
     <section className="w-screen bg-white" aria-label="Partner logos">
-      <div className="max-w-[1200px] mx-auto py-6 px-4 md:px-6">
-        <p className="mb-3 text-xs uppercase tracking-widest text-gray-400 text-center md:text-left">
+      <div className="max-w-[1200px] mx-auto py-10 px-4 md:px-6">
+        <p className="mb-4 text-xs uppercase tracking-widest text-gray-400 text-center md:text-left">
           Listen in to what others are saying
         </p>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-8 items-center justify-items-center">
-          {brands.map((brand, i) => (
-            <a
-              key={i}
-              href={brand.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex justify-center items-center h-16 sm:h-20 md:h-24 w-full"
-            >
-              <img
-                src={brand.file}
-                alt={brand.name}
-                className="max-h-8 sm:max-h-12 md:max-h-20 object-contain"
-                loading="lazy"
-              />
-            </a>
-          ))}
+
+        {/* Marquee container */}
+        <div className="relative overflow-hidden">
+          <div className="flex animate-marquee hover:[animation-play-state:paused]">
+            {[...brands, ...brands].map((brand, i) => (
+              <a
+                key={i}
+                href={brand.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-shrink-0 w-40 sm:w-48 md:w-56 flex justify-center items-center px-6"
+              >
+                <img
+                  src={brand.file}
+                  alt={brand.name}
+                  className="max-h-10 sm:max-h-12 md:max-h-16 object-contain opacity-80 hover:opacity-100 transition-opacity duration-300"
+                  loading="lazy"
+                />
+              </a>
+            ))}
+          </div>
         </div>
+
+        {/* Tailwind inline animation styles */}
+        <style>{`
+          @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+          }
+          .animate-marquee {
+            display: flex;
+            width: calc(200%);
+            animation: marquee 30s linear infinite;
+          }
+        `}</style>
       </div>
     </section>
   );

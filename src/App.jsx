@@ -27,7 +27,7 @@ export default function App() {
           </div>
 
           {/* Socials + Menu */}
-          <nav className="flex items-center gap-2">
+          <nav className="flex items-center gap-1">
             {/* Menu Button */}
             <button
               onClick={() => window.open("/menu.pdf", "_blank")}
