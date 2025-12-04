@@ -1,4 +1,4 @@
-import { FiBookOpen, FiShoppingBag } from "react-icons/fi";
+import { FiShoppingBag } from "react-icons/fi";
 import { FaInstagram } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
@@ -25,13 +25,13 @@ export default function Header() {
 
         {/* Menu + Icons */}
         <nav className="flex items-center gap-3">
-          {/* Restaurant Menu (Outline Book) */}
+          {/* Menu (Text Only) */}
           <button
             onClick={() => window.open("/menu.pdf", "_blank")}
-            className="w-9 h-9 sm:w-10 sm:h-10 grid place-items-center text-gray-900 text-lg sm:text-xl border border-gray-200 rounded-full hover:bg-gray-100 transition-colors"
+            className="px-4 h-9 sm:h-10 flex items-center justify-center text-gray-900 text-sm sm:text-base border border-gray-200 rounded-full hover:bg-gray-100 transition-colors"
             title="View Menu"
           >
-            <FiBookOpen />
+            Menu
           </button>
 
           {/* Merchandise Icon */}
