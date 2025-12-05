@@ -6,7 +6,7 @@ export default function Home() {
       {/* Hero Section */}
       <section className="relative w-screen h-[90vh] min-h-[380px] overflow-hidden">
         <img
-          src="/commontimehero.png"
+          src="/herobg.jpg"
           alt="Common Time"
           className="w-full h-full object-cover"
         />
