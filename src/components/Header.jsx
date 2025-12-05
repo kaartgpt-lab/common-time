@@ -35,13 +35,13 @@ export default function Header() {
           </button>
 
           {/* Merchandise Icon */}
-          <Link
+          {/* <Link
             to="/merch"
             className="w-9 h-9 sm:w-10 sm:h-10 grid place-items-center text-gray-900 text-lg sm:text-xl border border-gray-200 rounded-full hover:bg-gray-100 transition-colors"
             title="Merchandise"
           >
             <FiShoppingBag />
-          </Link>
+          </Link> */}
 
           {/* Instagram Icon */}
           <a
