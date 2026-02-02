@@ -51,7 +51,7 @@ export default function Home() {
             </Accordion.Item>
             <Accordion.Item title="Location">
               <p>
-                2&3 Meharchand market <br /> Lodhi colony <br /> New Delhi
+                Lodhi Colony | Vasant Vihar | Khan Market <br /> New Delhi
               </p>
             </Accordion.Item>
             <Accordion.Item title="Timings">
