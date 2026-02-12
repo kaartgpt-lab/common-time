@@ -22,7 +22,7 @@ export default function Home() {
       {/* Accordions */}
       <main className="w-screen px-4 md:px-6 lg:px-8 py-6">
         <div className="font-[Bai_Jamjuree] font-light max-w-[1200px] mx-auto">
-          <Accordion>
+          {/* <Accordion>
             <Accordion.Item title="Philosophy">
               <p>
                 <span className="text-2xl">Hi, welcome to Common Time.</span>{" "}
@@ -62,7 +62,7 @@ export default function Home() {
                 +91 9838000017 <br /> hello@commontime.in
               </p>
             </Accordion.Item>
-          </Accordion>
+          </Accordion> */}
         </div>
 
         {/* Partner Logos */}
