@@ -26,13 +26,13 @@ export default function Header() {
         {/* Menu + Icons */}
         <nav className="flex items-center gap-3">
           {/* Menu (Text Only) */}
-          <button
+          {/* <button
             onClick={() => window.open("/menu.pdf", "_blank")}
             className="px-4 h-9 sm:h-10 flex items-center justify-center text-gray-900 text-sm sm:text-base border border-gray-200 rounded-full hover:bg-gray-100 transition-colors"
             title="View Menu"
           >
             Menu
-          </button>
+          </button> */}
 
           {/* Merchandise Icon */}
           {/* <Link
