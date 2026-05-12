@@ -8,7 +8,7 @@ export default function HeroSection({
   ctaHref = "/shop",
 }) {
   return (
-    <section className="relative w-full lg:min-h-[608px] min-h-[800px] overflow-hidden">
+    <section className="relative w-full min-h-[93vh] lg-min-h-[78vh] overflow-hidden">
       {/* <video
   autoPlay
   muted

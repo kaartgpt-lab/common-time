@@ -34,7 +34,7 @@ export default function App() {
           <Route path="/locations/:slug" element={<Locations />} />
           <Route path="/menu" element={<Menu />} />
           <Route path="/coming-soon" element={<ComingSoon />} />
-          {/* <Route path="/about" element={<About />} /> */}
+          <Route path="/about" element={<About />} /> 
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/orders" element={<Orders />} />
