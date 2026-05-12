@@ -36,11 +36,7 @@ export default function Header() {
       image: "header-dropdown/IMG_5713.avif"
     },
     MENU: {
-      links: [
-        { name: "Cafe Menu", path: "/menu" },
-        { name: "Order", path: "/shop" }
-      ],
-      image: "header-dropdown/IMG_5589.avif"
+      links: [{name: "Order Online", path: "/shop"} ],
     },
     ORDER: {
       links: [{name: "Order Online", path: "/shop"} ],
@@ -132,15 +128,7 @@ export default function Header() {
         <nav className={`hidden lg:flex ${navBlockStyles} mr-6`}>
           <div className="group h-full flex items-center">
             <Link to="/menu" className={`${stitchNavLink} nav-link-custom`}>MENU</Link>
-            <div className="dropdown-panel absolute top-full right-0 mt-0 w-[350px] h-44 bg-white px-4 pt-15 pb-2 flex justify-between items-end shadow-sm z-50">
-              <div className="flex flex-col space-y-1 font-[Garet_Book]">
-                <Link to="/menu" className="dropdown-link text-3xl">Cafe Menu</Link>
-                <Link to="/shop" className="dropdown-link text-3xl">Order</Link>
-              </div>
-              {/* <div className="w-32 h-44 overflow-hidden">
-                <img src="header-dropdown/IMG_5589.avif" alt="Menu" className="w-full h-full object-cover" />
-              </div> */}
-            </div>
+            
           </div>
           <div className="group h-full flex items-center">
             <Link to="/coming-soon" className={`${stitchNavLink} nav-link-custom`}>ORDER</Link>
@@ -175,7 +163,7 @@ export default function Header() {
               
               {/* Tab Selector - Using Bai Jamjuree for Structure */}
               <div className="flex justify-between px-8 py-2 border-b border-gray-300">
-                {['SHOP', 'LOCATIONS', 'MENU',].map((tab) => (
+                {['SHOP', 'LOCATIONS'].map((tab) => (
                   <button 
                     key={tab}
                     onClick={() => setActiveMobileTab(tab)}
@@ -184,6 +172,14 @@ export default function Header() {
                     {tab}
                   </button>
                 ))}
+                <Link to="/menu">
+                <button 
+                    className={`text-[12px] font-[Bai_Jamjuree] tracking-[0.2em] font-bold pb-2 transition-all text-gray-400 hover:text-black`}
+                  >
+                   MENU
+                  </button>
+                </Link>
+                
               </div>
               {/* Dynamic Content Display - Using Garet Book for Links */}
               <div className="flex justify-between items-end  px-4 pt-6 pb-2 min-h-[160px] ">

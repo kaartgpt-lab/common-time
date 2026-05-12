@@ -99,7 +99,7 @@ export default function Home() {
       {/* <GalleryMarquee /> */}
          
       {/* --- Objects & Equipment Section with Shimmer --- */}
-      <section className="bg-[#fafaf8] pb-12 md:py-12 border-b border-black/5">
+      <section className="bg-[#fafaf8] mt-12 md:mt-0 pb-12 md:py-12 border-b border-black/5">
         <Container>
           <div className="flex flex-col items-start mb-10 md:mb-15">
             {/* Sub-label with Shimmer */}
