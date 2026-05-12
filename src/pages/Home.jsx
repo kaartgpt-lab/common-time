@@ -97,29 +97,7 @@ export default function Home() {
       /> */}
 
       {/* <GalleryMarquee /> */}
-         <section className="bg-[#fafaf8] py-12 md:py-12 border-b border-black/5">
-        <Container>
-          <div className="flex flex-col items-start mb-10 md:mb-15">
-            {/* Sub-label with Shimmer */}
-            <span className="shiny-text py-2 inline-block overflow-visible font-[Garet_Book] text-xs uppercase tracking-[0.2em] font-semibold italic mb-1">
-              Curated Selection
-            </span>
-            
-            {/* Main Heading with Shimmer - & remains unchanged */}
-            <div className="flex items-center gap-4">
-
-              <h2 className="text-2xl md:text-3xl font-light tracking-tight font-[Bai_Jamjuree] flex items-baseline gap-3">
-                <span className="shiny-text py-2 inline-block overflow-visible tracking-[0.02em]">Coffee Highlights</span> 
-              </h2>
-            </div>
-          </div>
-          <ProductGrid products={featuredCoffee} columns={4} />
-          
-          {/* <div className="mt-20 flex justify-end">
-            <div className="h-[1px] w-24 bg-black/5"></div>
-          </div> */}
-        </Container>
-      </section>
+         
       {/* --- Objects & Equipment Section with Shimmer --- */}
       <section className="bg-[#fafaf8] pb-12 md:py-12 border-b border-black/5">
         <Container>
