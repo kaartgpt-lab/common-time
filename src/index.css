@@ -1,0 +1,229 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap");
+@import "tailwindcss";
+
+/* Custom Font */
+@font-face {
+  font-family: "Garet Book";
+  src: url("/fonts/Garet-Book.otf") format("opentype");
+  font-weight: 600;
+  font-style: normal;
+}
+/* --- GOOGLE TRANSLATE KILL-SWITCH --- */
+
+/* 1. Hides the top banner and all associated iframes */
+.goog-te-banner-frame,
+.goog-te-banner-frame.skiptranslate,
+.goog-te-gadget-icon,
+.goog-te-menu-value span:nth-child(5),
+#goog-gt-tt,
+#goog-gt-m,
+#goog-gt-s,
+.goog-te-spinner-pos {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+}
+
+/* 2. Forces the page to stay at the top (prevents the 40px jump) */
+body {
+    top: 0px !important;
+    position: static !important;
+}
+
+/* 3. Removes the blue highlight/underline from translated text */
+.goog-text-highlight {
+    background-color: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+/* 4. Hides the "Powered by Google" text and logo */
+.goog-logo-link,
+.goog-te-gadget {
+    display: none !important;
+}
+
+.goog-te-combo {
+    display: none !important;
+}
+
+/* 5. Prevents hover tooltips from showing original text */
+.goog-tooltip,
+.goog-tooltip:hover {
+    display: none !important;
+    visibility: hidden !important;
+}
+/* Animation for Background Blobs */
+@keyframes blob {
+  0% { transform: translate(0px, 0px) scale(1); }
+  33% { transform: translate(30px, -50px) scale(1.1); }
+  66% { transform: translate(-20px, 20px) scale(0.9); }
+  100% { transform: translate(0px, 0px) scale(1); }
+}
+
+.animate-blob {
+  animation: blob 7s infinite;
+}
+
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+/* Hide Scrollbars */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Wheel Fade Edges */
+.mask-fade-edges {
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 40%,
+    black 60%,
+    transparent 100%
+  );
+}
+
+.animate-fadeIn {
+  animation: fadeIn 1s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(20px, -30px) scale(1.1); }
+}
+
+.animate-float {
+  animation: float 12s ease-in-out infinite;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.mask-fade-edges {
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 30%,
+    black 70%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 30%,
+    black 70%,
+    transparent 100%
+  );
+}
+
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+/* Ensure branding and locations stay English */
+.notranslate {
+  unicode-bidi: isolate;
+}
+/* Design System - Common Time */
+:root {
+  /* Colors - Warm Neutral */
+  --color-bg: #fafaf8;
+  --color-bg-cream: #f7f5f2;
+  --color-text: #1a1a1a;
+  --color-text-muted: #6b7280;
+  --color-border: #e5e7eb;
+  --color-accent: #6B5344;
+  --color-accent-light: #8B7355;
+
+  /* Typography */
+  font-family: "Inter", system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  font-weight: 400;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html,
+body {
+  margin: 0;
+  overflow-x: hidden;
+}
+
+/* Global lowercase — overrides all uppercase utility classes */
+* {
+  text-transform: lowercase !important;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
+
+/* ================= NAVBAR ================= */
+
+/* Underline Animation */
+.nav-link {
+  position: relative;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 1px;
+  bottom: -4px;
+  left: 0;
+  background-color: currentColor;
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* Dropdown Animation */
+.dropdown-panel {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.group:hover .dropdown-panel {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* Dropdown Typography */
+.dropdown-link {
+  font-size: 2.25rem; /* 36px */
+  font-weight: 300;
+  text-transform: uppercase;
+  color: #666666;
+  transition: color 0.3s ease;
+  letter-spacing: -0.02em;
+}
+
+.dropdown-link:hover {
+  color: #1a1a1a;
+}
