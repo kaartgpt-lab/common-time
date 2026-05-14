@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
 import { supabase } from "../services/supabase";
 import { useAuth } from "../context/AuthContext";
 
@@ -19,7 +19,7 @@ const emptyForm = {
 
 export default function Admin() {
   const { user, loading: authLoading } = useAuth();
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // kept for other uses
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [modal, setModal] = useState(null); // null | "add" | "edit"
@@ -32,12 +32,7 @@ export default function Admin() {
   const [imgPreview, setImgPreview] = useState("");
   const [toast, setToast] = useState(null);
 
-  // ── Auth guard ───────────────────────────────────────────
-  useEffect(() => {
-    if (authLoading) return;
-    if (!user) { navigate("/login"); return; }
-    if (user.email !== ADMIN_EMAIL) { navigate("/"); return; }
-  }, [user, authLoading]);
+  // auth guard handled via early returns below
 
   // ── Fetch products ───────────────────────────────────────
   const fetchProducts = async () => {
@@ -164,7 +159,18 @@ export default function Admin() {
 
   const formatPrice = (paise) => `₹${(paise / 100).toLocaleString("en-IN")}`;
 
-  if (authLoading) return <div className="min-h-screen flex items-center justify-center text-[11px] tracking-widest text-black/30">loading...</div>;
+  // ── Auth guards (render-based, no timing issues) ─────────
+  if (authLoading) return (
+    <div className="min-h-screen flex items-center justify-center text-[11px] tracking-widest text-black/30">loading...</div>
+  );
+  if (!user) return <Navigate to="/login" replace />;
+  if (user.email !== ADMIN_EMAIL) return (
+    <div className="min-h-screen flex flex-col items-center justify-center gap-4 text-center px-6">
+      <p className="text-[11px] tracking-widest text-black/40">not authorised</p>
+      <p className="text-[10px] text-black/25">logged in as: <span className="text-black/50">{user.email}</span></p>
+      <p className="text-[10px] text-black/25">expected: <span className="text-black/50">{ADMIN_EMAIL}</span></p>
+    </div>
+  );
 
   return (
     <div className="min-h-screen bg-[#fafaf8] font-[Garet_Book]">
