@@ -90,11 +90,11 @@ const FounderSection = () => {
           rotateX,
           rotateY,
           transformStyle: "preserve-3d",
-          background: "rgba(255,255,255,0.08)",
-          backdropFilter: "blur(24px)",
-          WebkitBackdropFilter: "blur(24px)",
-          border: "1px solid rgba(255,255,255,0.15)",
-          boxShadow: "0 8px 48px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.12)",
+          background: "rgba(255,255,255,0.22)",
+          backdropFilter: "blur(14px)",
+          WebkitBackdropFilter: "blur(14px)",
+          border: "1px solid rgba(255,255,255,0.28)",
+          boxShadow: "0 8px 48px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.2)",
           padding: "clamp(2rem, 5vw, 4rem)",
         }}
       >

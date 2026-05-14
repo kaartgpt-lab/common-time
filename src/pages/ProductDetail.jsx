@@ -211,21 +211,6 @@ export default function ProductDetail() {
               {formatPrice(product.price)}
             </p>
 
-            <div className="flex items-center gap-6 mb-8">
-              <QuantitySelector
-                value={quantity}
-                onChange={setQuantity}
-                min={1}
-                max={product.stock_quantity || 99}
-              />
-
-              <button
-                onClick={handleAddToCart}
-                className="px-10 py-3 bg-[#6B5344] text-white text-sm uppercase tracking-wider font-medium hover:bg-[#5a4538] transition-colors"
-              >
-                Add to Cart
-              </button>
-            </div>
 
           </div>
         </section>

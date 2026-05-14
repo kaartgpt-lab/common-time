@@ -119,10 +119,6 @@ export default function ProductGrid({ products, columns = 4 }) {
                     {formatPrice(product.price)}
                   </p>
                   <div className="flex flex-col gap-3 w-full mt-auto">
-                    <button onClick={(e) => { e.preventDefault(); addItem(product.id, 1); toast.success(`${product.name} added to cart`); }}
-                      className="w-full py-2.5 bg-[#493627] text-white text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-black transition-colors duration-300 font-[Garet_Book]">
-                      Add to Cart
-                    </button>
                     <Link to={`/shop/${slug}`} className="text-center text-[9px] font-bold uppercase tracking-widest text-gray-500 border-b border-transparent hover:border-gray-400 pb-0.5 transition-all font-[Garet_Book]">
                       View Full Details
                     </Link>
