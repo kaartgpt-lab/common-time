@@ -18,7 +18,7 @@ const emptyForm = {
 };
 
 export default function Admin() {
-  const { user } = useAuth();
+  const { user, loading: authLoading } = useAuth();
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -34,9 +34,10 @@ export default function Admin() {
 
   // ── Auth guard ───────────────────────────────────────────
   useEffect(() => {
-    if (user === null) { navigate("/login"); return; }
-    if (user && user.email !== ADMIN_EMAIL) { navigate("/"); return; }
-  }, [user]);
+    if (authLoading) return;
+    if (!user) { navigate("/login"); return; }
+    if (user.email !== ADMIN_EMAIL) { navigate("/"); return; }
+  }, [user, authLoading]);
 
   // ── Fetch products ───────────────────────────────────────
   const fetchProducts = async () => {
@@ -163,7 +164,7 @@ export default function Admin() {
 
   const formatPrice = (paise) => `₹${(paise / 100).toLocaleString("en-IN")}`;
 
-  if (user === undefined) return null; // still loading auth
+  if (authLoading) return <div className="min-h-screen flex items-center justify-center text-[11px] tracking-widest text-black/30">loading...</div>;
 
   return (
     <div className="min-h-screen bg-[#fafaf8] font-[Garet_Book]">
