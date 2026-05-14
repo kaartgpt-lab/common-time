@@ -4,7 +4,7 @@ import { supabase } from "../services/supabase";
 import { useAuth } from "../context/AuthContext";
 
 // ── Set your admin email here ──────────────────────────────
-const ADMIN_EMAIL = "jaivardhan@commontime.in";
+const ADMIN_EMAIL = "jai@commontime.in";
 // ──────────────────────────────────────────────────────────
 
 const CATEGORIES = ["coffee", "merchandise"];
