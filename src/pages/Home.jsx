@@ -165,9 +165,19 @@ export default function Home() {
 function PartnerLogos() {
   const brands = [
     {
-      name: "LBB",
-      file: "/logos/lbb.jpg",
-      url: "https://www.instagram.com/p/DQeUg5qEgLo/?img_index=4&igsh=cHdjaDY1c2ZybDZx",
+      name: "Vogue",
+      file: "/logos/vogue.png",
+      url: "https://www.vogue.in/content/new-restaurants-in-india-you-should-grab-a-meal-at-this-february-2026",
+    },
+    {
+      name: "Elle Gourmet",
+      file: "/logos/ellegourmet.png",
+      url: "https://ellegourmet.in/food/freshly-served/24-hot-chocolate-spots-to-bookmark-this-season-10917333",
+    },
+    {
+      name: "Cosmopolitan",
+      file: "/logos/cosmopolitan.png",
+      url: "https://www.cosmopolitan.in/life/features/story/the-coolest-restaurants-across-india-that-deserve-to-be-on-your-foodie-ra",
     },
     {
       name: "Food Talk India",
@@ -175,24 +185,19 @@ function PartnerLogos() {
       url: "https://www.instagram.com/p/DQcDapsElc2/?img_index=4&igsh=MXcxN3M5aDIxMDB2bA==",
     },
     {
+      name: "The Lab Mag",
+      file: "/logos/labmag.png",
+      url: "https://www.thelabmagofficial.com/just-opened-delhi-ncrs-best-new-restaurants-bars/",
+    },
+    {
+      name: "LBB",
+      file: "/logos/lbb.jpg",
+      url: "https://www.instagram.com/p/DQeUg5qEgLo/?img_index=4&igsh=cHdjaDY1c2ZybDZx",
+    },
+    {
       name: "ET Hospitality",
       file: "/logos/ethospitality.svg",
       url: "https://hospitality.economictimes.indiatimes.com/news/restaurants/common-time-debuts-in-lodhi-colony-new-delhi/125049847",
-    },
-    {
-      name: "Restaurant India",
-      file: "/logos/restaurantindia.png",
-      url: "https://www.restaurantindia.in/news/restaurant-india-news-common-time-debuts-in-lodhi-colony-at-new-delhi.n14295",
-    },
-    {
-      name: "StyleWire",
-      file: "/logos/thestylewire.png",
-      url: "https://thestylewire.in/2025/11/04/where-to-eat-stay-and-indulge-fresh-openings-across-india/",
-    },
-    {
-      name: "Restaurant India",
-      file: "/logos/restaurantindia.png",
-      url: "https://www.instagram.com/p/DQlgM5xjpAQ/",
     },
   ];
 
