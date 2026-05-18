@@ -34,7 +34,7 @@ export default function Home() {
       "Our minimalist flagship blending Amsterdam’s bakery culture with Japanese precision. A sanctuary of light and linear design in the heart of New Delhi.",
     address: "Shop 2–3, Meherchand Market, New Delhi 110003",
     hours: "08:00 AM — 10:00 PM",
-    imageUrl: "/locations/IMG_4886.avif",
+    imageUrl: "/locations/lodhi.jpg",
     locationLink:
       "https://maps.google.com/?q=Common+Time+Meherchand+Market+Lodhi+Colony+New+Delhi",
   },
@@ -45,7 +45,7 @@ export default function Home() {
       "A sleek neighborhood retreat serving artisan brews and refined bakes. Designed as a creative hub where community meets curated specialty coffee.",
     address: "Basant Lok Market, Vasant Vihar, New Delhi 110057",
     hours: "08:00 AM — 10:00 PM",
-    imageUrl: "/locations/IMG_9504.avif",
+    imageUrl: "/locations/vasant.avif",
     locationLink: "https://maps.app.goo.gl/P7CNpQL1mJG3xS2o9",
   },
   {
@@ -55,7 +55,7 @@ export default function Home() {
       "An elevated perspective in Delhi's premier lifestyle destination. Experience our signature brews and bakes within a minimalist, sun-drenched sanctuary.",
     address: "Second floor, 34, Above Pure Home Living, Khan Market, New Delhi 110003",
     hours: "08:00 AM — 10:00 PM",
-    imageUrl: "/locations/khanmarket.jpg",
+    imageUrl: "/locations/khan.jpg",
     locationLink: "https://maps.app.goo.gl/Pri3Eq6u9y7jmHtA6",
   },
 ];
