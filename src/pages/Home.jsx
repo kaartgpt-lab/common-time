@@ -146,9 +146,7 @@ export default function Home() {
         {/* The Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
           {locations.map((loc) => (
-            <Link key={loc.slug} to={`/locations/${loc.slug}`}>
-              <LuxuryLocationCard {...loc} />
-            </Link>
+            <LuxuryLocationCard key={loc.slug} {...loc} />
           ))}
         </div>
       </Container>

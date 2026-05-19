@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 /**
  * REFINED MINIMAL LOCATION CARD
  * Layout Update: Symmetrical footer placement for Availability and Visit Space.
  */
 
-export const LuxuryLocationCard = ({ name, area, address, hours, imageUrl, locationLink, id }) => {
+export const LuxuryLocationCard = ({ name, area, address, hours, imageUrl, locationLink, id, slug }) => {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -17,15 +18,16 @@ export const LuxuryLocationCard = ({ name, area, address, hours, imageUrl, locat
   }, []);
 
   return (
+    <Link to={`/locations/${slug}`} className="block">
     <motion.div
       initial="rest"
       whileHover="hover"
       whileTap="hover"
       whileInView={isMobile ? "hover" : undefined}
-      viewport={{ 
+      viewport={{
         once: false,
-        amount: 0.5, 
-        margin: "-20% 0px -20% 0px" 
+        amount: 0.5,
+        margin: "-20% 0px -20% 0px"
       }}
       className="relative w-full h-[550px] flex flex-col bg-[#F9F7F2] group cursor-pointer overflow-hidden border border-black/5 rounded-sm"
     >
@@ -121,5 +123,6 @@ export const LuxuryLocationCard = ({ name, area, address, hours, imageUrl, locat
         </motion.div>
       </motion.div>
     </motion.div>
+    </Link>
   );
 };
