@@ -3,12 +3,12 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
 const FounderSection = () => (
-  <section className="relative w-full bg-[#F7F4EF] flex items-center justify-center py-24 px-6 overflow-hidden">
+  <section className="relative w-full bg-[#F7F4EF] flex items-center justify-center py-12 px-6 overflow-hidden">
     <div className="text-center">
       <motion.p
         initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }} transition={{ duration: 1.1, ease: [0.19, 1, 0.22, 1] }}
-        className="font-[Bai_Jamjuree] text-3xl md:text-5xl font-light italic text-[#1a1a1a] tracking-tight leading-tight mb-10"
+        className="font-[Bai_Jamjuree] text-lg md:text-2xl font-light italic text-[#1a1a1a] tracking-tight leading-tight mb-6"
       >
         designed for the moments between
       </motion.p>
