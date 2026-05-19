@@ -30,6 +30,7 @@ export default function Home() {
   {
     name: "Lodhi Colony",
     area: "Meherchand Market",
+    slug: "lodhi-colony",
     description:
       "Our minimalist flagship blending Amsterdam’s bakery culture with Japanese precision. A sanctuary of light and linear design in the heart of New Delhi.",
     address: "Shop 2–3, Meherchand Market, New Delhi 110003",
@@ -41,6 +42,7 @@ export default function Home() {
   {
     name: "Vasant Vihar",
     area: "Basant Lok",
+    slug: "vasant-vihar",
     description:
       "A sleek neighborhood retreat serving artisan brews and refined bakes. Designed as a creative hub where community meets curated specialty coffee.",
     address: "Basant Lok Market, Vasant Vihar, New Delhi 110057",
@@ -51,8 +53,9 @@ export default function Home() {
   {
     name: "Khan Market",
     area: "Rabindra Nagar",
+    slug: "khan-market",
     description:
-      "An elevated perspective in Delhi's premier lifestyle destination. Experience our signature brews and bakes within a minimalist, sun-drenched sanctuary.",
+      "An elevated perspective in Delhi’s premier lifestyle destination. Experience our signature brews and bakes within a minimalist, sun-drenched sanctuary.",
     address: "Second floor, 34, Above Pure Home Living, Khan Market, New Delhi 110003",
     hours: "08:00 AM — 10:00 PM",
     imageUrl: "/locations/khan.jpg",
@@ -143,7 +146,9 @@ export default function Home() {
         {/* The Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
           {locations.map((loc) => (
-            <LuxuryLocationCard key={loc.id} {...loc} />
+            <Link key={loc.slug} to={`/locations/${loc.slug}`}>
+              <LuxuryLocationCard {...loc} />
+            </Link>
           ))}
         </div>
       </Container>

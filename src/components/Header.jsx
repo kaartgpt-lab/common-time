@@ -99,7 +99,7 @@ export default function Header() {
           </div>
 
           <div className="group h-full flex items-center">
-            <Link to="#" className={`${stitchNavLink} nav-link-custom`}>LOCATIONS</Link>
+            <Link to="/locations/lodhi-colony" className={`${stitchNavLink} nav-link-custom`}>LOCATIONS</Link>
             <div className="dropdown-panel absolute top-full left-0 mt-0 w-[350px] h-44 bg-white px-4 pt-15 pb-2 flex justify-between items-end shadow-sm z-50">
               <div className="flex flex-col space-y-1 font-light font-[Garet_Book]">
                 <Link to="/locations/lodhi-colony" className="dropdown-link">Lodhi Colony</Link>
