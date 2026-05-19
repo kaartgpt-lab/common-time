@@ -61,8 +61,8 @@ export default function Orders() {
   if (authLoading || !user) return null;
 
   return (
-    <main className="min-h-screen py-16 px-4 max-w-4xl mx-auto font-display font-[Bai_Jamjuree]">
-      <h1 className="text-2xl font-bold mb-8 uppercase tracking-tight font-[Bai_Jamjuree]">Orders</h1>
+    <main className="min-h-screen py-16 px-4 max-w-4xl mx-auto font-[Garet_Book]">
+      <h1 className="text-2xl font-light mb-8 tracking-tight font-[Bai_Jamjuree]">orders</h1>
       {loading ? (
         <div className="space-y-4">
           {[1, 2, 3].map((i) => (
@@ -83,7 +83,7 @@ export default function Orders() {
                 className="w-full px-4 py-4 flex flex-wrap items-center justify-between gap-2 text-left hover:bg-gray-50 transition-colors"
               >
                 <div>
-                  <span className="font-mono text-sm text-gray-500">
+                  <span className="font-[Garet_Book] text-sm text-gray-500">
                     #{order.id.slice(0, 8)}
                   </span>
                   <span

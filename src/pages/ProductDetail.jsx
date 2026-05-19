@@ -127,7 +127,7 @@ export default function ProductDetail() {
       : [];
 
   return (
-    <main className="min-h-screen py-16 md:py-24">
+    <main className="min-h-screen py-16 md:py-24 font-[Garet_Book]">
       <div className="max-w-[1200px] mx-auto px-4 md:px-6">
 
         <nav className="text-sm text-gray-500 mb-8">
@@ -184,7 +184,7 @@ export default function ProductDetail() {
               {product.category}
             </p>
 
-            <h1 className="text-3xl md:text-4xl font-medium text-gray-900 mb-6 tracking-tight">
+            <h1 className="text-3xl md:text-4xl font-light text-gray-900 mb-6 tracking-tight font-[Bai_Jamjuree]">
               {product.name}
             </h1>
 
@@ -217,7 +217,7 @@ export default function ProductDetail() {
 
         {related.length > 0 && (
           <section>
-            <h2 className="text-xl font-medium text-gray-900 mb-8">
+            <h2 className="text-xl font-light text-gray-900 mb-8 font-[Bai_Jamjuree]">
               You May Also Like
             </h2>
 

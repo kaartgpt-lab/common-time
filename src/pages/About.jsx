@@ -6,7 +6,7 @@ import AboutHero from "../components/editorial/AboutHero.jsx";
 import AboutValues from "../components/editorial/AboutValues.jsx";
 export default function About() {
   return (
-    <main className="flex flex-col font-display text-slate-900 antialiased bg-[#F9F7F2]">
+    <main className="flex flex-col font-[Garet_Book] text-slate-900 antialiased bg-[#F9F7F2]">
       {/* 1. HERO SECTION */}
       <AboutHero/>
       <FounderManifesto/>

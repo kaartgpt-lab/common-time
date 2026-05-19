@@ -72,21 +72,21 @@ export default function OrderDetail() {
   if (!order) {
     return (
       <main className="max-w-4xl mx-auto px-6 py-20 text-center">
-        <h1 className="font-serif text-3xl mb-4">Order not found</h1>
+        <h1 className="font-[Bai_Jamjuree] text-3xl font-light mb-4">order not found</h1>
         <Link to="/orders" className="text-sm underline uppercase tracking-widest">Back to Orders</Link>
       </main>
     );
   }
 
   return (
-    <main className="max-w-4xl mx-auto px-6 py-20 font-display text-slate-900 antialiased font-[Bai_Jamjuree] ">
+    <main className="max-w-4xl mx-auto px-6 py-20 font-[Garet_Book] text-slate-900 antialiased">
       <style>{`
         .tracking-widest-extra { letter-spacing: 0.15em; }
       `}</style>
 
       {/* Header */}
       <div className="mb-16">
-        <h1 className="font-[Bai_Jamjuree] text-5xl md:text-6xl font-bold mb-8 uppercase tracking-tight ">
+        <h1 className="font-[Bai_Jamjuree] text-4xl md:text-5xl font-light mb-8 tracking-tight">
           Order Details
         </h1>
         

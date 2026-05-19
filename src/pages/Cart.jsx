@@ -65,7 +65,7 @@ export default function Cart() {
   }
 
   return (
-    <main className="max-w-7xl mx-auto px-6 py-16 md:py-24 font-display text-[#493627] antialiased">
+    <main className="max-w-7xl mx-auto px-6 py-16 md:py-24 font-[Garet_Book] text-[#493627] antialiased">
       {/* HEADER SECTION */}
       <div className="mb-16 font-[Bai_Jamjuree]">
         <h2 className="text-6xl md:text-8xl font-black tracking-tighter text-[#493627]/10 uppercase select-none">

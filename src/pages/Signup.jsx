@@ -39,10 +39,10 @@ export default function Signup() {
   };
 
   return (
-    <main className="min-h-screen flex items-center justify-center py-16 px-4">
+    <main className="min-h-screen flex items-center justify-center py-16 px-4 font-[Garet_Book]">
       <div className="w-full max-w-md">
-        <h1 className="text-2xl font-bold mb-2 uppercase">Sign Up</h1>
-        <p className="text-gray-600 mb-8">Create your account</p>
+        <h1 className="text-2xl font-light mb-2 font-[Bai_Jamjuree] tracking-tight">Sign Up</h1>
+        <p className="text-gray-500 mb-8 text-sm">create your account</p>
 
         <form onSubmit={handleSubmit} className="space-y-4">
 
@@ -86,7 +86,7 @@ export default function Signup() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-black text-white py-3 rounded-full font-medium hover:bg-gray-800 disabled:opacity-70 uppercase"
+            className="w-full bg-black text-white py-3 rounded-sm font-[Garet_Book] text-xs tracking-[0.2em] hover:bg-gray-800 disabled:opacity-70"
           >
             {loading ? "Creating..." : "Sign Up"}
           </button>

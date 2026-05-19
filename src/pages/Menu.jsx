@@ -256,7 +256,7 @@ export default function Menu() {
   };
 
   return (
-    <main className="min-h-screen bg-[#FDFDFD] text-black font-sans pb-32 overflow-x-hidden selection:bg-black selection:text-white">
+    <main className="min-h-screen bg-[#FDFDFD] text-black font-[Garet_Book] pb-32 overflow-x-hidden selection:bg-black selection:text-white">
       
       {showSelector && (
         <div className="fixed inset-0 top-[70px] md:top-[85px] bg-white z-[40] flex flex-col items-center justify-center overflow-hidden animate-fadeIn">
