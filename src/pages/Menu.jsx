@@ -99,7 +99,6 @@ const MenuItem = ({ name, price, desc }) => (
         {desc}
       </p>
     )}
-    <span className="text-[18px] font-normal mt-4 block">{price}</span>
     <div className="mt-6 border-b border-dotted border-gray-300 w-2/3"></div>
   </div>
 );

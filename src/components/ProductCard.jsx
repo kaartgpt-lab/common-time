@@ -204,10 +204,7 @@ export default function ProductCard({ product, index = 0 }) {
             <h3 className="text-[13px] font-light font-[Bai_Jamjuree] text-black/85 leading-snug line-clamp-2 mb-2">
               {product.name}
             </h3>
-            <div className="flex items-center justify-between pt-2 border-t border-black/5">
-              <span className="text-[13px] font-[Garet_Book] text-black/65 font-medium">
-                {formatPrice(product.price)}
-              </span>
+            <div className="flex items-center justify-end pt-2 border-t border-black/5">
               <span className="text-[#8b7355] text-[11px] leading-none">→</span>
             </div>
           </Link>

@@ -207,9 +207,6 @@ export default function ProductDetail() {
               </p>
             )}
 
-            <p className="text-xl font-normal text-gray-900 mb-8">
-              {formatPrice(product.price)}
-            </p>
 
 
           </div>

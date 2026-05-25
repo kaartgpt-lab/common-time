@@ -138,7 +138,6 @@ export default function OrderDetail() {
                   </p>
                 </div>
               </div>
-              <p className="text-sm font-medium">{formatPrice(item.price_at_purchase * item.quantity)}</p>
             </div>
           ))}
         </div>
@@ -169,16 +168,8 @@ export default function OrderDetail() {
         <div className="bg-[#493627]/5 p-8 h-fit">
           <div className="space-y-4">
             <div className="flex justify-between text-xs tracking-widest-extra uppercase">
-              <span>Subtotal</span>
-              <span>{formatPrice(order.total_amount)}</span>
-            </div>
-            <div className="flex justify-between text-xs tracking-widest-extra uppercase">
               <span>Shipping</span>
               <span className="italic">Free</span>
-            </div>
-            <div className="pt-4 border-t border-[#493627]/10 flex justify-between font-bold text-sm tracking-widest-extra uppercase">
-              <span>Total</span>
-              <span>{formatPrice(order.total_amount)}</span>
             </div>
           </div>
         </div>

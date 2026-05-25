@@ -268,7 +268,6 @@ export default function Checkout() {
                       <p className="font-medium text-sm">{row.product.name}</p>
                       <p className="text-xs opacity-60 mt-1 uppercase tracking-tighter">Specialty Selection</p>
                     </div>
-                    <span className="text-sm font-medium">{formatPrice(row.product.price * row.quantity)}</span>
                   </div>
                 </div>
               ))}
@@ -276,19 +275,8 @@ export default function Checkout() {
 
             <div className="space-y-3 pt-6 border-t border-[#493627]/10">
               <div className="flex justify-between text-sm">
-                <span className="opacity-60">Subtotal</span>
-                <span>{formatPrice(total)}</span>
-              </div>
-              <div className="flex justify-between text-sm">
                 <span className="opacity-60">Shipping</span>
-                <span className="text-[10px] uppercase tracking-tighter italic">Calculated at next step</span>
-              </div>
-              <div className="flex justify-between pt-6 mt-4 border-t border-[#493627]/10">
-                <span className="text-lg font-bold uppercase tracking-widest">Total</span>
-                <div className="text-right">
-                  <span className="text-xs opacity-50 mr-2 uppercase">INR</span>
-                  <span className="text-2xl font-[Bai_Jamjuree] font-light">{formatPrice(total)}</span>
-                </div>
+                <span className="text-[10px] uppercase tracking-tighter italic">Calculated separately</span>
               </div>
             </div>
           </aside>

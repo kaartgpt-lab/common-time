@@ -115,7 +115,7 @@ export default function ProductGrid({ products, columns = 4 }) {
                   <p className="text-[11px] text-gray-600 mb-3 leading-relaxed font-light font-[Garet_Book]">
                     {product.description?.slice(0, 90)}...
                   </p>
-                  <p className="text-lg font-medium text-gray-900 mb-6 font-[Bai_Jamjuree]">
+                  <p className="text-lg font-medium text-gray-900 mb-6 font-[Bai_Jamjuree] hidden">
                     {formatPrice(product.price)}
                   </p>
                   <div className="flex flex-col gap-3 w-full mt-auto">

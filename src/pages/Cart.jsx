@@ -145,10 +145,6 @@ export default function Cart() {
                   </div>
                 </div>
 
-                {/* ITEM TOTAL */}
-                <div className="text-right py-1 font-[Bai_Jamjuree]">
-                  <span className="text-lg font-medium">{formatPrice(row.product.price * row.quantity)}</span>
-                </div>
               </div>
             ))
           )}
@@ -161,19 +157,8 @@ export default function Cart() {
             
             <div className="space-y-4">
               <div className="flex justify-between items-center text-sm">
-                <span className="text-[#493627]/60  font-[Garet_Book]">Subtotal</span>
-                <span className="font-medium">{formatPrice(total)}</span>
-              </div>
-              <div className="flex justify-between items-center text-sm">
                 <span className="text-[#493627]/60 font-[Garet_Book]">Shipping</span>
-                <span className="italic text-xs  font-[Garet_Book]">Calculated at next step</span>
-              </div>
-              
-              <div className="pt-6 mt-6 border-t border-[#493627]/10 flex justify-between items-end font-[Bai_Jamjuree]">
-                <span className="text-sm font-bold uppercase tracking-widest">Total</span>
-                <span className="text-2xl font-bold tracking-tighter text-[#493627]">
-                  {formatPrice(total)}
-                </span>
+                <span className="italic text-xs font-[Garet_Book]">Calculated at next step</span>
               </div>
             </div>
 

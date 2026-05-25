@@ -98,9 +98,6 @@ export default function Orders() {
                     {order.status}
                   </span>
                 </div>
-                <span className="font-semibold text-[#493627]">
-                  {formatPrice(order.total_amount)}
-                </span>
                 <span className="text-sm text-gray-500 ">
                   {new Date(order.created_at).toLocaleDateString()}
                 </span>
@@ -122,7 +119,7 @@ export default function Orders() {
                         <div className="flex-1">
                           <p className="font-medium text-sm">{oi.product?.name}</p>
                           <p className="text-xs text-gray-500 mt-1 uppercase tracking-widest">
-                            Qty: {oi.quantity} × {formatPrice(oi.price_at_purchase)}
+                            qty: {oi.quantity}
                           </p>
                         </div>
                       </div>
