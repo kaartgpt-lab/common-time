@@ -105,18 +105,9 @@ export default function Home() {
       <section className="bg-[#fafaf8] mt-12 md:mt-0 pb-12 md:py-12 border-b border-black/5">
         <Container>
           <div className="flex flex-col items-start mb-10 md:mb-15">
-            {/* Sub-label with Shimmer */}
-            <span className="shiny-text py-2 inline-block overflow-visible font-[Garet_Book] text-xs uppercase tracking-[0.2em] font-semibold italic mb-1">
-              Curated Selection
-            </span>
-            
-            {/* Main Heading with Shimmer - & remains unchanged */}
-            <div className="flex items-center gap-4">
-             
-              <h2 className="text-2xl md:text-3xl font-light tracking-tight font-[Bai_Jamjuree] flex items-baseline gap-3">
-                <span className="shiny-text py-2 inline-block overflow-visible">Objects & Equipment</span> 
-              </h2>
-            </div>
+            <h2 className="text-2xl md:text-3xl font-light tracking-tight font-[Bai_Jamjuree]">
+              <span className="shiny-text py-2 inline-block overflow-visible">Objects & Equipment</span>
+            </h2>
           </div>
           <ProductGrid products={featuredObjects} columns={4} />
           
@@ -132,15 +123,9 @@ export default function Home() {
       <Container>
         {/* Header - Consistent with your homepage style */}
         <div className="mb-10 md:mb-15 flex flex-col items-start">
-          <span className="shiny-text py-2 inline-block overflow-visible font-[Garet_Book] text-xs uppercase tracking-[0.2em] font-semibold italic mb-1">
-            Physical Presence
-          </span>
-          <div className="flex items-center gap-4">
-           
-           <h2 className="text-2xl md:text-3xl font-light tracking-tight font-[Bai_Jamjuree] flex items-baseline gap-3">
-                <span className="shiny-text py-2 inline-block overflow-visible">Our Spaces</span> 
-              </h2>
-          </div>
+          <h2 className="text-2xl md:text-3xl font-light tracking-tight font-[Bai_Jamjuree]">
+            <span className="shiny-text py-2 inline-block overflow-visible">Our Spaces</span>
+          </h2>
         </div>
 
         {/* The Grid */}
