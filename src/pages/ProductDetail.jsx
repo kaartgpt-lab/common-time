@@ -123,8 +123,8 @@ export default function ProductDetail() {
     product.product_images?.length > 0
       ? [...product.product_images].sort((a, b) => a.position - b.position)
       : product.image_url
-      ? [{ image_url: product.image_url }]
-      : [];
+        ? [{ image_url: product.image_url }]
+        : [];
 
   return (
     <main className="min-h-screen py-16 md:py-24 font-[Garet_Book]">
@@ -157,11 +157,10 @@ export default function ProductDetail() {
                       <button
                         key={index}
                         onClick={() => setActiveImage(index)}
-                        className={`border ${
-                          activeImage === index
+                        className={`border ${activeImage === index
                             ? "border-black"
                             : "border-gray-200"
-                        }`}
+                          }`}
                       >
                         <img
                           src={img.image_url}
@@ -206,6 +205,47 @@ export default function ProductDetail() {
                 {notesText}
               </p>
             )}
+
+
+            {/*---------------------- add to cart button ------------------- */}
+
+            <div className="mt-8 space-y-6">
+              <p className="text-2xl font-light text-gray-900 font-[Bai_Jamjuree]">
+                {formatPrice(product.price)}
+              </p>
+
+              <div className="flex items-center gap-4">
+                <span className="text-xs uppercase tracking-[0.2em] text-gray-500">
+                  Quantity
+                </span>
+
+                <QuantitySelector
+                  value={quantity}
+                  onChange={setQuantity}
+                  min={1}
+                  max={product.stock_quantity || 99}
+                />
+              </div>
+
+              <button
+                type="button"
+                onClick={handleAddToCart}
+                disabled={!product.stock_quantity || product.stock_quantity <= 0}
+                className="w-full md:w-auto bg-[#493627] text-[#f7f7f6] px-12 py-5 text-sm uppercase tracking-[0.2em] font-bold hover:opacity-90 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {product.stock_quantity > 0 ? "Add to Cart" : "Out of Stock"}
+              </button>
+
+              <Link
+                to="/cart"
+                className="block text-sm text-gray-500 underline hover:text-gray-900"
+              >
+                View Cart
+              </Link>
+            </div>
+
+            {/*---------------------- add to cart button ------------------- */}
+
 
 
 

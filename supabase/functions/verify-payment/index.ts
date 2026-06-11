@@ -1,6 +1,6 @@
 /**
  * verify-payment Edge Function
- * Verifies Razorpay payment signature and updates order status
+ * Verifies Razorpay payment signature and marks the matching local order as paid.
  */
 
 /// <reference lib="deno.window" />
@@ -15,9 +15,73 @@ interface VerifyPaymentBody {
   razorpay_signature: string;
 }
 
-serve(async (req: Request) => {
-  /* ---------- CORS PREFLIGHT ---------- */
+interface OrderRow {
+  id: string;
+  user_id: string;
+  status: string;
+  razorpay_order_id: string;
+}
 
+function jsonResponse(body: Record<string, unknown>, status = 200) {
+  return new Response(JSON.stringify(body), {
+    status,
+    headers: {
+      ...corsHeaders,
+      "Content-Type": "application/json",
+    },
+  });
+}
+
+function getRazorpaySecret() {
+  const keySecret = Deno.env.get("RAZORPAY_KEY_SECRET");
+
+  if (!keySecret) {
+    throw new Error("RAZORPAY_SECRET_MISSING");
+  }
+
+  return keySecret;
+}
+
+async function hmacSha256Hex(message: string, secret: string) {
+  const encoder = new TextEncoder();
+
+  const cryptoKey = await crypto.subtle.importKey(
+    "raw",
+    encoder.encode(secret),
+    {
+      name: "HMAC",
+      hash: "SHA-256",
+    },
+    false,
+    ["sign"]
+  );
+
+  const signature = await crypto.subtle.sign(
+    "HMAC",
+    cryptoKey,
+    encoder.encode(message)
+  );
+
+  return Array.from(new Uint8Array(signature))
+    .map((byte) => byte.toString(16).padStart(2, "0"))
+    .join("");
+}
+
+function timingSafeEqual(left: string, right: string) {
+  if (left.length !== right.length) {
+    return false;
+  }
+
+  let result = 0;
+
+  for (let i = 0; i < left.length; i += 1) {
+    result |= left.charCodeAt(i) ^ right.charCodeAt(i);
+  }
+
+  return result === 0;
+}
+
+serve(async (req: Request) => {
   if (req.method === "OPTIONS") {
     return new Response(null, {
       status: 200,
@@ -27,150 +91,110 @@ serve(async (req: Request) => {
 
   try {
     if (req.method !== "POST") {
-      return new Response(
-        JSON.stringify({ error: "Method not allowed" }),
-        {
-          status: 405,
-          headers: { ...corsHeaders, "Content-Type": "application/json" },
-        }
-      );
+      return jsonResponse({ error: "Method not allowed" }, 405);
     }
-
-    /* ---------- AUTH ---------- */
 
     const authHeader = req.headers.get("Authorization") ?? "";
 
-    if (!authHeader) {
-      return new Response(
-        JSON.stringify({ error: "Missing Authorization header" }),
-        {
-          status: 401,
-          headers: { ...corsHeaders, "Content-Type": "application/json" },
-        }
-      );
+    if (!authHeader.startsWith("Bearer ")) {
+      return jsonResponse({ error: "Missing Authorization header" }, 401);
     }
 
+    const token = authHeader.replace("Bearer ", "").trim();
     const userClient = createUserClient(req);
 
     const {
       data: { user },
       error: authError,
-    } = await userClient.auth.getUser();
+    } = await userClient.auth.getUser(token);
 
     if (authError || !user) {
-      console.error("AUTH FAILED:", authError);
-
-      return new Response(
-        JSON.stringify({ error: "Not authenticated" }),
-        {
-          status: 401,
-          headers: { ...corsHeaders, "Content-Type": "application/json" },
-        }
-      );
+      return jsonResponse({ error: "Invalid or expired token" }, 401);
     }
-
-    const userId = user.id;
-
-    /* ---------- BODY ---------- */
 
     const body: VerifyPaymentBody = await req.json();
 
-    const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = body;
+    const razorpayOrderId = body.razorpay_order_id?.trim();
+    const razorpayPaymentId = body.razorpay_payment_id?.trim();
+    const razorpaySignature = body.razorpay_signature?.trim();
 
-    if (!razorpay_order_id || !razorpay_payment_id || !razorpay_signature) {
-      return new Response(
-        JSON.stringify({ error: "Missing payment verification details" }),
-        {
-          status: 400,
-          headers: { ...corsHeaders, "Content-Type": "application/json" },
-        }
-      );
+    if (!razorpayOrderId || !razorpayPaymentId || !razorpaySignature) {
+      return jsonResponse({ error: "Missing payment verification details" }, 400);
     }
 
-    /* ---------- DEV MODE ---------- */
-
-    const devMode = Deno.env.get("DEV_MODE") === "true";
-
-    let orderId: string;
-
-    if (devMode) {
-      // Extract order ID from dev order ID format: dev_order_<timestamp>
-      console.log("DEV MODE: Extracting order ID from:", razorpay_order_id);
-      
-      // In dev mode, we need to find the order by user_id since we don't have actual Razorpay orders
-      const { data: orders, error: ordersError } = await supabaseAdmin
-        .from("orders")
-        .select("id")
-        .eq("user_id", userId)
-        .order("created_at", { ascending: false })
-        .limit(1);
-
-      if (ordersError || !orders || orders.length === 0) {
-        return new Response(
-          JSON.stringify({ error: "Order not found" }),
-          {
-            status: 404,
-            headers: { ...corsHeaders, "Content-Type": "application/json" },
-          }
-        );
-      }
-
-      orderId = orders[0].id;
-      console.log("DEV MODE: Found order ID:", orderId);
-    } else {
-      // Production: Use razorpay_order_id as order ID
-      orderId = razorpay_order_id;
-
-      // TODO: Verify signature with Razorpay API
-      // For now, we'll trust the client provided it
-      console.log("Production mode: Would verify signature with Razorpay");
+    if (!razorpayOrderId.startsWith("order_")) {
+      return jsonResponse({ error: "Invalid Razorpay order id" }, 400);
     }
 
-    /* ---------- UPDATE ORDER STATUS ---------- */
+    if (!razorpayPaymentId.startsWith("pay_")) {
+      return jsonResponse({ error: "Invalid Razorpay payment id" }, 400);
+    }
+
+    const { data: order, error: orderError } = await supabaseAdmin
+      .from("orders")
+      .select("id, user_id, status, razorpay_order_id")
+      .eq("razorpay_order_id", razorpayOrderId)
+      .eq("user_id", user.id)
+      .single();
+
+    if (orderError || !order) {
+      return jsonResponse({ error: "Order not found" }, 404);
+    }
+
+    const localOrder = order as OrderRow;
+
+    if (localOrder.status === "paid") {
+      return jsonResponse({
+        verified: true,
+        order_id: localOrder.id,
+        status: localOrder.status,
+      });
+    }
+
+    const keySecret = getRazorpaySecret();
+
+    const generatedSignature = await hmacSha256Hex(
+      `${razorpayOrderId}|${razorpayPaymentId}`,
+      keySecret
+    );
+
+    if (!timingSafeEqual(generatedSignature, razorpaySignature)) {
+      console.warn("[verify-payment] Signature mismatch:", {
+        orderId: localOrder.id,
+        razorpayOrderId,
+      });
+
+      return jsonResponse({ error: "Payment signature mismatch" }, 400);
+    }
 
     const { data: updatedOrder, error: updateError } = await supabaseAdmin
       .from("orders")
-      .update({ status: "paid" })
-      .eq("id", orderId)
-      .eq("user_id", userId)
+      .update({
+        status: "paid",
+        razorpay_payment_id: razorpayPaymentId,
+      })
+      .eq("id", localOrder.id)
+      .eq("user_id", user.id)
       .select("id, status")
       .single();
 
     if (updateError || !updatedOrder) {
-      console.error("Failed to update order:", updateError);
-
-      return new Response(
-        JSON.stringify({ error: "Failed to update order status" }),
-        {
-          status: 500,
-          headers: { ...corsHeaders, "Content-Type": "application/json" },
-        }
-      );
+      console.error("[verify-payment] Order update failed:", updateError);
+      return jsonResponse({ error: "Could not update order status" }, 500);
     }
 
-    console.log("Order updated successfully:", updatedOrder);
+    return jsonResponse({
+      verified: true,
+      order_id: updatedOrder.id,
+      status: updatedOrder.status,
+    });
+  } catch (error) {
+    console.error("[verify-payment] Final error:", error);
 
-    return new Response(
-      JSON.stringify({
-        verified: true,
-        order_id: orderId,
-        status: updatedOrder.status,
-        dev_mode: devMode,
-      }),
-      {
-        status: 200,
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-      }
-    );
-  } catch (err) {
-    console.error("verify-payment error:", err);
+    if (error instanceof Error && error.message === "RAZORPAY_SECRET_MISSING") {
+      return jsonResponse({ error: "Razorpay secret is not configured" }, 500);
+    }
 
-    return new Response(
-      JSON.stringify({ error: "Internal server error" }),
-      {
-        status: 500,
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-      }
-    );
+    return jsonResponse({ error: "Internal server error" }, 500);
   }
 });
