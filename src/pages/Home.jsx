@@ -87,13 +87,7 @@ export default function Home() {
         }
       `}} />
 
-      <HeroSection
-        headline="Elevated rituals"
-        subtext=""
-        ctaText="Discover"
-        ctaHref="/shop"
-      />
-      <ProductBanner products={products} />
+      <ProductBanner />
       <Common />
       {/* <CenteredRevealSection
         headline="Coffee, conversation, and small moments that make the day better."
