@@ -10,6 +10,7 @@ import GalleryMarquee from "../components/editorial/GalleryMarquee";
 import InstagramSection from "../components/editorial/InstagramSection";
 import Common from "../components/editorial/Common";
 import ProductBanner from "../components/editorial/ProductBanner";
+import BlogSection from "../components/editorial/BlogSection";
 
 export default function Home() {
   const [products, setProducts] = useState([]);
@@ -89,6 +90,7 @@ export default function Home() {
 
       <ProductBanner />
       <Common />
+      <BlogSection />
       {/* <CenteredRevealSection
         headline="Coffee, conversation, and small moments that make the day better."
         linkText="Visit Us"
