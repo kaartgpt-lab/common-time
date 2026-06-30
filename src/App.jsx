@@ -22,6 +22,8 @@ import Footer from "./components/Footer.jsx";
 import OrderDetail from "./pages/OrderDetail.jsx";
 import ComingSoon from "./pages/ComingSoon.jsx";
 import Admin from "./pages/Admin.jsx";
+import Journal from "./pages/Journal.jsx";
+import JournalPost from "./pages/JournalPost.jsx";
 export default function App() {
   return (
     <div className="flex flex-col min-h-screen">
@@ -44,6 +46,8 @@ export default function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/admin" element={<Admin />} />
+          <Route path="/journal" element={<Journal />} />
+          <Route path="/journal/:slug" element={<JournalPost />} />
           <Route path="/merch" element={<Navigate to="/shop" replace />} />
           <Route path="/merch/:id" element={<MerchRedirect />} />
         </Routes>

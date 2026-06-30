@@ -1,34 +1,5 @@
 import { Link } from "react-router-dom";
-
-const POSTS = [
-  {
-    slug: "pour-over-guide",
-    category: "brew guide",
-    title: "The Pour Over: Slowing Down to Taste More",
-    excerpt:
-      "There's a reason pour over coffee has become the ritual of choice for those who want more from their cup. When water meets ground coffee at the right temperature, something shifts.",
-    image: "/gallery-marquee/CT-02.jpg",
-    readTime: "4 min read",
-  },
-  {
-    slug: "understanding-origins",
-    category: "origin stories",
-    title: "Why Where Your Coffee Grows Changes Everything",
-    excerpt:
-      "Ethiopia, Colombia, Sumatra — each origin carries its own story in the cup. Altitude, rainfall, soil. The terroir of coffee is as complex as any wine region in the world.",
-    image: "/hot.avif",
-    readTime: "6 min read",
-  },
-  {
-    slug: "grind-size-matters",
-    category: "technique",
-    title: "Grind Size: The Variable You're Probably Getting Wrong",
-    excerpt:
-      "Before you blame your beans, check your grind. It's the single most impactful variable in your brew — finer than you think for espresso, coarser than you'd expect for a French press.",
-    image: "/nutmeg latte.avif",
-    readTime: "3 min read",
-  },
-];
+import { POSTS } from "../../data/journal";
 
 export default function BlogSection() {
   return (
