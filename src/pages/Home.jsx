@@ -9,6 +9,7 @@ import Container from "../components/layout/Container";
 import GalleryMarquee from "../components/editorial/GalleryMarquee";
 import InstagramSection from "../components/editorial/InstagramSection";
 import Common from "../components/editorial/Common";
+import ProductBanner from "../components/editorial/ProductBanner";
 
 export default function Home() {
   const [products, setProducts] = useState([]);
@@ -92,6 +93,7 @@ export default function Home() {
         ctaText="Discover"
         ctaHref="/shop"
       />
+      <ProductBanner products={products} />
       <Common />
       {/* <CenteredRevealSection
         headline="Coffee, conversation, and small moments that make the day better."
