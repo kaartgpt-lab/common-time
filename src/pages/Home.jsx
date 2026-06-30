@@ -90,7 +90,6 @@ export default function Home() {
 
       <ProductBanner />
       <Common />
-      <BlogSection />
       {/* <CenteredRevealSection
         headline="Coffee, conversation, and small moments that make the day better."
         linkText="Visit Us"
@@ -135,6 +134,7 @@ export default function Home() {
       </Container>
     </main>
         <PartnerLogos />
+      <BlogSection />
      <section className="py-10 flex flex-col items-center justify-center font-[Garet_Book] w-full bg-[#fafaf8]">
   {/* A very thin, short divider */}
   <div className="w-12 h-px bg-gray-200 mb-8 mx-auto" />
