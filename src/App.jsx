@@ -24,8 +24,11 @@ import ComingSoon from "./pages/ComingSoon.jsx";
 import Admin from "./pages/Admin.jsx";
 import Journal from "./pages/Journal.jsx";
 import JournalPost from "./pages/JournalPost.jsx";
+import { QuickViewProvider } from "./context/QuickViewContext.jsx";
+import QuickViewPanel from "./components/commerce/QuickViewPanel.jsx";
 export default function App() {
   return (
+    <QuickViewProvider>
     <div className="flex flex-col min-h-screen">
       <Header />
       <main className="flex-1">
@@ -53,6 +56,8 @@ export default function App() {
         </Routes>
       </main>
       <Footer />
+      <QuickViewPanel />
     </div>
+    </QuickViewProvider>
   );
 }

@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import { Link } from "react-router-dom";
 import { formatPrice } from "../../utils/formatters";
 import { useCart } from "../../context/CartContext";
+import { useQuickView } from "../../context/QuickViewContext";
 import toast from "react-hot-toast";
 
 function slugify(str) {
@@ -14,6 +15,7 @@ function slugify(str) {
 
 export default function ProductGrid({ products, columns = 4 }) {
   const { addItem } = useCart();
+  const { open: openQuickView } = useQuickView();
   const scrollRef = useRef(null);
 
   if (!products?.length) return null;
@@ -105,6 +107,15 @@ export default function ProductGrid({ products, columns = 4 }) {
                       {product.name}
                     </p>
                   </div>
+                  {/* Quick view — visible on hover (desktop) and always visible on mobile */}
+                  <button
+                    onClick={(e) => { e.preventDefault(); e.stopPropagation(); openQuickView(product); }}
+                    className="absolute bottom-3 right-3 bg-white/90 backdrop-blur-sm text-[#1a1a1a] text-[8px] uppercase tracking-[0.25em] font-[Garet_Book] px-3 py-1.5
+                      opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-300
+                      hover:bg-[#1a1a1a] hover:text-white"
+                  >
+                    quick view
+                  </button>
                 </div>
 
                 {/* BACK SIDE */}
@@ -119,8 +130,14 @@ export default function ProductGrid({ products, columns = 4 }) {
                     {formatPrice(product.price)}
                   </p>
                   <div className="flex flex-col gap-3 w-full mt-auto">
-                    <Link to={`/shop/${slug}`} className="text-center text-[9px] font-bold uppercase tracking-widest text-gray-500 border-b border-transparent hover:border-gray-400 pb-0.5 transition-all font-[Garet_Book]">
-                      View Full Details
+                    <button
+                      onClick={(e) => { e.stopPropagation(); openQuickView(product); }}
+                      className="w-full bg-[#1a1a1a] text-white text-[9px] uppercase tracking-widest font-[Garet_Book] py-3 hover:bg-[#8b7355] transition-colors duration-300"
+                    >
+                      quick view
+                    </button>
+                    <Link to={`/shop/${slug}`} className="text-center text-[9px] uppercase tracking-widest text-gray-400 hover:text-gray-700 transition-colors font-[Garet_Book]">
+                      full details →
                     </Link>
                   </div>
                 </div>
