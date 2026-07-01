@@ -122,7 +122,7 @@ export default function ProductDetail() {
       ? [{ image_url: product.image_url }]
       : [];
 
-  const isCoffee = product.category === "coffee";
+  const isCoffee = product.category === "beans";
 
   return (
     <main className="min-h-screen bg-white font-[Inter]">
