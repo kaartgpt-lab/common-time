@@ -27,7 +27,7 @@ export default function Home() {
   }, []);
 
   const featuredCoffee = products.filter((p) => p.category === "coffee").slice(0, 4);
-  const featuredObjects = products.filter((p) => p.category === "merchandise").slice(0, 4);
+  const featuredObjects = products.filter((p) => p.category === "merch").slice(0, 4);
  const locations = [
   {
     name: "Lodhi Colony",
