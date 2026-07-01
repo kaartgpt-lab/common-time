@@ -100,8 +100,8 @@ export default function ProductDetail() {
   if (!product) {
     return (
       <main className="min-h-screen bg-white flex flex-col items-center justify-center gap-4">
-        <p className="font-[Garet_Book] text-[#1a1a1a]/50">product not found.</p>
-        <Link to="/shop" className="text-[10px] uppercase tracking-[0.3em] font-[Garet_Book] text-[#8b7355]">
+        <p className="font-[Inter] text-[#1a1a1a]/50">product not found.</p>
+        <Link to="/shop" className="text-[10px] uppercase tracking-[0.3em] font-[Inter] text-[#8b7355]">
           ← back to shop
         </Link>
       </main>
@@ -125,7 +125,7 @@ export default function ProductDetail() {
   const isCoffee = product.category === "coffee";
 
   return (
-    <main className="min-h-screen bg-white font-[Garet_Book]">
+    <main className="min-h-screen bg-white font-[Inter]">
 
       {/* Breadcrumb */}
       <div className="max-w-[1200px] mx-auto px-5 md:px-6 pt-10 md:pt-14">
@@ -177,16 +177,16 @@ export default function ProductDetail() {
           <div className="flex flex-col lg:pt-2">
 
             {/* Category */}
-            <p className="text-[9px] uppercase tracking-[0.45em] text-[#8b7355] font-[Garet_Book] mb-4">
+            <p className="text-[9px] uppercase tracking-[0.45em] text-[#8b7355] font-[Inter] mb-4">
               {product.category?.replace("-", " ")}
             </p>
 
             {/* Name + price */}
             <div className="flex items-start justify-between gap-4 mb-2">
-              <h1 className="font-[Bai_Jamjuree] font-light text-[#1a1a1a] text-3xl md:text-4xl leading-tight flex-1">
+              <h1 className="font-[Inter] font-light text-[#1a1a1a] text-3xl md:text-4xl leading-tight flex-1">
                 {product.name}
               </h1>
-              <p className="font-[Bai_Jamjuree] text-xl md:text-2xl text-[#1a1a1a] flex-shrink-0 mt-1">
+              <p className="font-[Inter] text-xl md:text-2xl text-[#1a1a1a] flex-shrink-0 mt-1">
                 {formatPrice(product.price)}
               </p>
             </div>
@@ -214,7 +214,7 @@ export default function ProductDetail() {
                   {notesArr.map((note) => (
                     <span
                       key={note}
-                      className="text-[10px] uppercase tracking-[0.2em] text-[#8b7355] border border-[#8b7355]/30 px-3 py-1 font-[Garet_Book]"
+                      className="text-[10px] uppercase tracking-[0.2em] text-[#8b7355] border border-[#8b7355]/30 px-3 py-1 font-[Inter]"
                     >
                       {note}
                     </span>
@@ -234,7 +234,7 @@ export default function ProductDetail() {
                       <button
                         key={w}
                         onClick={() => setWeight(w)}
-                        className={`text-[10px] uppercase tracking-[0.2em] font-[Garet_Book] px-5 py-2.5 border transition-colors duration-200 ${
+                        className={`text-[10px] uppercase tracking-[0.2em] font-[Inter] px-5 py-2.5 border transition-colors duration-200 ${
                           weight === w
                             ? "bg-[#1a1a1a] text-white border-[#1a1a1a]"
                             : "bg-white text-[#1a1a1a]/50 border-black/15 hover:border-[#1a1a1a]/40 hover:text-[#1a1a1a]"
@@ -254,7 +254,7 @@ export default function ProductDetail() {
                       <button
                         key={g}
                         onClick={() => setGrind(g)}
-                        className={`text-[10px] uppercase tracking-[0.15em] font-[Garet_Book] px-4 py-2 border transition-colors duration-200 ${
+                        className={`text-[10px] uppercase tracking-[0.15em] font-[Inter] px-4 py-2 border transition-colors duration-200 ${
                           grind === g
                             ? "bg-[#1a1a1a] text-white border-[#1a1a1a]"
                             : "bg-white text-[#1a1a1a]/50 border-black/15 hover:border-[#1a1a1a]/40 hover:text-[#1a1a1a]"
@@ -278,7 +278,7 @@ export default function ProductDetail() {
                 >
                   −
                 </button>
-                <span className="w-10 text-center text-[13px] font-[Garet_Book] text-[#1a1a1a]">
+                <span className="w-10 text-center text-[13px] font-[Inter] text-[#1a1a1a]">
                   {quantity}
                 </span>
                 <button
@@ -292,14 +292,14 @@ export default function ProductDetail() {
               {/* Add to cart */}
               <button
                 onClick={handleAddToCart}
-                className="flex-1 h-12 bg-[#1a1a1a] text-white text-[10px] uppercase tracking-[0.35em] font-[Garet_Book] hover:bg-[#8b7355] transition-colors duration-300"
+                className="flex-1 h-12 bg-[#1a1a1a] text-white text-[10px] uppercase tracking-[0.35em] font-[Inter] hover:bg-[#8b7355] transition-colors duration-300"
               >
                 add to cart
               </button>
             </div>
 
             {/* Shipping note */}
-            <p className="text-[10px] text-[#1a1a1a]/30 mt-4 font-[Garet_Book]">
+            <p className="text-[10px] text-[#1a1a1a]/30 mt-4 font-[Inter]">
               free shipping on orders above ₹999 · ships within 2–3 days
             </p>
 
@@ -311,10 +311,10 @@ export default function ProductDetail() {
       {related.length > 0 && (
         <section className="bg-[#F9F7F2] py-16 md:py-20 border-t border-black/5">
           <div className="max-w-[1200px] mx-auto px-5 md:px-6">
-            <p className="text-[9px] uppercase tracking-[0.45em] text-[#8b7355] font-[Garet_Book] mb-3">
+            <p className="text-[9px] uppercase tracking-[0.45em] text-[#8b7355] font-[Inter] mb-3">
               you may also like
             </p>
-            <h2 className="font-[Bai_Jamjuree] font-light text-[#1a1a1a] text-2xl mb-10">
+            <h2 className="font-[Inter] font-light text-[#1a1a1a] text-2xl mb-10">
               more from {product.category?.replace("-", " ")}
             </h2>
             <ProductGrid products={related} columns={3} />

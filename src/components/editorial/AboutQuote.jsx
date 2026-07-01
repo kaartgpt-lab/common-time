@@ -104,7 +104,7 @@ const ManifestoCard = ({ item, index, isLeft }) => {
 
         {/* Label */}
         <div className="flex items-center gap-3 mb-6">
-          <span className="font-[Garet_Book] text-[8px] uppercase tracking-[0.2em] text-black font-bold italic">
+          <span className="font-[Inter] text-[8px] uppercase tracking-[0.2em] text-black font-bold italic">
             {item.label}
           </span>
           <div className="h-px w-6 bg-black/5" />
@@ -113,18 +113,18 @@ const ManifestoCard = ({ item, index, isLeft }) => {
         {/* Content Stagger */}
         <div className="space-y-4">
           {item.title && (
-            <h3 className="text-xl md:text-2xl font-light font-[Bai_Jamjuree] text-[#1A1A1A] tracking-tighter leading-tight">
+            <h3 className="text-xl md:text-2xl font-light font-[Inter] text-[#1A1A1A] tracking-tighter leading-tight">
               {item.title}
             </h3>
           )}
-          <p className="font-[Garet_Book] text-[13px] md:text-sm text-gray-500 leading-relaxed">
+          <p className="font-[Inter] text-[13px] md:text-sm text-gray-500 leading-relaxed">
             {item.body}
           </p>
         </div>
 
         {item.isFinal && (
           <div className="mt-8 pt-8 border-t border-black/5">
-            <p className="font-[Bai_Jamjuree] text-[10px] uppercase tracking-[0.4em] text-[#1A1A1A] font-bold">
+            <p className="font-[Inter] text-[10px] uppercase tracking-[0.4em] text-[#1A1A1A] font-bold">
               — Jaivardhan
             </p>
           </div>

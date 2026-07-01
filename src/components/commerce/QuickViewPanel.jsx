@@ -106,17 +106,17 @@ function MdPanel({ product, slug, close, handleAddToCart }) {
       <div className="flex flex-col flex-1 px-6 pt-6 pb-8 md:px-8 md:pt-7 md:pb-10">
         {/* Category */}
         {product.category && (
-          <p className="text-[9px] uppercase tracking-[0.4em] text-[#8b7355] font-[Garet_Book] mb-3">
+          <p className="text-[9px] uppercase tracking-[0.4em] text-[#8b7355] font-[Inter] mb-3">
             {product.category.replace("-", " ")}
           </p>
         )}
 
         {/* Name + price */}
         <div className="flex items-start justify-between gap-4 mb-4">
-          <h2 className="font-[Bai_Jamjuree] font-light text-[#1a1a1a] text-xl md:text-2xl leading-tight flex-1">
+          <h2 className="font-[Inter] font-light text-[#1a1a1a] text-xl md:text-2xl leading-tight flex-1">
             {product.name}
           </h2>
-          <p className="font-[Bai_Jamjuree] text-lg text-[#1a1a1a] flex-shrink-0 mt-0.5">
+          <p className="font-[Inter] text-lg text-[#1a1a1a] flex-shrink-0 mt-0.5">
             {formatPrice(product.price)}
           </p>
         </div>
@@ -126,7 +126,7 @@ function MdPanel({ product, slug, close, handleAddToCart }) {
 
         {/* Description */}
         {product.description && (
-          <p className="font-[Garet_Book] text-[13px] md:text-[14px] text-[#1a1a1a]/60 leading-relaxed mb-6 flex-1">
+          <p className="font-[Inter] text-[13px] md:text-[14px] text-[#1a1a1a]/60 leading-relaxed mb-6 flex-1">
             {product.description}
           </p>
         )}
@@ -135,14 +135,14 @@ function MdPanel({ product, slug, close, handleAddToCart }) {
         <div className="flex flex-col gap-3 mt-auto">
           <button
             onClick={handleAddToCart}
-            className="w-full bg-[#1a1a1a] text-white text-[10px] uppercase tracking-[0.3em] font-[Garet_Book] py-4 hover:bg-[#8b7355] transition-colors duration-300"
+            className="w-full bg-[#1a1a1a] text-white text-[10px] uppercase tracking-[0.3em] font-[Inter] py-4 hover:bg-[#8b7355] transition-colors duration-300"
           >
             add to cart
           </button>
           <Link
             to={`/shop/${slug}`}
             onClick={close}
-            className="w-full border border-black/15 text-[#1a1a1a]/60 text-[10px] uppercase tracking-[0.3em] font-[Garet_Book] py-3.5 text-center hover:border-[#1a1a1a]/40 hover:text-[#1a1a1a] transition-colors duration-300"
+            className="w-full border border-black/15 text-[#1a1a1a]/60 text-[10px] uppercase tracking-[0.3em] font-[Inter] py-3.5 text-center hover:border-[#1a1a1a]/40 hover:text-[#1a1a1a] transition-colors duration-300"
           >
             view full details
           </Link>

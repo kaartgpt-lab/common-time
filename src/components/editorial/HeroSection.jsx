@@ -28,7 +28,7 @@ export default function HeroSection({
   />
       <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/20 to-transparent" />
       <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 gap-8">
-        <h1 className="text-[20px] font-[Bai_Jamjuree] text-white font-light tracking-[0.02em] leading-tight mb-4">
+        <h1 className="text-[20px] font-[Inter] text-white font-light tracking-[0.02em] leading-tight mb-4">
           {headline || "Elevated rituals"}
         </h1>
         {subtext && (
@@ -39,7 +39,7 @@ export default function HeroSection({
         {/* {ctaText && (
           <Link
             to={ctaHref}
-            className="inline-block px-8 py-3 font-[Garet_Book] bg-[#8B7355]/90 text-white text-sm uppercase tracking-wider hover:bg-[#8B7355] transition-colors"
+            className="inline-block px-8 py-3 font-[Inter] bg-[#8B7355]/90 text-white text-sm uppercase tracking-wider hover:bg-[#8B7355] transition-colors"
           >
             {ctaText}
           </Link>

@@ -103,14 +103,14 @@ export default function ProductGrid({ products, columns = 4 }) {
                 <div className="flip-card-front bg-gray-100 overflow-hidden">
                   <img src={product.image_url || "/hot.jpg"} alt={product.name} className="w-full h-full object-cover" />
                   <div className="absolute bottom-3 left-3">
-                    <p className="text-[9px] uppercase tracking-[0.2em] text-white bg-black/40 backdrop-blur-sm px-2 py-0.5 font-[Bai_Jamjuree]">
+                    <p className="text-[9px] uppercase tracking-[0.2em] text-white bg-black/40 backdrop-blur-sm px-2 py-0.5 font-[Inter]">
                       {product.name}
                     </p>
                   </div>
                   {/* Quick view — visible on hover (desktop) and always visible on mobile */}
                   <button
                     onClick={(e) => { e.preventDefault(); e.stopPropagation(); openQuickView(product); }}
-                    className="absolute bottom-3 right-3 bg-white/90 backdrop-blur-sm text-[#1a1a1a] text-[8px] uppercase tracking-[0.25em] font-[Garet_Book] px-3 py-1.5
+                    className="absolute bottom-3 right-3 bg-white/90 backdrop-blur-sm text-[#1a1a1a] text-[8px] uppercase tracking-[0.25em] font-[Inter] px-3 py-1.5
                       opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-300
                       hover:bg-[#1a1a1a] hover:text-white"
                   >
@@ -120,23 +120,23 @@ export default function ProductGrid({ products, columns = 4 }) {
 
                 {/* BACK SIDE */}
                 <div className="flip-card-back bg-[#F9F7F2] p-6 flex flex-col justify-center items-start border border-gray-100 shadow-2xl">
-                  <h3 className="text-xl font-light text-gray-900 mb-1.5 uppercase tracking-tight leading-tight font-[Bai_Jamjuree]">
+                  <h3 className="text-xl font-light text-gray-900 mb-1.5 uppercase tracking-tight leading-tight font-[Inter]">
                     {product.name}
                   </h3>
-                  <p className="text-[11px] text-gray-600 mb-3 leading-relaxed font-light font-[Garet_Book]">
+                  <p className="text-[11px] text-gray-600 mb-3 leading-relaxed font-light font-[Inter]">
                     {product.description?.slice(0, 90)}...
                   </p>
-                  <p className="text-lg font-medium text-gray-900 mb-6 font-[Bai_Jamjuree] hidden">
+                  <p className="text-lg font-medium text-gray-900 mb-6 font-[Inter] hidden">
                     {formatPrice(product.price)}
                   </p>
                   <div className="flex flex-col gap-3 w-full mt-auto">
                     <button
                       onClick={(e) => { e.stopPropagation(); openQuickView(product); }}
-                      className="w-full bg-[#1a1a1a] text-white text-[9px] uppercase tracking-widest font-[Garet_Book] py-3 hover:bg-[#8b7355] transition-colors duration-300"
+                      className="w-full bg-[#1a1a1a] text-white text-[9px] uppercase tracking-widest font-[Inter] py-3 hover:bg-[#8b7355] transition-colors duration-300"
                     >
                       quick view
                     </button>
-                    <Link to={`/shop/${slug}`} className="text-center text-[9px] uppercase tracking-widest text-gray-400 hover:text-gray-700 transition-colors font-[Garet_Book]">
+                    <Link to={`/shop/${slug}`} className="text-center text-[9px] uppercase tracking-widest text-gray-400 hover:text-gray-700 transition-colors font-[Inter]">
                       full details →
                     </Link>
                   </div>

@@ -173,7 +173,7 @@ export default function Admin() {
   );
 
   return (
-    <div className="min-h-screen bg-[#fafaf8] font-[Garet_Book]">
+    <div className="min-h-screen bg-[#fafaf8] font-[Inter]">
 
       {/* ── Toast ── */}
       {toast && (
@@ -186,7 +186,7 @@ export default function Admin() {
       <div className="bg-white border-b border-black/5 px-6 md:px-12 py-5 flex items-center justify-between sticky top-0 z-50">
         <div>
           <p className="text-[9px] tracking-[0.35em] text-black/30 mb-0.5">common time</p>
-          <h1 className="text-sm font-[Bai_Jamjuree] font-light tracking-tight text-black">admin panel</h1>
+          <h1 className="text-sm font-[Inter] font-light tracking-tight text-black">admin panel</h1>
         </div>
         <button
           onClick={openAdd}
@@ -208,7 +208,7 @@ export default function Admin() {
           ].map((s) => (
             <div key={s.label} className="bg-white border border-black/5 p-5">
               <p className="text-[8px] tracking-[0.3em] text-black/30 mb-2">{s.label}</p>
-              <p className="text-2xl font-[Bai_Jamjuree] font-light text-black">{s.val}</p>
+              <p className="text-2xl font-[Inter] font-light text-black">{s.val}</p>
             </div>
           ))}
         </div>
@@ -246,7 +246,7 @@ export default function Admin() {
                       </div>
                     </td>
                     <td className="px-5 py-3">
-                      <p className="text-[12px] text-black font-[Bai_Jamjuree]">{p.name}</p>
+                      <p className="text-[12px] text-black font-[Inter]">{p.name}</p>
                       {p.slug && <p className="text-[9px] text-black/25 mt-0.5">/{p.slug}</p>}
                     </td>
                     <td className="px-5 py-3">
@@ -290,7 +290,7 @@ export default function Admin() {
         <div className="fixed inset-0 z-[100] flex items-center justify-center px-4" style={{ background: "rgba(0,0,0,0.5)", backdropFilter: "blur(4px)" }}>
           <div className="bg-white w-full max-w-xl max-h-[90vh] overflow-y-auto shadow-2xl">
             <div className="px-8 py-6 border-b border-black/5 flex items-center justify-between sticky top-0 bg-white z-10">
-              <h2 className="text-sm font-[Bai_Jamjuree] font-light tracking-tight">{modal === "add" ? "add product" : "edit product"}</h2>
+              <h2 className="text-sm font-[Inter] font-light tracking-tight">{modal === "add" ? "add product" : "edit product"}</h2>
               <button onClick={() => setModal(null)} className="text-black/30 hover:text-black text-lg transition-colors">×</button>
             </div>
 

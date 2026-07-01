@@ -66,7 +66,7 @@ const AboutPillars = () => {
                 <div className="relative z-10">
                   {/* Label & Linear detail */}
                   <div className="flex items-center gap-4 mb-10 overflow-hidden">
-                    <span className="font-[Garet_Book] text-[10px] uppercase tracking-[0.6em] text-[#8B7355] font-bold italic whitespace-nowrap">
+                    <span className="font-[Inter] text-[10px] uppercase tracking-[0.6em] text-[#8B7355] font-bold italic whitespace-nowrap">
                       {pillar.label}
                     </span>
                     <motion.div 
@@ -79,10 +79,10 @@ const AboutPillars = () => {
 
                   {/* Title & Description */}
                   <div className="space-y-4 mb-12">
-                    <h3 className="text-3xl font-light font-[Bai_Jamjuree] text-[#1A1A1A] tracking-tighter leading-none">
+                    <h3 className="text-3xl font-light font-[Inter] text-[#1A1A1A] tracking-tighter leading-none">
                       {pillar.title}
                     </h3>
-                    <p className="font-[Garet_Book] text-[13px] md:text-sm text-gray-500 leading-relaxed max-w-[280px]">
+                    <p className="font-[Inter] text-[13px] md:text-sm text-gray-500 leading-relaxed max-w-[280px]">
                       {pillar.description}
                     </p>
                   </div>
@@ -120,7 +120,7 @@ const AboutPillars = () => {
         whileTap={{ scale: 0.98 }}
         className="w-full bg-[#1A1A1A] text-white py-5 px-4 rounded-sm transition-colors duration-500 flex items-center justify-center group"
       >
-        <span className="font-[Bai_Jamjuree] text-[10px] md:text-[12px] uppercase tracking-[0.4em] font-bold">
+        <span className="font-[Inter] text-[10px] md:text-[12px] uppercase tracking-[0.4em] font-bold">
           Home
         </span>
       </motion.button>
@@ -133,7 +133,7 @@ const AboutPillars = () => {
         whileTap={{ scale: 0.98 }}
         className="w-full bg-[#1A1A1A] text-white py-5 px-4 rounded-sm transition-colors duration-500 flex items-center justify-center group"
       >
-        <span className="font-[Bai_Jamjuree] text-[10px] md:text-[12px] uppercase tracking-[0.4em] font-bold">
+        <span className="font-[Inter] text-[10px] md:text-[12px] uppercase tracking-[0.4em] font-bold">
           Shop
         </span>
       </motion.button>
@@ -180,7 +180,7 @@ const CommunityIcon = () => (
 // 4. Symmetrical CTA link
 const CTALink = ({ to, label }) => (
   <Link to={to} className="group relative flex flex-col items-center">
-    <span className="font-[Garet_Book] text-[10px] uppercase tracking-[0.2em] text-[#1A1A1A] font-black italic mb-3 transition-colors group-hover:text-[#8B7355]">
+    <span className="font-[Inter] text-[10px] uppercase tracking-[0.2em] text-[#1A1A1A] font-black italic mb-3 transition-colors group-hover:text-[#8B7355]">
       {label}
     </span>
     {/* The Self-Drawing Endless Line */}

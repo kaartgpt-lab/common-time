@@ -51,7 +51,7 @@ export const LuxuryLocationCard = ({ name, area, address, hours, imageUrl, locat
         />
         
         <div className="absolute top-6 right-6 z-20">
-          <p className="text-[10px] font-[Bai_Jamjuree] text-black/20 tracking-[0.4em] font-bold">
+          <p className="text-[10px] font-[Inter] text-black/20 tracking-[0.4em] font-bold">
             {id}
           </p>
         </div>
@@ -69,12 +69,12 @@ export const LuxuryLocationCard = ({ name, area, address, hours, imageUrl, locat
         {/* Header Block */}
         <div className="mb-6">
           <div className="flex items-center gap-3 mb-2">
-            <span className="text-[9px] uppercase tracking-[0.2em] text-black/80 block font-[Garet_Book] ">
+            <span className="text-[9px] uppercase tracking-[0.2em] text-black/80 block font-[Inter] ">
               {area}
             </span>
             <div className="h-[1px] w-6 bg-black/10" />
           </div>
-          <h3 className="text-2xl md:text-2xl font-light text-[#1A1A1A] tracking-tighter font-[Bai_Jamjuree] leading-none">
+          <h3 className="text-2xl md:text-2xl font-light text-[#1A1A1A] tracking-tighter font-[Inter] leading-none">
             {name}
           </h3>
         </div>
@@ -88,7 +88,7 @@ export const LuxuryLocationCard = ({ name, area, address, hours, imageUrl, locat
           className="flex flex-col flex-grow justify-between"
         >
           {/* Address Block */}
-          <p className="text-[11px] text-gray-500 font-[Garet_Book] uppercase tracking-[0.2em] leading-relaxed max-w-[280px]">
+          <p className="text-[11px] text-gray-500 font-[Inter] uppercase tracking-[0.2em] leading-relaxed max-w-[280px]">
             {address}
           </p>
 
@@ -97,7 +97,7 @@ export const LuxuryLocationCard = ({ name, area, address, hours, imageUrl, locat
             {/* Availability - Left Side */}
             <div className="flex flex-col gap-1 border-l border-black/5 ">
               <span className="text-[8px] uppercase tracking-[0.3em] text-black/30 font-bold">Availability</span>
-              <p className="text-[11px] text-black/80 font-[Garet_Book] tracking-tight">{hours}</p>
+              <p className="text-[11px] text-black/80 font-[Inter] tracking-tight">{hours}</p>
             </div>
 
             {/* Visit Space - Right Side */}

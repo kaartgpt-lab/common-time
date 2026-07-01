@@ -102,13 +102,13 @@ export default function ProductBanner() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
               <div className="absolute bottom-0 left-0 p-6 md:p-10 z-10 w-full">
-                <p className="text-[9px] uppercase tracking-[0.45em] text-white/50 font-[Garet_Book] mb-3">
+                <p className="text-[9px] uppercase tracking-[0.45em] text-white/50 font-[Inter] mb-3">
                   {s.left.label}
                 </p>
-                <h2 className="text-white font-[Bai_Jamjuree] font-light text-3xl md:text-4xl leading-tight mb-6 whitespace-pre-line">
+                <h2 className="text-white font-[Inter] font-light text-3xl md:text-4xl leading-tight mb-6 whitespace-pre-line">
                   {s.left.heading}
                 </h2>
-                <span className="inline-flex items-center gap-2 border border-white/40 text-white/90 px-5 py-3 text-[10px] uppercase tracking-[0.3em] font-[Garet_Book]">
+                <span className="inline-flex items-center gap-2 border border-white/40 text-white/90 px-5 py-3 text-[10px] uppercase tracking-[0.3em] font-[Inter]">
                   {s.left.cta.text}
                   <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
                     <path d="M1 6h10M7 2l4 4-4 4" stroke="currentColor" strokeWidth="0.8" strokeLinecap="round" strokeLinejoin="round"/>
@@ -129,10 +129,10 @@ export default function ProductBanner() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
               <div className="absolute bottom-0 left-0 p-7 md:p-10 z-10">
-                <p className="text-[9px] uppercase tracking-[0.45em] text-white/50 font-[Garet_Book] mb-2">
+                <p className="text-[9px] uppercase tracking-[0.45em] text-white/50 font-[Inter] mb-2">
                   {s.right.label}
                 </p>
-                <h3 className="text-white font-[Bai_Jamjuree] font-light text-xl md:text-2xl leading-tight">
+                <h3 className="text-white font-[Inter] font-light text-xl md:text-2xl leading-tight">
                   {s.right.heading}
                 </h3>
               </div>

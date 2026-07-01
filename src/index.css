@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap");
 @import "tailwindcss";
 
 /* Custom Font */
@@ -151,7 +151,7 @@ body {
   --color-accent-light: #8B7355;
 
   /* Typography */
-  font-family: "Garet Book", system-ui, sans-serif;
+  font-family: "Inter", system-ui, sans-serif;
   line-height: 1.6;
   font-weight: 400;
   font-synthesis: none;

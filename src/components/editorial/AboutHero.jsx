@@ -54,12 +54,12 @@ const AboutHero = () => {
           className="flex flex-col items-center"
         >
           {/* Top Identity Label */}
-          <span className="font-[Garet_Book] text-[10px] md:text-[12px] uppercase tracking-[0.8em] text-white/70 mb-8 block">
+          <span className="font-[Inter] text-[10px] md:text-[12px] uppercase tracking-[0.8em] text-white/70 mb-8 block">
             The Narrative
           </span>
 
           {/* Main Hero Headline */}
-          <h1 className="text-5xl md:text-[5xl] font-light font-[Bai_Jamjuree] text-white leading-[0.9] tracking-tighter mb-10">
+          <h1 className="text-5xl md:text-[5xl] font-light font-[Inter] text-white leading-[0.9] tracking-tighter mb-10">
             Architecture <br />
             <span className="italic text-white/80">of the Everyday.</span>
           </h1>
@@ -67,7 +67,7 @@ const AboutHero = () => {
           {/* Sub-context */}
           <div className="flex items-center gap-6">
             <div className="h-[1px] w-12 bg-[#8B7355]" />
-            <p className="font-[Garet_Book] text-[11px] md:text-[13px] uppercase tracking-[0.4em] text-white font-bold">
+            <p className="font-[Inter] text-[11px] md:text-[13px] uppercase tracking-[0.4em] text-white font-bold">
               EST. NOV 2025 DELHI
             </p>
             <div className="h-[1px] w-12 bg-[#8B7355]" />
@@ -85,7 +85,7 @@ const AboutHero = () => {
         transition={{ delay: 2.5 }}
         className="absolute bottom-12 right-12 md:right-24 z-30 flex flex-col items-center gap-4"
       >
-        <span className="font-[Garet_Book] text-[9px] uppercase tracking-[0.3em] text-white/50 [writing-mode:vertical-lr]">
+        <span className="font-[Inter] text-[9px] uppercase tracking-[0.3em] text-white/50 [writing-mode:vertical-lr]">
           Scroll to Begin
         </span>
         <motion.div 

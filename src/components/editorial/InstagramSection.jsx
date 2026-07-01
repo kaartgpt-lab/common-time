@@ -85,13 +85,13 @@ const InstagramSection = () => {
         {/* Header Section */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-20">
           <div className="flex flex-col items-start">
-            <ShinyText className="font-[Garet_Book] text-[10px] md:text-xs uppercase tracking-[0.4em] font-semibold italic">
+            <ShinyText className="font-[Inter] text-[10px] md:text-xs uppercase tracking-[0.4em] font-semibold italic">
               Social Presence
             </ShinyText>
             
             <div className="flex items-center gap-4">
               <div className="h-[1px] w-12 bg-black/20 hidden md:block"></div>
-              <h2 className="text-4xl md:text-6xl font-light tracking-tight font-[Bai_Jamjuree] flex items-baseline gap-3">
+              <h2 className="text-4xl md:text-6xl font-light tracking-tight font-[Inter] flex items-baseline gap-3">
                 <ShinyText>Digital Narrative</ShinyText> 
                 <span className="italic font-normal "></span>
               </h2>
@@ -105,7 +105,7 @@ const InstagramSection = () => {
               className={`transition-all duration-500 ${!canScrollLeft ? 'opacity-20 cursor-default' : 'opacity-100 hover:text-[#8b7355]'}`}
               disabled={!canScrollLeft}
             >
-              <span className="font-[Bai_Jamjuree] text-[10px] uppercase tracking-widest text-black">Prev</span>
+              <span className="font-[Inter] text-[10px] uppercase tracking-widest text-black">Prev</span>
             </button>
             <div className="h-[1px] w-12 bg-black/10"></div>
             <button 
@@ -113,7 +113,7 @@ const InstagramSection = () => {
               className={`transition-all duration-500 ${!canScrollRight ? 'opacity-20 cursor-default' : 'opacity-100 hover:text-[#8b7355]'}`}
               disabled={!canScrollRight}
             >
-              <span className="font-[Bai_Jamjuree] text-[10px] uppercase tracking-widest text-black">Next</span>
+              <span className="font-[Inter] text-[10px] uppercase tracking-widest text-black">Next</span>
             </button>
           </div>
         </div>
@@ -166,7 +166,7 @@ const InstagramSection = () => {
                 </div>
 
                 <div className="absolute bottom-8 left-8 pointer-events-none">
-                  <p className="font-[Bai_Jamjuree] text-[9px] uppercase tracking-[0.3em] text-white/70 shadow-sm">
+                  <p className="font-[Inter] text-[9px] uppercase tracking-[0.3em] text-white/70 shadow-sm">
                     @commontime.coffee
                   </p>
                 </div>
@@ -181,7 +181,7 @@ const InstagramSection = () => {
             href="https://www.instagram.com/itscommontime/" 
             target="_blank"
             rel="noopener noreferrer"
-            className="group font-[Bai_Jamjuree] text-[10px] uppercase tracking-widest text-[#8b7355] hover:text-black transition-all duration-500 flex items-center gap-3"
+            className="group font-[Inter] text-[10px] uppercase tracking-widest text-[#8b7355] hover:text-black transition-all duration-500 flex items-center gap-3"
           >
             <span>View Profile</span>
             <div className="w-6 h-[1px] bg-[#8b7355] group-hover:w-10 transition-all duration-500"></div>

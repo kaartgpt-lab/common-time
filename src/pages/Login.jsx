@@ -27,9 +27,9 @@ export default function Login() {
   };
 
   return (
-    <main className="min-h-screen flex items-center justify-center py-16 px-4 font-[Garet_Book]">
+    <main className="min-h-screen flex items-center justify-center py-16 px-4 font-[Inter]">
       <div className="w-full max-w-md">
-        <h1 className="text-2xl font-light mb-2 font-[Bai_Jamjuree] tracking-tight">Login</h1>
+        <h1 className="text-2xl font-light mb-2 font-[Inter] tracking-tight">Login</h1>
         <p className="text-gray-500 mb-8 text-sm">sign in to your account</p>
 
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -52,7 +52,7 @@ export default function Login() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-black text-white py-3 rounded-sm font-[Garet_Book] text-xs tracking-[0.2em] hover:bg-gray-800 disabled:opacity-70"
+            className="w-full bg-black text-white py-3 rounded-sm font-[Inter] text-xs tracking-[0.2em] hover:bg-gray-800 disabled:opacity-70"
           >
             {loading ? "Signing in..." : "Sign In"}
           </button>

@@ -52,19 +52,19 @@ const ComingSoon = () => {
           className="flex flex-col items-center"
         >
           {/* Top Brand Label */}
-          <span className="font-[Garet_Book] text-[10px] md:text-[12px] uppercase tracking-[0.6em] text-[#8B7355] font-bold mb-8 block italic">
+          <span className="font-[Inter] text-[10px] md:text-[12px] uppercase tracking-[0.6em] text-[#8B7355] font-bold mb-8 block italic">
             Common Time
           </span>
 
           {/* Main Shimmer Heading */}
-          <h1 className="text-5xl md:text-8xl font-light font-[Bai_Jamjuree] tracking-tighter leading-[0.9] text-[#1A1A1A] mb-10">
+          <h1 className="text-5xl md:text-8xl font-light font-[Inter] tracking-tighter leading-[0.9] text-[#1A1A1A] mb-10">
             Coming <br />
             <span className="shiny-text">Soon.</span>
           </h1>
 
           {/* Narrative / Context */}
           <div className="max-w-md mx-auto space-y-6 mb-16">
-            <p className="font-[Garet_Book] text-sm md:text-base text-gray-500 leading-relaxed italic">
+            <p className="font-[Inter] text-sm md:text-base text-gray-500 leading-relaxed italic">
               "We are currently refining the architecture of this space. 
               A new perspective on the Common Time experience is arriving soon."
             </p>
@@ -84,7 +84,7 @@ const ComingSoon = () => {
               initial="rest"
               className="flex flex-col items-center group cursor-pointer"
             >
-              <span className="font-[Garet_Book] text-[10px] uppercase tracking-[0.2em] text-[#1A1A1A] font-black italic mb-3 transition-colors group-hover:text-[#8B7355]">
+              <span className="font-[Inter] text-[10px] uppercase tracking-[0.2em] text-[#1A1A1A] font-black italic mb-3 transition-colors group-hover:text-[#8B7355]">
                 Return to Homepage.
               </span>
               <motion.div 

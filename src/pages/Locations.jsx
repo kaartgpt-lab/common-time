@@ -144,18 +144,18 @@ const Locations = () => {
         <motion.span
           initial={{ y: "100%" }}
           whileInView={{ y: 0 }}
-          className="text-[9px] font-[Garet_Book] uppercase tracking-[0.6em] text-[#8b7355] mb-2 block font-bold"
+          className="text-[9px] font-[Inter] uppercase tracking-[0.6em] text-[#8b7355] mb-2 block font-bold"
         >
           {item.area}
         </motion.span>
       </div>
-      <h4 className="text-3xl md:text-4xl font-[Bai_Jamjuree] font-light text-black tracking-tighter leading-none group-hover:translate-x-2 transition-transform duration-700">
+      <h4 className="text-3xl md:text-4xl font-[Inter] font-light text-black tracking-tighter leading-none group-hover:translate-x-2 transition-transform duration-700">
         {item.city}
       </h4>
     </div>
 
     <div className="relative flex flex-col items-end gap-2">
-      <span className="text-[8px] font-[Garet_Book] uppercase tracking-[0.3em] text-black/80 group-hover:text-black/80 transition-colors duration-500">Enter Space</span>
+      <span className="text-[8px] font-[Inter] uppercase tracking-[0.3em] text-black/80 group-hover:text-black/80 transition-colors duration-500">Enter Space</span>
       <div className="h-[1px] w-8 bg-[#8b7355] group-hover:w-16 transition-all duration-700"></div>
     </div>
   </div>
@@ -214,27 +214,27 @@ const Locations = () => {
             <div className="w-full lg:w-5/12 flex flex-col items-start">
               <div className="flex items-center gap-4 mb-6">
                 <div className="h-[1px] w-8 bg-[#8b7355]"></div>
-                <span className="font-[Garet_Book] text-[10px] uppercase tracking-[0.3em] text-[#8b7355] font-bold">
+                <span className="font-[Inter] text-[10px] uppercase tracking-[0.3em] text-[#8b7355] font-bold">
                   {loc.area}
                 </span>
               </div>
-              <h2 className="text-4xl md:text-6xl font-light tracking-tight font-[Bai_Jamjuree] mb-8">
+              <h2 className="text-4xl md:text-6xl font-light tracking-tight font-[Inter] mb-8">
                 <ShinyText>{loc.city}</ShinyText>
               </h2>
-              <p className="font-[Garet_Book] text-gray-500 leading-relaxed mb-12 text-lg lg:pr-12">
+              <p className="font-[Inter] text-gray-500 leading-relaxed mb-12 text-lg lg:pr-12">
                 {loc.description}
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-8 w-full border-t border-black/5 pt-10">
                 <div className="group">
                   <p className="text-[9px] uppercase tracking-[0.3em] text-black/30 mb-2 transition-colors group-hover:text-[#8b7355]">Location</p>
-                  <p className="text-sm font-[Garet_Book] text-gray-800 leading-snug">{loc.address}</p>
+                  <p className="text-sm font-[Inter] text-gray-800 leading-snug">{loc.address}</p>
                 </div>
                 <div className="group">
                   <p className="text-[9px] uppercase tracking-[0.3em] text-black/30 mb-2 transition-colors group-hover:text-[#8b7355]">Availability</p>
-                  <p className="text-sm font-[Garet_Book] text-gray-800">{loc.hours}</p>
+                  <p className="text-sm font-[Inter] text-gray-800">{loc.hours}</p>
                 </div>
               </div>
-              <a href={loc.locationLink} target="_blank" rel="noreferrer" className="mt-12 group flex items-center gap-4 font-[Bai_Jamjuree] text-[10px] uppercase tracking-[0.4em] text-black">
+              <a href={loc.locationLink} target="_blank" rel="noreferrer" className="mt-12 group flex items-center gap-4 font-[Inter] text-[10px] uppercase tracking-[0.4em] text-black">
                 Get Directions
                 <div className="h-[1px] w-6 bg-black group-hover:w-12 transition-all duration-500"></div>
               </a>
@@ -248,8 +248,8 @@ const Locations = () => {
         <Container>
           <div className="mb-20 flex items-end justify-between">
             <div className="max-w-md">
-              <h3 className="text-[10px] font-[Garet_Book] uppercase tracking-[0.5em] text-[#8b7355] mb-4 font-bold">Indices</h3>
-              <h2 className="text-3xl font-[Bai_Jamjuree] font-light tracking-tighter text-black leading-none">
+              <h3 className="text-[10px] font-[Inter] uppercase tracking-[0.5em] text-[#8b7355] mb-4 font-bold">Indices</h3>
+              <h2 className="text-3xl font-[Inter] font-light tracking-tighter text-black leading-none">
                 Other <span className="italic ">Atmospheres.</span>
               </h2>
             </div>

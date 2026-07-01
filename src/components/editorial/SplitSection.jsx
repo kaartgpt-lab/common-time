@@ -76,7 +76,7 @@ export default function CenteredRevealSection({
     >
       <div className="max-w-5xl mx-auto text-center">
         {/* Large Centered Reveal Text */}
-        <h2 className="text-5xl md:text-5xl lg:text-5xl font-[Bai_Jamjuree] leading-[1.3] md:leading-[1.4] tracking-tight">
+        <h2 className="text-5xl md:text-5xl lg:text-5xl font-[Inter] leading-[1.3] md:leading-[1.4] tracking-tight">
           {allWords.map((word, i) => (
             <RevealWord 
               key={i} 
@@ -91,10 +91,10 @@ export default function CenteredRevealSection({
 
         {/* Call to Action */}
         {linkText && linkHref && (
-          <div className="mt-16 font-[Garet_Book]">
+          <div className="mt-16 font-[Inter]">
             <Link
               to={linkHref}
-              className="inline-block px-8  py-3 border border-[#fcf7e6] text-[#fcf7e6] text-xs font-[Garet_Book] uppercase tracking-[0.2em] transition-all hover:bg-[#fcf7e6] hover:text-stone-900"
+              className="inline-block px-8  py-3 border border-[#fcf7e6] text-[#fcf7e6] text-xs font-[Inter] uppercase tracking-[0.2em] transition-all hover:bg-[#fcf7e6] hover:text-stone-900"
             >
               {linkText}
             </Link>

@@ -9,16 +9,16 @@ export default function BlogSection() {
         {/* Header */}
         <div className="flex items-end justify-between mb-12">
           <div>
-            <p className="text-[9px] uppercase tracking-[0.45em] text-[#8b7355] font-[Garet_Book] mb-3">
+            <p className="text-[9px] uppercase tracking-[0.45em] text-[#8b7355] font-[Inter] mb-3">
               from the journal
             </p>
-            <h2 className="text-2xl md:text-3xl font-light font-[Bai_Jamjuree] text-[#1a1a1a] leading-tight">
+            <h2 className="text-2xl md:text-3xl font-light font-[Inter] text-[#1a1a1a] leading-tight">
               brew notes
             </h2>
           </div>
           <Link
             to="/journal"
-            className="hidden md:inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.3em] font-[Garet_Book] text-[#1a1a1a]/50 hover:text-[#1a1a1a] transition-colors duration-300"
+            className="hidden md:inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.3em] font-[Inter] text-[#1a1a1a]/50 hover:text-[#1a1a1a] transition-colors duration-300"
           >
             all posts
             <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
@@ -44,27 +44,27 @@ export default function BlogSection() {
 
               {/* Meta */}
               <div className="flex items-center gap-3 mb-3">
-                <span className="text-[9px] uppercase tracking-[0.4em] text-[#8b7355] font-[Garet_Book]">
+                <span className="text-[9px] uppercase tracking-[0.4em] text-[#8b7355] font-[Inter]">
                   {post.category}
                 </span>
                 <span className="w-px h-3 bg-black/15" />
-                <span className="text-[9px] uppercase tracking-[0.3em] text-[#1a1a1a]/35 font-[Garet_Book]">
+                <span className="text-[9px] uppercase tracking-[0.3em] text-[#1a1a1a]/35 font-[Inter]">
                   {post.readTime}
                 </span>
               </div>
 
               {/* Title */}
-              <h3 className="font-[Bai_Jamjuree] font-light text-[#1a1a1a] text-lg leading-snug mb-3 group-hover:text-[#8b7355] transition-colors duration-300">
+              <h3 className="font-[Inter] font-light text-[#1a1a1a] text-lg leading-snug mb-3 group-hover:text-[#8b7355] transition-colors duration-300">
                 {post.title}
               </h3>
 
               {/* Excerpt */}
-              <p className="text-[13px] font-[Garet_Book] text-[#1a1a1a]/55 leading-relaxed flex-1">
+              <p className="text-[13px] font-[Inter] text-[#1a1a1a]/55 leading-relaxed flex-1">
                 {post.excerpt}
               </p>
 
               {/* Read more */}
-              <div className="mt-5 flex items-center gap-2 text-[10px] uppercase tracking-[0.3em] font-[Garet_Book] text-[#1a1a1a]/40 group-hover:text-[#8b7355] transition-colors duration-300">
+              <div className="mt-5 flex items-center gap-2 text-[10px] uppercase tracking-[0.3em] font-[Inter] text-[#1a1a1a]/40 group-hover:text-[#8b7355] transition-colors duration-300">
                 read more
                 <svg width="10" height="10" viewBox="0 0 12 12" fill="none" className="transition-transform duration-300 group-hover:translate-x-1">
                   <path d="M1 6h10M7 2l4 4-4 4" stroke="currentColor" strokeWidth="0.8" strokeLinecap="round" strokeLinejoin="round"/>
@@ -79,7 +79,7 @@ export default function BlogSection() {
         <div className="mt-10 flex justify-center md:hidden">
           <Link
             to="/journal"
-            className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.3em] font-[Garet_Book] text-[#1a1a1a]/50 border border-black/15 px-6 py-3"
+            className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.3em] font-[Inter] text-[#1a1a1a]/50 border border-black/15 px-6 py-3"
           >
             all posts
             <svg width="10" height="10" viewBox="0 0 12 12" fill="none">

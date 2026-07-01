@@ -15,7 +15,7 @@ export default function Header() {
   // --- STITCH DESIGN TOKENS ---
   const headerStyles = "bg-white border-t-4 border-[#333333] shadow-sm";
   const navBlockStyles = "bg-white/40 px-6 h-11 flex items-center space-x-8 relative"; 
-  const stitchNavLink = "text-[16px] tracking-[0.05em] font-[Bai_Jamjuree] text-black uppercase hover:opacity-70 transition-opacity";
+  const stitchNavLink = "text-[16px] tracking-[0.05em] font-[Inter] text-black uppercase hover:opacity-70 transition-opacity";
 
   // --- CONTENT MAPPING (Synced with Desktop) ---
   const mobileMenuData = {
@@ -87,7 +87,7 @@ export default function Header() {
           <div className="group h-full flex items-center">
             <Link to="/shop" className={`${stitchNavLink} nav-link-custom`}>SHOP</Link>
             <div className="dropdown-panel absolute top-full left-0 mt-0 w-[350px] h-44 bg-white px-4 pt-15 pb-2 flex justify-between items-end shadow-sm z-50">
-              <div className="flex flex-col space-y-1 font-[Garet_Book]">
+              <div className="flex flex-col space-y-1 font-[Inter]">
                 <Link to="/orders" className="dropdown-link">My Orders</Link>
                 <Link to="/profile" className="dropdown-link">Profile</Link>
                 <Link to="/shop" className="dropdown-link">Order Online</Link>
@@ -101,7 +101,7 @@ export default function Header() {
           <div className="group h-full flex items-center">
             <Link to="/locations/lodhi-colony" className={`${stitchNavLink} nav-link-custom`}>LOCATIONS</Link>
             <div className="dropdown-panel absolute top-full left-0 mt-0 w-[350px] h-44 bg-white px-4 pt-15 pb-2 flex justify-between items-end shadow-sm z-50">
-              <div className="flex flex-col space-y-1 font-light font-[Garet_Book]">
+              <div className="flex flex-col space-y-1 font-light font-[Inter]">
                 <Link to="/locations/lodhi-colony" className="dropdown-link">Lodhi Colony</Link>
                 <Link to="/locations/vasant-vihar" className="dropdown-link">Vasant vihar</Link>
                 <Link to="/locations/khan-market" className="dropdown-link">Khan market</Link>
@@ -166,14 +166,14 @@ export default function Header() {
                   <button 
                     key={tab}
                     onClick={() => setActiveMobileTab(tab)}
-                    className={`text-[12px] font-[Bai_Jamjuree] tracking-[0.2em] font-bold pb-2 transition-all ${activeMobileTab === tab ? 'border-b-2 border-black text-black' : 'text-gray-400'}`}
+                    className={`text-[12px] font-[Inter] tracking-[0.2em] font-bold pb-2 transition-all ${activeMobileTab === tab ? 'border-b-2 border-black text-black' : 'text-gray-400'}`}
                   >
                     {tab}
                   </button>
                 ))}
                 <Link to="/menu">
                 <button 
-                    className={`text-[12px] font-[Bai_Jamjuree] tracking-[0.2em] font-bold pb-2 transition-all text-gray-400 hover:text-black`}
+                    className={`text-[12px] font-[Inter] tracking-[0.2em] font-bold pb-2 transition-all text-gray-400 hover:text-black`}
                   >
                    MENU
                   </button>
@@ -195,7 +195,7 @@ export default function Header() {
                         <Link 
                           key={idx} 
                           to={link.path} 
-                          className="text-[24px] font-[Garet_Book] font-black uppercase tracking-tighter text-[#1A1A1A] leading-none hover:text-[#8b7355] transition-colors"
+                          className="text-[24px] font-[Inter] font-black uppercase tracking-tighter text-[#1A1A1A] leading-none hover:text-[#8b7355] transition-colors"
                           onClick={() => setIsMobileMenuOpen(false)}
                         >
                           {link.name}
@@ -226,14 +226,14 @@ export default function Header() {
                   {user ? (
                     <button 
                       onClick={() => { signOut(); setIsMobileMenuOpen(false); }} 
-                      className="text-[11px] font-[Bai_Jamjuree] font-bold tracking-[0.25em] uppercase text-black"
+                      className="text-[11px] font-[Inter] font-bold tracking-[0.25em] uppercase text-black"
                     >
                       Logout
                     </button>
                   ) : (
                     <Link 
                       to="/login" 
-                      className="text-[11px] font-[Bai_Jamjuree] font-bold tracking-[0.25em] uppercase text-black" 
+                      className="text-[11px] font-[Inter] font-bold tracking-[0.25em] uppercase text-black" 
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
                       Sign In
@@ -243,7 +243,7 @@ export default function Header() {
                 <div className="p-6 text-center bg-white/40">
                   <Link 
                     to="/" 
-                    className="text-[11px] font-[Bai_Jamjuree] font-bold tracking-[0.25em] uppercase text-black" 
+                    className="text-[11px] font-[Inter] font-bold tracking-[0.25em] uppercase text-black" 
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     ORDER

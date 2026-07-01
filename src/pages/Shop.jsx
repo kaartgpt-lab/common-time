@@ -123,18 +123,18 @@ export default function Shop() {
       <section className="border-b border-black/5 pt-14 pb-10 md:pt-14 md:pb-14 px-4 md:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col items-start">
-            <span className="shiny-text py-2 inline-block overflow-visible font-[Garet_Book] text-[10px] md:text-xs uppercase tracking-[0.4em] font-semibold italic mb-4">
+            <span className="shiny-text py-2 inline-block overflow-visible font-[Inter] text-[10px] md:text-xs uppercase tracking-[0.4em] font-semibold italic mb-4">
               Curated Selection
             </span>
             <div className="flex items-center gap-4">
               <div className="h-[1px] w-12 bg-black/20 hidden md:block" />
-              <h1 className="text-4xl md:text-5xl font-light tracking-tight font-[Bai_Jamjuree]">
+              <h1 className="text-4xl md:text-5xl font-light tracking-tight font-[Inter]">
                 <span className="shiny-text py-2 inline-block overflow-visible">
                   The Shop
                 </span>
               </h1>
             </div>
-            <p className="mt-4 text-sm text-black/40 font-[Garet_Book] max-w-md leading-relaxed ml-0 md:ml-16">
+            <p className="mt-4 text-sm text-black/40 font-[Inter] max-w-md leading-relaxed ml-0 md:ml-16">
               Objects, rituals, and finishing touches — for the moments between.
             </p>
           </div>
@@ -149,7 +149,7 @@ export default function Shop() {
               <button
                 key={cat.value}
                 onClick={() => setCategory(cat.value)}
-                className={`flex-shrink-0 px-4 md:px-6 py-4 text-[10px] md:text-xs uppercase tracking-[0.2em] font-[Garet_Book] font-semibold border-b-2 whitespace-nowrap transition-colors duration-200 ${
+                className={`flex-shrink-0 px-4 md:px-6 py-4 text-[10px] md:text-xs uppercase tracking-[0.2em] font-[Inter] font-semibold border-b-2 whitespace-nowrap transition-colors duration-200 ${
                   category === cat.value
                     ? "border-[#8b7355] text-[#1a1a1a]"
                     : "border-transparent text-black/35 hover:text-black/65"
@@ -166,11 +166,11 @@ export default function Shop() {
       <section className="bg-[#f5f3ef] border-b border-black/5 px-4 md:px-8 py-4">
         <div className="max-w-7xl mx-auto">
           <div key={category} className="desc-fade flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-5">
-            <span className="text-[9px] uppercase tracking-[0.35em] text-[#8b7355] font-[Garet_Book] font-semibold flex-shrink-0">
+            <span className="text-[9px] uppercase tracking-[0.35em] text-[#8b7355] font-[Inter] font-semibold flex-shrink-0">
               {activeCategory?.sublabel}
             </span>
             <div className="hidden sm:block h-3 w-px bg-black/15" />
-            <p className="text-[11px] text-black/45 font-[Garet_Book] leading-relaxed">
+            <p className="text-[11px] text-black/45 font-[Inter] leading-relaxed">
               {activeCategory?.description}
             </p>
           </div>
@@ -195,7 +195,7 @@ export default function Shop() {
             </div>
           ) : products.length === 0 ? (
             <div className="py-24 text-center">
-              <p className="text-black/30 text-xs uppercase tracking-[0.3em] font-[Garet_Book]">
+              <p className="text-black/30 text-xs uppercase tracking-[0.3em] font-[Inter]">
                 Nothing here yet.
               </p>
             </div>
@@ -213,7 +213,7 @@ export default function Shop() {
 
           {!loading && products.length > 0 && (
             <div className="mt-14 flex justify-center">
-              <span className="text-[10px] uppercase tracking-[0.35em] text-black/20 font-[Garet_Book]">
+              <span className="text-[10px] uppercase tracking-[0.35em] text-black/20 font-[Inter]">
                 {products.length} {products.length === 1 ? "item" : "items"}
               </span>
             </div>

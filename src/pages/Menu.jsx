@@ -81,14 +81,14 @@ const HINDI_MAP = {
 
 // --- CUSTOM UI COMPONENTS ---
 const SectionHeader = ({ title }) => (
-  <div className="flex items-center gap-3 mb-10 mt-16 first:mt-0 font-[Bai_Jamjuree]">
+  <div className="flex items-center gap-3 mb-10 mt-16 first:mt-0 font-[Inter]">
     <div className="w-[5px] h-8 bg-black"></div>
     <h2 className="text-3xl font-light tracking-tight lowercase">{title}</h2>
   </div>
 );
 
 const MenuItem = ({ name, price, desc }) => (
-  <div className="flex flex-col mb-12 relative font-[Bai_Jamjuree]" >
+  <div className="flex flex-col mb-12 relative font-[Inter]" >
     <div className="flex items-start gap-2">
       <h3 className={`text-[24px] font-normal leading-tight lowercase`}>
         {name}
@@ -104,11 +104,11 @@ const MenuItem = ({ name, price, desc }) => (
 );
 
 const PageHeader = () => (
-  <div className="flex w-full justify-between lg:pr-8 items-center mb-12 font-[Bai_Jamjuree]">
+  <div className="flex w-full justify-between lg:pr-8 items-center mb-12 font-[Inter]">
     <div className="lg:w-20 md:w-18 sm:w-16 w-12 lg:h-20 md:h-18 sm:h-16 h-12">
         <img src="/logo.jpg" alt="Logo" />
     </div>
-    <h1 className="font-[Bai_Jamjuree] font-medium text-gray-900 tracking-tight text-xl sm:text-2xl md:text-3xl lg:text-[32px]">COMMON <span className="font-light ">TIME</span></h1>
+    <h1 className="font-[Inter] font-medium text-gray-900 tracking-tight text-xl sm:text-2xl md:text-3xl lg:text-[32px]">COMMON <span className="font-light ">TIME</span></h1>
   </div>
 );
 
@@ -255,13 +255,13 @@ export default function Menu() {
   };
 
   return (
-    <main className="min-h-screen bg-[#FDFDFD] text-black font-[Garet_Book] pb-32 overflow-x-hidden selection:bg-black selection:text-white">
+    <main className="min-h-screen bg-[#FDFDFD] text-black font-[Inter] pb-32 overflow-x-hidden selection:bg-black selection:text-white">
       
       {showSelector && (
         <div className="fixed inset-0 top-[70px] md:top-[85px] bg-white z-[40] flex flex-col items-center justify-center overflow-hidden animate-fadeIn">
           <div className="absolute inset-0 pointer-events-none opacity-[0.04] bg-[url('https://grainy-gradients.vercel.app/noise.svg')]"></div>
           <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-gray-100 rounded-full blur-[120px] animate-pulse"></div>
-            <p className="mt-2 text-2xl tracking-[0.3em] uppercase font-semibold font-[Bai_Jamjuree]">Select Language</p>
+            <p className="mt-2 text-2xl tracking-[0.3em] uppercase font-semibold font-[Inter]">Select Language</p>
           <div className="max-w-2xl w-full flex flex-col items-center px-6 relative z-10 ">
             <div className="flex items-center justify-center gap-12 mt-5 w-full h-[400px] relative">
               <div className="flex flex-col items-center h-72 w-10 relative">
@@ -278,7 +278,7 @@ export default function Menu() {
                     const dist = Math.abs(i - activeIdx);
                     return (
                       <button key={l.c} onClick={() => translateMenu(l.c)} disabled={loading} className="w-full h-20 flex flex-col items-center justify-center snap-center transition-all duration-150 ease-out will-change-[transform,opacity,filter]" style={{ opacity: dist === 0 ? 1 : Math.max(0.12, 1 - dist * 0.45), transform: `scale(${dist === 0 ? 1.18 : 1 - dist * 0.15})`, filter: dist === 0 ? 'none' : `blur(${dist * 1.2}px)`, letterSpacing: dist === 0 ? '0.3em' : '0.05em' }}>
-                        <span className="text-2xl font-light uppercase font-[Bai_Jamjuree]">{l.n}</span>
+                        <span className="text-2xl font-light uppercase font-[Inter]">{l.n}</span>
                         {dist === 0 && !loading && <div className="mt-4 flex gap-1 animate-fadeIn"><div className="w-1.5 h-1.5 bg-black rounded-full"></div><div className="w-8 h-[1px] bg-black/30 self-center"></div><div className="w-1.5 h-1.5 bg-black rounded-full"></div></div>}
                         {dist === 0 && loading && <div className="mt-4 w-5 h-5 border-[2px] border-black border-t-transparent rounded-full animate-spin"></div>}
                       </button>
@@ -299,13 +299,13 @@ export default function Menu() {
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-8">{menu.hot_coffee.map((item, i) => <MenuItem key={i} {...item} />)}</div>
           <SectionHeader title={headers.iced} />
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-8">{menu.iced_coffee.map((item, i) => <MenuItem key={i} {...item} />)}</div>
-          <div className="flex gap-8 mt-4 notranslate font-[Bai_Jamjuree] px-12">
+          <div className="flex gap-8 mt-4 notranslate font-[Inter] px-12">
              <div><div className="flex items-center gap-2 mb-4"><div className="w-[5px] h-8 bg-black"></div><span className="text-sm font-bold uppercase tracking-wider">Add:</span></div><ul className="text-[13px] space-y-1 text-gray-700"><li>Milk lab oat/almond/coconut milk +80</li><li>Lactose free milk +0</li><li>Colombian decaf +100</li></ul></div>
              <div><div className="flex items-center gap-2 mb-4"><div className="w-[5px] h-8 bg-black"></div><span className="text-sm font-bold uppercase tracking-wider">Make it:</span></div><ul className="text-[13px] space-y-1 text-gray-700"><li>Extra hot</li><li>Half espresso shot</li><li>Extra espresso shot +30</li></ul></div>
           </div>
         </div>
         
-        <div className="max-w-[1400px] mx-auto px-12 border-t border-gray-100 mt-10 pt-10 font-[Bai_Jamjuree]">
+        <div className="max-w-[1400px] mx-auto px-12 border-t border-gray-100 mt-10 pt-10 font-[Inter]">
           <PageHeader />
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-24">
             <div>
@@ -316,11 +316,11 @@ export default function Menu() {
           </div>
         </div>
 
-        <div className="max-w-[1400px] mx-auto px-12 border-t border-gray-100 mt-10 pt-10 font-[Bai_Jamjuree]">
+        <div className="max-w-[1400px] mx-auto px-12 border-t border-gray-100 mt-10 pt-10 font-[Inter]">
           <PageHeader />
           <SectionHeader title={headers.bakes} /><div className="grid grid-cols-2 lg:grid-cols-4 gap-x-8">{menu.baked_goods.map((item, i) => <MenuItem key={i} {...item} />)}</div>
           <div className="mt-24 flex justify-between items-end border-t pt-8">
-            <div className="text-[11px] text-gray-400 tracking-widest uppercase font-[Bai_Jamjuree]">
+            <div className="text-[11px] text-gray-400 tracking-widest uppercase font-[Inter]">
               <p className="notranslate">@itscommontime | www.commontime.in</p>
               <p className="mt-2 notranslate">lodhi colony | vasant vihar | khan market</p>
             </div>
@@ -331,7 +331,7 @@ export default function Menu() {
       {!showSelector && (
         <button onClick={() => setShowSelector(true)} className="fixed bottom-10 right-10 flex items-center gap-4 bg-white/70 backdrop-blur-xl border border-black/10 px-8 py-4 rounded-full shadow-2xl hover:scale-105 transition-all group z-50">
           <div className="w-2 h-2 bg-black rounded-full animate-pulse"></div>
-          <span className="text-[11px] uppercase font-bold text-black opacity-70 group-hover:opacity-100 font-[Bai_Jamjuree]">Change Language</span>
+          <span className="text-[11px] uppercase font-bold text-black opacity-70 group-hover:opacity-100 font-[Inter]">Change Language</span>
         </button>
       )}
 

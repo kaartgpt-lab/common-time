@@ -186,7 +186,7 @@ export default function ProductCard({ product, index = 0 }) {
               <div className="ct-gold-line" />
               {product.tag && (
                 <div className="absolute top-2.5 left-2.5 z-10">
-                  <span className="bg-white/90 backdrop-blur-sm text-[8px] uppercase tracking-[0.25em] text-black/55 px-2 py-1 font-[Garet_Book]">
+                  <span className="bg-white/90 backdrop-blur-sm text-[8px] uppercase tracking-[0.25em] text-black/55 px-2 py-1 font-[Inter]">
                     {product.tag}
                   </span>
                 </div>
@@ -197,11 +197,11 @@ export default function ProductCard({ product, index = 0 }) {
           {/* ── Info block ── */}
           <Link to={`/shop/${slug}`} className="block px-2.5 pt-3 pb-3 flex-1">
             {product.category && (
-              <span className="block text-[8px] uppercase tracking-[0.3em] text-[#8b7355] font-[Garet_Book] font-semibold mb-1">
+              <span className="block text-[8px] uppercase tracking-[0.3em] text-[#8b7355] font-[Inter] font-semibold mb-1">
                 {product.category.replace(/_/g, " ")}
               </span>
             )}
-            <h3 className="text-[13px] font-light font-[Bai_Jamjuree] text-black/85 leading-snug line-clamp-2 mb-2">
+            <h3 className="text-[13px] font-light font-[Inter] text-black/85 leading-snug line-clamp-2 mb-2">
               {product.name}
             </h3>
             <div className="flex items-center justify-end pt-2 border-t border-black/5">

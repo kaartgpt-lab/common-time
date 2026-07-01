@@ -46,12 +46,12 @@ const LuxuryProductCard = ({ product, onAddToCart }) => {
         </span>
         
         <Link to={`/product/${product.id}`}>
-          <h3 className="text-xl font-light tracking-tighter font-[Bai_Jamjuree] text-gray-900 group-hover:text-[#8b7355] transition-colors duration-500 mb-1">
+          <h3 className="text-xl font-light tracking-tighter font-[Inter] text-gray-900 group-hover:text-[#8b7355] transition-colors duration-500 mb-1">
             {product.name}
           </h3>
         </Link>
         
-        <p className="font-[Garet_Book] text-sm text-gray-400">
+        <p className="font-[Inter] text-sm text-gray-400">
           ₹{product.price?.toLocaleString()}
         </p>
       </div>

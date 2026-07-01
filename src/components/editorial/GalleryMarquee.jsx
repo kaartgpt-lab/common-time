@@ -60,13 +60,13 @@ const GalleryMarquee = () => {
       <Container>
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-20">
           {/* <div className="flex flex-col items-start">
-            <ShinyText className="font-[Garet_Book] text-[10px] md:text-xs uppercase tracking-[0.4em] font-semibold italic">
+            <ShinyText className="font-[Inter] text-[10px] md:text-xs uppercase tracking-[0.4em] font-semibold italic">
               Spatial Experience
             </ShinyText>
             
             <div className="flex items-center gap-4">
               <div className="h-[1px] w-12 bg-black/20 hidden md:block"></div>
-              <h2 className="text-4xl md:text-6xl font-light tracking-tight font-[Bai_Jamjuree] flex items-baseline gap-3">
+              <h2 className="text-4xl md:text-6xl font-light tracking-tight font-[Inter] flex items-baseline gap-3">
                 <ShinyText>A Glimpse Inside</ShinyText>
               </h2>
             </div>

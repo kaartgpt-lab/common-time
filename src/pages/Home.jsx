@@ -102,7 +102,7 @@ export default function Home() {
       <section className="bg-[#fafaf8] mt-12 md:mt-0 pb-12 md:py-12 border-b border-black/5">
         <Container>
           <div className="flex flex-col items-start mb-10 md:mb-15">
-            <h2 className="text-2xl md:text-3xl font-light tracking-tight font-[Bai_Jamjuree]">
+            <h2 className="text-2xl md:text-3xl font-light tracking-tight font-[Inter]">
               <span className="shiny-text py-2 inline-block overflow-visible">Objects & Equipment</span>
             </h2>
           </div>
@@ -120,7 +120,7 @@ export default function Home() {
       <Container>
         {/* Header - Consistent with your homepage style */}
         <div className="mb-10 md:mb-15 flex flex-col items-start">
-          <h2 className="text-2xl md:text-3xl font-light tracking-tight font-[Bai_Jamjuree]">
+          <h2 className="text-2xl md:text-3xl font-light tracking-tight font-[Inter]">
             <span className="shiny-text py-2 inline-block overflow-visible">Our Spaces</span>
           </h2>
         </div>
@@ -135,7 +135,7 @@ export default function Home() {
     </main>
         <PartnerLogos />
       <BlogSection />
-     <section className="py-10 flex flex-col items-center justify-center font-[Garet_Book] w-full bg-[#fafaf8]">
+     <section className="py-10 flex flex-col items-center justify-center font-[Inter] w-full bg-[#fafaf8]">
   {/* A very thin, short divider */}
   <div className="w-12 h-px bg-gray-200 mb-8 mx-auto" />
   
@@ -190,7 +190,7 @@ function PartnerLogos() {
   return (
     <section className="bg-white" aria-label="Partner logos">
       <div className="max-w-[1200px] mx-auto py-10 px-4 md:px-6 overflow-hidden">
-        <p className="mb-4 text-xs uppercase tracking-widest text-gray-400 text-center md:text-left font-[Bai_Jamjuree]">
+        <p className="mb-4 text-xs uppercase tracking-widest text-gray-400 text-center md:text-left font-[Inter]">
           Listen in to what others are saying
         </p>
 

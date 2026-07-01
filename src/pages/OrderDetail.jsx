@@ -72,26 +72,26 @@ export default function OrderDetail() {
   if (!order) {
     return (
       <main className="max-w-4xl mx-auto px-6 py-20 text-center">
-        <h1 className="font-[Bai_Jamjuree] text-3xl font-light mb-4">order not found</h1>
+        <h1 className="font-[Inter] text-3xl font-light mb-4">order not found</h1>
         <Link to="/orders" className="text-sm underline uppercase tracking-widest">Back to Orders</Link>
       </main>
     );
   }
 
   return (
-    <main className="max-w-4xl mx-auto px-6 py-20 font-[Garet_Book] text-slate-900 antialiased">
+    <main className="max-w-4xl mx-auto px-6 py-20 font-[Inter] text-slate-900 antialiased">
       <style>{`
         .tracking-widest-extra { letter-spacing: 0.15em; }
       `}</style>
 
       {/* Header */}
       <div className="mb-16">
-        <h1 className="font-[Bai_Jamjuree] text-4xl md:text-5xl font-light mb-8 tracking-tight">
+        <h1 className="font-[Inter] text-4xl md:text-5xl font-light mb-8 tracking-tight">
           Order Details
         </h1>
         
         {/* Metadata Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 py-8 border-y border-[#493627]/10 font-[Garet_Book]">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 py-8 border-y border-[#493627]/10 font-[Inter]">
           <div>
             <p className="text-[10px] uppercase tracking-widest-extra text-[#493627]/60 mb-1">Order Number</p>
             <p className="text-sm font-medium uppercase">#{order.id.slice(0, 8)}</p>

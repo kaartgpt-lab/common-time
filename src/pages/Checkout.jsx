@@ -159,7 +159,7 @@ export default function Checkout() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#f7f7f6] text-[#493627] font-[Garet_Book] antialiased">
+    <div className="min-h-screen flex flex-col bg-[#f7f7f6] text-[#493627] font-[Inter] antialiased">
       <style>{`
         input::placeholder { opacity: 0.4; }
       `}</style>
@@ -171,7 +171,7 @@ export default function Checkout() {
           <div className="lg:col-span-7 space-y-12">
             <section>
               <div className="flex justify-between items-end mb-6">
-                <h2 className="font-[Bai_Jamjuree] text-2xl font-light tracking-tight">Contact Information</h2>
+                <h2 className="font-[Inter] text-2xl font-light tracking-tight">Contact Information</h2>
                 <p className="text-sm opacity-70">Logged in as {user?.email}</p>
               </div>
               <div className="space-y-4">
@@ -195,7 +195,7 @@ export default function Checkout() {
             </section>
 
             <section className="space-y-6">
-              <h2 className="font-[Bai_Jamjuree] text-2xl font-light tracking-tight">Shipping Address</h2>
+              <h2 className="font-[Inter] text-2xl font-light tracking-tight">Shipping Address</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="md:col-span-2 flex flex-col gap-2">
                   <label className="text-xs uppercase tracking-widest font-medium opacity-70">Address *</label>
@@ -253,7 +253,7 @@ export default function Checkout() {
 
           {/* SUMMARY ASIDE */}
           <aside className="lg:col-span-5 bg-[#493627]/5 p-8 h-fit sticky top-12">
-            <h3 className="font-[Bai_Jamjuree] text-xl font-light tracking-tight mb-8">Order Summary</h3>
+            <h3 className="font-[Inter] text-xl font-light tracking-tight mb-8">Order Summary</h3>
             <div className="space-y-6 mb-8 max-h-[40vh] overflow-y-auto pr-2">
               {cartRows.map((row) => (
                 <div key={row.product_id} className="flex gap-4">

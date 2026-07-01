@@ -7,10 +7,10 @@ export default function Journal() {
 
       {/* Header */}
       <div className="max-w-[1200px] mx-auto px-5 md:px-6 pt-14 pb-10 border-b border-black/5">
-        <p className="text-[9px] uppercase tracking-[0.45em] text-[#8b7355] font-[Garet_Book] mb-3">
+        <p className="text-[9px] uppercase tracking-[0.45em] text-[#8b7355] font-[Inter] mb-3">
           from the journal
         </p>
-        <h1 className="font-[Bai_Jamjuree] font-light text-[#1a1a1a] text-3xl md:text-4xl">
+        <h1 className="font-[Inter] font-light text-[#1a1a1a] text-3xl md:text-4xl">
           brew notes
         </h1>
       </div>
@@ -27,21 +27,21 @@ export default function Journal() {
           </div>
           <div className="flex flex-col justify-center">
             <div className="flex items-center gap-3 mb-4">
-              <span className="text-[9px] uppercase tracking-[0.4em] text-[#8b7355] font-[Garet_Book]">
+              <span className="text-[9px] uppercase tracking-[0.4em] text-[#8b7355] font-[Inter]">
                 {POSTS[0].category}
               </span>
               <span className="w-px h-3 bg-black/15" />
-              <span className="text-[9px] uppercase tracking-[0.3em] text-[#1a1a1a]/35 font-[Garet_Book]">
+              <span className="text-[9px] uppercase tracking-[0.3em] text-[#1a1a1a]/35 font-[Inter]">
                 {POSTS[0].readTime}
               </span>
             </div>
-            <h2 className="font-[Bai_Jamjuree] font-light text-[#1a1a1a] text-2xl md:text-3xl leading-tight mb-4 group-hover:text-[#8b7355] transition-colors duration-300">
+            <h2 className="font-[Inter] font-light text-[#1a1a1a] text-2xl md:text-3xl leading-tight mb-4 group-hover:text-[#8b7355] transition-colors duration-300">
               {POSTS[0].title}
             </h2>
-            <p className="font-[Garet_Book] text-[14px] text-[#1a1a1a]/55 leading-relaxed mb-6">
+            <p className="font-[Inter] text-[14px] text-[#1a1a1a]/55 leading-relaxed mb-6">
               {POSTS[0].excerpt}
             </p>
-            <span className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.3em] font-[Garet_Book] text-[#8b7355]">
+            <span className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.3em] font-[Inter] text-[#8b7355]">
               read more
               <svg width="10" height="10" viewBox="0 0 12 12" fill="none" className="transition-transform duration-300 group-hover:translate-x-1">
                 <path d="M1 6h10M7 2l4 4-4 4" stroke="currentColor" strokeWidth="0.8" strokeLinecap="round" strokeLinejoin="round"/>
@@ -69,18 +69,18 @@ export default function Journal() {
                 />
               </div>
               <div className="flex items-center gap-3 mb-3">
-                <span className="text-[9px] uppercase tracking-[0.4em] text-[#8b7355] font-[Garet_Book]">
+                <span className="text-[9px] uppercase tracking-[0.4em] text-[#8b7355] font-[Inter]">
                   {post.category}
                 </span>
                 <span className="w-px h-3 bg-black/15" />
-                <span className="text-[9px] uppercase tracking-[0.3em] text-[#1a1a1a]/35 font-[Garet_Book]">
+                <span className="text-[9px] uppercase tracking-[0.3em] text-[#1a1a1a]/35 font-[Inter]">
                   {post.readTime}
                 </span>
               </div>
-              <h3 className="font-[Bai_Jamjuree] font-light text-[#1a1a1a] text-lg md:text-xl leading-snug mb-3 group-hover:text-[#8b7355] transition-colors duration-300">
+              <h3 className="font-[Inter] font-light text-[#1a1a1a] text-lg md:text-xl leading-snug mb-3 group-hover:text-[#8b7355] transition-colors duration-300">
                 {post.title}
               </h3>
-              <p className="font-[Garet_Book] text-[13px] text-[#1a1a1a]/55 leading-relaxed">
+              <p className="font-[Inter] text-[13px] text-[#1a1a1a]/55 leading-relaxed">
                 {post.excerpt}
               </p>
             </Link>

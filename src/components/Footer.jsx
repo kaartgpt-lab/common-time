@@ -16,7 +16,7 @@ const LOCATIONS = [
 
 export default function Footer() {
   return (
-    <footer className="bg-[#1a1a1a] font-[Garet_Book]">
+    <footer className="bg-[#1a1a1a] font-[Inter]">
 
       {/* Main grid */}
       <div className="max-w-[1200px] mx-auto px-5 md:px-6 pt-14 pb-12 md:pt-16 md:pb-14">
@@ -24,7 +24,7 @@ export default function Footer() {
 
           {/* Col 1 — Brand */}
           <div>
-            <p className="font-[Bai_Jamjuree] font-light text-white text-xl tracking-[0.15em] uppercase mb-2">
+            <p className="font-[Inter] font-light text-white text-xl tracking-[0.15em] uppercase mb-2">
               Common Time
             </p>
             <p className="text-[10px] uppercase tracking-[0.35em] text-white/30 mb-8">
@@ -33,7 +33,7 @@ export default function Footer() {
             <div className="space-y-3">
               {LOCATIONS.map((loc) => (
                 <div key={loc.name}>
-                  <p className="text-[11px] text-white/60 font-[Garet_Book]">{loc.name}</p>
+                  <p className="text-[11px] text-white/60 font-[Inter]">{loc.name}</p>
                   <p className="text-[10px] text-white/30 uppercase tracking-[0.15em]">{loc.area}</p>
                 </div>
               ))}
