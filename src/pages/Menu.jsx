@@ -72,31 +72,6 @@ const HINDI_MAP = {
   // Drinking Chocolate
   "DRINKING CHOCOLATE": "ड्रिंकिंग चॉकलेट",
 
-  // Baked Goods
-  "BUTTER CROISSANT": "बटर क्रोइसैन्ट",
-  "ALMOND CROISSANT": "आलमंड क्रोइसैन्ट",
-  "ESPRESSO, KAHLUA & HAZELNUT CROISSANT": "एस्प्रेसो, कहलुआ और हेज़लनट क्रोइसैन्ट",
-  "CINNAMON ROLL": "सिनमन रोल",
-  "OAT AND ANZAC COOKIE (VEGAN)": "ओट और एंजैक कुकी (शाकाहारी)",
-  "CHOCO CHIP AND SEA SALT COOKIE": "चोको चिप और सी सॉल्ट कुकी",
-  "LEMON POPPY SEED COCONUT TEA CAKE": "लेमन पॉपी सीड कोकोनट टी केक",
-  "TOMATO, OLIVE & RICCOTA CHEESE DANISH": "टोमेटो, ऑलिव और रिकाेटा चीज़ डेनिश",
-  "RASPBERRY & WHITE CHOCOLATE COOKIE": "रास्पबेरी और व्हाइट चॉकलेट कुकी",
-  "BANANA CHOCOLATE CINNAMON TEA CAKE": "बनाना चॉकलेट सिनमन टी केक",
-  "GLUTEN FREE CHOCOLATE CAKE SLICE": "ग्लूटेन फ्री चॉकलेट केक स्लाइस",
-  "LAYERED CARROT CAKE": "लेयर्ड कैरेट केक",
-  "PESTO, TOMATO AND CHEESE CROISSANT": "पेस्टो, टोमेटो और चीज़ क्रोइसैन्ट",
-  "GARLIC CHEESE CROISSANT": "गार्लिक चीज़ क्रोइसैन्ट",
-  "CHICKEN SAUSAGE AND RED BEAN CROISSANT": "चिकन सॉसेज और रेड बीन क्रोइसैन्ट",
-  "HAM, MUSTARD & CHEESE CROISSANT": "हैम, मस्टर्ड और चीज़ क्रोइसैन्ट",
-  "MUSHROOM CROISSANT": "मशरुम क्रोइसैन्ट",
-  "CAPRESE PESTO FOCACCIA SANDWICH": "कैप्रेसे पेस्टो फोकैशिया सैंडविच",
-  "MUSHROOM, ONION & CHEDDER FOCACCIA SANDWICH": "मशरूम, अनियन और चेडर फोकैशिया सैंडविच",
-  "PERI PERI COTTAGE CHEESE CIABBATA SANDWICH": "पेरी पेरी कॉटेज चीज़ सिआबाटा सैंडविच",
-  "SMOKED CHIPOTLE CHICKEN FOCACCIA SANDWICH": "स्मोक्ड चिपोटल चिकन फोकैशिया सैंडविच",
-  "AVOCADO, CUCUMBER & DILL CREAM CHEESE BAGEL": "एवोकैडो, ककड़ी और डिल क्रीम चीज़ बैगेल",
-  "CHICKEN SALAMI & CREAM CHEESE BAGEL": "चिकन सलामी और क्रीम चीज़ बैगेल",
-  "MAMA ROSA CHICKEN FOCACCIA SANDWICH": "मामा रोज़ा चिकन फोकैशिया सैंडविच"
 };
 
 // --- CUSTOM UI COMPONENTS ---
@@ -145,8 +120,7 @@ export default function Menu() {
   const wheelRef = useRef(null);
   const [headers, setHeaders] = useState({
     hot: "hot coffee", iced: "iced coffee", pour: "pourover", matcha: "matcha",
-    choc: "drinking chocolate", tea: "loose leaf tea", refresh: "refreshers",
-    bakes: "baked goods"
+    choc: "drinking chocolate", tea: "loose leaf tea", refresh: "refreshers"
   });
 
   useEffect(() => {
@@ -178,7 +152,7 @@ export default function Menu() {
   const translateMenu = async (targetLang) => {
     if (targetLang === "en") {
       setMenu(originalData);
-      setHeaders({ hot: "hot coffee", iced: "iced coffee", pour: "pourover", matcha: "matcha", choc: "drinking chocolate", tea: "loose leaf tea", refresh: "refreshers", bakes: "baked goods" });
+      setHeaders({ hot: "hot coffee", iced: "iced coffee", pour: "pourover", matcha: "matcha", choc: "drinking chocolate", tea: "loose leaf tea", refresh: "refreshers" });
       setShowSelector(false); return;
     }
 
@@ -193,8 +167,7 @@ export default function Menu() {
       { id: 3, text: "MATCHA", type: "header", key: "matcha" },
       { id: 4, text: "DRINKING CHOCOLATE", type: "header", key: "choc" },
       { id: 5, text: "LOOSE LEAF TEA", type: "header", key: "tea" },
-      { id: 6, text: "REFRESHERS", type: "header", key: "refresh" },
-      { id: 7, text: "BAKED GOODS", type: "header", key: "bakes" }
+      { id: 6, text: "REFRESHERS", type: "header", key: "refresh" }
     ];
 
     let currentId = 8;
@@ -249,8 +222,7 @@ export default function Menu() {
         matcha: getVal(3, "matcha").toLowerCase(),
         choc: getVal(4, "drinking chocolate").toLowerCase(),
         tea: getVal(5, "loose leaf tea").toLowerCase(),
-        refresh: getVal(6, "refreshers").toLowerCase(),
-        bakes: getVal(7, "baked goods").toLowerCase()
+        refresh: getVal(6, "refreshers").toLowerCase()
       });
 
       stringMap.slice(8).forEach(s => {
@@ -342,11 +314,9 @@ export default function Menu() {
           </div>
         </div>
 
-        {/* ── Page 3: Baked Goods ── */}
-        <div className="max-w-[1400px] mx-auto px-12 border-t border-gray-100 mt-10 pt-10 font-[Inter]">
-          <PageHeader />
-          <SectionHeader title={headers.bakes} /><div className="grid grid-cols-2 lg:grid-cols-4 gap-x-8">{menu.baked_goods.map((item, i) => <MenuItem key={i} {...item} />)}</div>
-          <div className="mt-24 flex justify-between items-end border-t pt-8">
+        {/* ── Footer ── */}
+        <div className="max-w-[1400px] mx-auto px-12 mt-10 pt-8 border-t border-gray-100">
+          <div className="flex justify-between items-end">
             <div className="text-[11px] text-gray-400 tracking-widest uppercase font-[Inter]">
               <p className="notranslate">@itscommontime | www.commontime.in</p>
               <p className="mt-2 notranslate">lodhi colony | vasant vihar | khan market</p>
