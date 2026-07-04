@@ -2,55 +2,75 @@ import { useState, useRef, useEffect } from "react";
 import { menuData as originalData } from "../data/menuData";
 import {motion} from  "framer-motion";
 // --- MANUAL TRANSLITERATION MAP FOR HINDI ---
-// This overrides the translation engine for specific coffee terms
 const HINDI_MAP = {
   "HOT COFFEE": "हॉट कॉफ़ी",
   "ICED COFFEE": "आइस्ड कॉफ़ी",
   "POUROVER": "पौरओवर",
   "MATCHA": "माचा",
   "DRINKING CHOCOLATE": "ड्रिंकिंग चॉकलेट",
-  "WELLNESS LOOSE LEAF TEA": "वेलनेस लूज़ लीफ टी",
-  "REFRESHERS AND SWEET TREATS": "रिफ्रेशर्स और स्वीट ट्रीट्स",
+  "LOOSE LEAF TEA": "लूज़ लीफ टी",
+  "REFRESHERS": "रिफ्रेशर्स",
   "BAKED GOODS": "बेक्ड गुड्स",
 
   // Hot Coffee
   "ESPRESSO": "एस्प्रेसो",
   "LONG BLACK": "लॉन्ग ब्लैक",
+  "SHORT LATTE": "शॉर्ट लाटे",
   "FLAT WHITE": "फ्लैट व्हाइट",
-  "COMPETITION LATTE": "कॉम्पिटिशन लाटे",
   "CAPPUCCINO": "कैपुचिनो",
   "CORTADO": "कोर्टाडो",
   "MOCHA": "मोचा",
-  "EARL GREY FLAT WHITE": "अर्ल ग्रे फ्लैट व्हाइट",
   "NUTMEG LATTE": "नटमेग लाटे",
   "SALTED CARAMEL LATTE": "सॉल्टेड कैरामेल लाटे",
   "SPANISH LATTE": "स्पैनिश लाटे",
   "HONEY CAPPUCCINO": "हनी कैपुचिनो",
 
   // Iced Coffee
+  "ICED LONG BLACK": "आइस्ड लॉन्ग ब्लैक",
   "UNSWEETENED ICED LATTE": "अनस्वीटन्ड आइस्ड लाटे",
   "COMMON TIME ICED LATTE": "कॉमन टाइम आइस्ड लाटे",
+  "ICED CAPPUCCINO": "आइस्ड कैपुचिनो",
+  "ICED AGAVE SHAKEN ESPRESSO": "आइस्ड एगेव शेकन एस्प्रेसो",
   "STRONG ICED LATTE": "स्ट्रॉन्ग आइस्ड लाटे",
-  "ICED LONG BLACK": "आइस्ड लॉन्ग ब्लैक",
   "ICED BON BON": "आइस्ड बॉन बॉन",
-  "ICED MOCHA": "आइस्ड मोचा",
-  "COLD BLACK": "कोल्ड ब्लैक",
-  "COLD BLACK BUMBLE": "कोल्ड ब्लैक बंबल",
-  "COCONUT SUGAR COLD BLACK": "कोकोनट शुगर कोल्ड ब्लैक",
-  "COCOSPRESSO": "कोकोस्प्रेसो",
-  "THE BIG APPLE": "द बिग एप्पल",
-  "MONT BLANC": "मोंट ब्लांक",
-  "ICED BROWN BUTTER LATTE": "आइस्ड ब्राउन बटर लाटे",
+  "COLD BREW": "कोल्ड ब्रू",
+  "BUMBLE COLD BREW": "बंबल कोल्ड ब्रू",
   "COLD COFFEE": "कोल्ड कॉफ़ी",
+  "MONT BLANC": "मोंट ब्लांक",
+  "THE BIG APPLE": "द बिग एप्पल",
+  "COCOSPRESSO": "कोकोस्प्रेसो",
+  "ICED MOCHA": "आइस्ड मोचा",
+  "ICED BROWN BUTTER SHAKEN LATTE": "आइस्ड ब्राउन बटर शेकन लाटे",
+  "JAPANESE COFFEE TONIC": "जापानीज़ कॉफ़ी टॉनिक",
 
-  // Matcha / Tea
-  "CLASSIC MATCHA LATTE": "क्लासिक माचा लाटे",
-  "KYOTO FIZZ": "क्योटो फ़िज़",
-  "VANILLA MATCHA LATTE": "वेनिला माचा लाटे",
-  "CHERRY MATCHA": "चेरी माचा",
-  "MONSOON (LEMON TULSI)": "मानसून (लेमन तुलसी)",
-  "MOGRA (JASMINE BLOSSOMS)": "मोगरा (जैस्मीन ब्लॉसम्स)",
-  "MUMBAI MATE": "मुंबई मेट",
+  // Pourover
+  "HOUSE POUROVER": "हाउस पौरओवर",
+  "JASMINE BLOSSOM USUCHA": "जैस्मीन ब्लॉसम उसुचा",
+  "CHERRY BOMB": "चेरी बॉम्ब",
+  "DINNER WINE": "डिनर वाइन",
+  "SANTA ANA SUNSET": "सांता अना सनसेट",
+  "ASTER": "एस्टर",
+
+  // Matcha
+  "MATCHA LATTE": "माचा लाटे",
+  "APPLE MATCHA": "एप्पल माचा",
+  "COCONUT MATCHA CLOUD": "कोकोनट माचा क्लाउड",
+  "BERRY MATCHA": "बेरी माचा",
+
+  // Tea
+  "MOGRA": "मोगरा",
+  "MONSOON LEMON TULSI": "मानसून लेमन तुलसी",
+
+  // Refreshers
+  "SPARKLING LEMONADE": "स्पार्कलिंग लेमनेड",
+  "TROPICAL LEMONADE": "ट्रॉपिकल लेमनेड",
+  "DETOX LEMONADE": "डिटॉक्स लेमनेड",
+  "HOUSE ICED TEA": "हाउस आइस्ड टी",
+  "COLD PRESSED ORANGE JUICE": "कोल्ड प्रेस्ड ऑरेंज जूस",
+  "NO ADDED SUGAR KOMBUCHA": "नो एडेड शुगर कोम्बुचा",
+
+  // Drinking Chocolate
+  "DRINKING CHOCOLATE": "ड्रिंकिंग चॉकलेट",
 
   // Baked Goods
   "BUTTER CROISSANT": "बटर क्रोइसैन्ट",
@@ -125,16 +145,14 @@ export default function Menu() {
   const wheelRef = useRef(null);
   const [headers, setHeaders] = useState({
     hot: "hot coffee", iced: "iced coffee", pour: "pourover", matcha: "matcha",
-    choc: "drinking chocolate", tea: "wellness loose leaf tea", refresh: "refreshers and sweet treats",
+    choc: "drinking chocolate", tea: "loose leaf tea", refresh: "refreshers",
     bakes: "baked goods"
   });
 
   useEffect(() => {
     if (showSelector) {
-      // --- FIX: RESET SELECTOR STATE WHEN OPENING ---
       setActiveIdx(0);
       setScrollProgress(0);
-      
       document.body.style.overflow = "hidden";
       document.documentElement.style.overflow = "hidden";
     } else {
@@ -160,7 +178,7 @@ export default function Menu() {
   const translateMenu = async (targetLang) => {
     if (targetLang === "en") {
       setMenu(originalData);
-      setHeaders({ hot: "hot coffee", iced: "iced coffee", pour: "pourover", matcha: "matcha", choc: "drinking chocolate", tea: "wellness loose leaf tea", refresh: "refreshers and sweet treats", bakes: "baked goods" });
+      setHeaders({ hot: "hot coffee", iced: "iced coffee", pour: "pourover", matcha: "matcha", choc: "drinking chocolate", tea: "loose leaf tea", refresh: "refreshers", bakes: "baked goods" });
       setShowSelector(false); return;
     }
 
@@ -174,8 +192,8 @@ export default function Menu() {
       { id: 2, text: "POUROVER", type: "header", key: "pour" },
       { id: 3, text: "MATCHA", type: "header", key: "matcha" },
       { id: 4, text: "DRINKING CHOCOLATE", type: "header", key: "choc" },
-      { id: 5, text: "WELLNESS LOOSE LEAF TEA", type: "header", key: "tea" },
-      { id: 6, text: "REFRESHERS AND SWEET TREATS", type: "header", key: "refresh" },
+      { id: 5, text: "LOOSE LEAF TEA", type: "header", key: "tea" },
+      { id: 6, text: "REFRESHERS", type: "header", key: "refresh" },
       { id: 7, text: "BAKED GOODS", type: "header", key: "bakes" }
     ];
 
@@ -195,12 +213,11 @@ export default function Menu() {
     try {
       for (let i = 0; i < stringMap.length; i += chunkSize) {
         const chunk = stringMap.slice(i, i + chunkSize);
-        
-        // --- BYPASS LOGIC FOR HINDI TRANSLITERATION ---
+
         const filteredChunk = chunk.filter(s => {
           if (targetLang === 'hi' && HINDI_MAP[s.text]) {
             finalResults[s.id] = HINDI_MAP[s.text];
-            return false; // Skip API for this specific string
+            return false;
           }
           return true;
         });
@@ -208,10 +225,10 @@ export default function Menu() {
         if (filteredChunk.length > 0) {
           const query = encodeURIComponent(filteredChunk.map(s => `${s.id}: ${s.text}`).join("\n"));
           const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=${targetLang}&dt=t&q=${query}`;
-          
+
           const response = await fetch(url);
           const result = await response.json();
-          
+
           result[0].forEach(segment => {
             if (!segment[0]) return;
             const lines = segment[0].split("\n");
@@ -231,8 +248,8 @@ export default function Menu() {
         pour: getVal(2, "pourover").toLowerCase(),
         matcha: getVal(3, "matcha").toLowerCase(),
         choc: getVal(4, "drinking chocolate").toLowerCase(),
-        tea: getVal(5, "wellness loose leaf tea").toLowerCase(),
-        refresh: getVal(6, "refreshers and sweet treats").toLowerCase(),
+        tea: getVal(5, "loose leaf tea").toLowerCase(),
+        refresh: getVal(6, "refreshers").toLowerCase(),
         bakes: getVal(7, "baked goods").toLowerCase()
       });
 
@@ -256,7 +273,7 @@ export default function Menu() {
 
   return (
     <main className="min-h-screen bg-[#FDFDFD] text-black font-[Inter] pb-32 overflow-x-hidden selection:bg-black selection:text-white">
-      
+
       {showSelector && (
         <div className="fixed inset-0 top-[70px] md:top-[85px] bg-white z-[40] flex flex-col items-center justify-center overflow-hidden animate-fadeIn">
           <div className="absolute inset-0 pointer-events-none opacity-[0.04] bg-[url('https://grainy-gradients.vercel.app/noise.svg')]"></div>
@@ -265,14 +282,12 @@ export default function Menu() {
           <div className="max-w-2xl w-full flex flex-col items-center px-6 relative z-10 ">
             <div className="flex items-center justify-center gap-12 mt-5 w-full h-[400px] relative">
               <div className="flex flex-col items-center h-72 w-10 relative">
-                
                 <div className="w-[4px] h-full bg-black/10 rounded-full"></div>
                 <div className="absolute w-4 h-4 bg-black rounded-full transition-all duration-150 ease-out left-1/2 -translate-x-1/2 shadow-2xl border-2 border-white" style={{ top: `${scrollProgress * 100}%` }}></div>
               </div>
-              
+
               <div className="relative w-80 h-full flex flex-col items-center">
                 <div className="absolute top-1/2 -translate-y-1/2 left-0 right-0 h-20 border-y border-black/[0.08] pointer-events-none bg-gray-50/30"></div>
-                
                 <div ref={wheelRef} className="h-full w-full overflow-y-scroll snap-y snap-mandatory no-scrollbar mask-fade-edges py-40">
                   {LANGUAGES.map((l, i) => {
                     const dist = Math.abs(i - activeIdx);
@@ -287,12 +302,13 @@ export default function Menu() {
                 </div>
               </div>
             </div>
-            
           </div>
         </div>
       )}
 
       <div className={`transition-all duration-1000 ease-in-out ${showSelector ? 'blur-3xl opacity-0 scale-95' : 'opacity-100 scale-100'}`}>
+
+        {/* ── Page 1: Hot + Iced Coffee ── */}
         <div className="max-w-[1400px] mx-auto px-12 pt-16">
           <PageHeader />
           <SectionHeader title={headers.hot} />
@@ -300,22 +316,33 @@ export default function Menu() {
           <SectionHeader title={headers.iced} />
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-8">{menu.iced_coffee.map((item, i) => <MenuItem key={i} {...item} />)}</div>
           <div className="flex gap-8 mt-4 notranslate font-[Inter] px-12">
-             <div><div className="flex items-center gap-2 mb-4"><div className="w-[5px] h-8 bg-black"></div><span className="text-sm font-bold uppercase tracking-wider">Add:</span></div><ul className="text-[13px] space-y-1 text-gray-700"><li>Milk lab oat/almond/coconut milk +80</li><li>Lactose free milk +0</li><li>Colombian decaf +100</li></ul></div>
-             <div><div className="flex items-center gap-2 mb-4"><div className="w-[5px] h-8 bg-black"></div><span className="text-sm font-bold uppercase tracking-wider">Make it:</span></div><ul className="text-[13px] space-y-1 text-gray-700"><li>Extra hot</li><li>Half espresso shot</li><li>Extra espresso shot +30</li></ul></div>
+            <div><div className="flex items-center gap-2 mb-4"><div className="w-[5px] h-8 bg-black"></div><span className="text-sm font-bold uppercase tracking-wider">Add:</span></div><ul className="text-[13px] space-y-1 text-gray-700"><li>Milk lab oat/almond/coconut milk +80</li><li>Lactose free milk +0</li><li>Colombian decaf +100</li></ul></div>
+            <div><div className="flex items-center gap-2 mb-4"><div className="w-[5px] h-8 bg-black"></div><span className="text-sm font-bold uppercase tracking-wider">Make it:</span></div><ul className="text-[13px] space-y-1 text-gray-700"><li>Extra hot</li><li>Half espresso shot</li><li>Extra espresso shot +30</li></ul></div>
           </div>
         </div>
-        
+
+        {/* ── Page 2: Pourover, Matcha, Chocolate, Tea, Refreshers ── */}
         <div className="max-w-[1400px] mx-auto px-12 border-t border-gray-100 mt-10 pt-10 font-[Inter]">
           <PageHeader />
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-24">
             <div>
-              <SectionHeader title={headers.pour} /><div className="mb-16"><h3 className="text-[24px] font-normal mb-2 lowercase">hot/iced</h3><p className="text-[12px] text-black font-light leading-snug">exceptional indian and international single origin coffee</p></div>
-              <SectionHeader title={headers.matcha} /><div className="grid grid-cols-2 gap-8 lg:gap-0">{menu.matcha.map((item, i) => <MenuItem key={i} {...item} />)}</div>
+              <SectionHeader title={headers.pour} />
+              <div className="grid grid-cols-2 gap-8 lg:gap-0">{menu.pourover.map((item, i) => <MenuItem key={i} {...item} />)}</div>
+              <SectionHeader title={headers.matcha} />
+              <div className="grid grid-cols-2 gap-8 lg:gap-0">{menu.matcha.map((item, i) => <MenuItem key={i} {...item} />)}</div>
             </div>
-            <div><SectionHeader title={headers.tea} /><div className="grid grid-cols-2 gap-8 lg:gap-0">{menu.tea.map((item, i) => <MenuItem key={i} {...item} />)}</div></div>
+            <div>
+              <SectionHeader title={headers.choc} />
+              <div>{menu.chocolate.map((item, i) => <MenuItem key={i} {...item} />)}</div>
+              <SectionHeader title={headers.tea} />
+              <div className="grid grid-cols-2 gap-8 lg:gap-0">{menu.tea.map((item, i) => <MenuItem key={i} {...item} />)}</div>
+              <SectionHeader title={headers.refresh} />
+              <div className="grid grid-cols-2 gap-8 lg:gap-0">{menu.refreshers.map((item, i) => <MenuItem key={i} {...item} />)}</div>
+            </div>
           </div>
         </div>
 
+        {/* ── Page 3: Baked Goods ── */}
         <div className="max-w-[1400px] mx-auto px-12 border-t border-gray-100 mt-10 pt-10 font-[Inter]">
           <PageHeader />
           <SectionHeader title={headers.bakes} /><div className="grid grid-cols-2 lg:grid-cols-4 gap-x-8">{menu.baked_goods.map((item, i) => <MenuItem key={i} {...item} />)}</div>
@@ -326,6 +353,7 @@ export default function Menu() {
             </div>
           </div>
         </div>
+
       </div>
 
       {!showSelector && (
