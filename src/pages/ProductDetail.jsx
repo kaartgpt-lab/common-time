@@ -246,7 +246,7 @@ export default function ProductDetail() {
           </div>
 
           {/* ─── Right: Product info ──────────────────────── */}
-          <div className="flex flex-col lg:pt-1">
+          <div className="flex flex-col lg:pt-1 lg:pr-10 xl:pr-16">
 
             {/* Category + subtitle */}
             <div className="flex items-center gap-3 mb-5">
@@ -353,7 +353,7 @@ export default function ProductDetail() {
                     grind
                   </p>
                   <div className="flex flex-wrap gap-2">
-                    {["espresso", "filter", "coarse", "medium", "fine"].map((g) => (
+                    {["espresso", "filter"].map((g) => (
                       <button
                         key={g}
                         onClick={() => setSelectedGrind(g)}
