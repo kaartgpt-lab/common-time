@@ -4,14 +4,14 @@ import { Link } from "react-router-dom";
 const SLIDES = [
   {
     left: {
-      image: "/hot.avif",
+      image: "/hero/hero1.jpg",
       alt: "specialty coffee",
       label: "the collection",
       heading: "specialty\ncoffee",
       cta: { text: "shop coffee", href: "/shop?category=coffee" },
     },
     right: {
-      image: "/gallery-marquee/CT-02.jpg",
+      image: "/hero/hero1-right.jpg",
       alt: "common time cafe",
       label: "new delhi",
       heading: "find us",
@@ -20,18 +20,18 @@ const SLIDES = [
   },
   {
     left: {
-      image: "/nutmeg latte.avif",
-      alt: "nutmeg latte",
+      image: "/hero/hero2.jpg",
+      alt: "crafted with care",
       label: "the ritual",
       heading: "crafted\nwith care",
       cta: { text: "shop all", href: "/shop" },
     },
     right: {
-      image: "/locations/lodhi.jpg",
-      alt: "common time lodhi colony",
-      label: "lodhi colony",
+      image: "/hero/hero2-right.jpg",
+      alt: "common time space",
+      label: "our spaces",
       heading: "visit us",
-      href: "/locations/lodhi-colony",
+      href: "/locations",
     },
   },
 ];
