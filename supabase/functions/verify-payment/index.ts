@@ -87,51 +87,50 @@ serve(async (req: Request) => {
       );
     }
 
-    /* ---------- DEV MODE ---------- */
+    /* ---------- VERIFY RAZORPAY SIGNATURE ---------- */
+    const RAZORPAY_KEY_SECRET = Deno.env.get("RAZORPAY_KEY_SECRET")!;
+    const message = `${razorpay_order_id}|${razorpay_payment_id}`;
+    const encoder = new TextEncoder();
+    const key = await crypto.subtle.importKey(
+      "raw",
+      encoder.encode(RAZORPAY_KEY_SECRET),
+      { name: "HMAC", hash: "SHA-256" },
+      false,
+      ["sign"]
+    );
+    const signatureBuffer = await crypto.subtle.sign("HMAC", key, encoder.encode(message));
+    const expectedSignature = Array.from(new Uint8Array(signatureBuffer))
+      .map((b) => b.toString(16).padStart(2, "0"))
+      .join("");
 
-    const devMode = Deno.env.get("DEV_MODE") === "true";
+    if (expectedSignature !== razorpay_signature) {
+      console.error("[verify-payment] Signature mismatch");
+      return new Response(
+        JSON.stringify({ error: "Payment signature verification failed" }),
+        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
 
-    let orderId: string;
+    /* ---------- LOOK UP ORDER BY RAZORPAY ORDER ID ---------- */
+    const { data: orderRow, error: orderLookupError } = await supabaseAdmin
+      .from("orders")
+      .select("id")
+      .eq("razorpay_order_id", razorpay_order_id)
+      .eq("user_id", userId)
+      .single();
 
-    if (devMode) {
-      // Extract order ID from dev order ID format: dev_order_<timestamp>
-      console.log("DEV MODE: Extracting order ID from:", razorpay_order_id);
-      
-      // In dev mode, we need to find the order by user_id since we don't have actual Razorpay orders
-      const { data: orders, error: ordersError } = await supabaseAdmin
-        .from("orders")
-        .select("id")
-        .eq("user_id", userId)
-        .order("created_at", { ascending: false })
-        .limit(1);
-
-      if (ordersError || !orders || orders.length === 0) {
-        return new Response(
-          JSON.stringify({ error: "Order not found" }),
-          {
-            status: 404,
-            headers: { ...corsHeaders, "Content-Type": "application/json" },
-          }
-        );
-      }
-
-      orderId = orders[0].id;
-      console.log("DEV MODE: Found order ID:", orderId);
-    } else {
-      // Production: Use razorpay_order_id as order ID
-      orderId = razorpay_order_id;
-
-      // TODO: Verify signature with Razorpay API
-      // For now, we'll trust the client provided it
-      console.log("Production mode: Would verify signature with Razorpay");
+    if (orderLookupError || !orderRow) {
+      return new Response(
+        JSON.stringify({ error: "Order not found" }),
+        { status: 404, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
     }
 
     /* ---------- UPDATE ORDER STATUS ---------- */
-
     const { data: updatedOrder, error: updateError } = await supabaseAdmin
       .from("orders")
-      .update({ status: "paid" })
-      .eq("id", orderId)
+      .update({ status: "paid", razorpay_payment_id })
+      .eq("id", orderRow.id)
       .eq("user_id", userId)
       .select("id, status")
       .single();
@@ -153,9 +152,8 @@ serve(async (req: Request) => {
     return new Response(
       JSON.stringify({
         verified: true,
-        order_id: orderId,
+        order_id: orderRow.id,
         status: updatedOrder.status,
-        dev_mode: devMode,
       }),
       {
         status: 200,
