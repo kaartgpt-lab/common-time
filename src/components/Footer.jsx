@@ -25,7 +25,7 @@ export default function Footer() {
           {/* Col 1 — Brand */}
           <div>
             <p className="font-[Inter] font-light text-white text-xl tracking-[0.15em] uppercase mb-2">
-              Common Time
+              common time
             </p>
             <p className="text-[10px] uppercase tracking-[0.35em] text-white/30 mb-8">
               specialty coffee · new delhi

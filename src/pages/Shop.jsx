@@ -18,7 +18,7 @@ const CATEGORIES = [
   {
     value: "merch",
     label: "merch",
-    sublabel: "Common Time Goods",
+    sublabel: "common time goods",
     description: "Wear it, carry it, live in it. common time branded goods.",
   },
 ];

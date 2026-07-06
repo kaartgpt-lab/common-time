@@ -53,7 +53,7 @@ const ComingSoon = () => {
         >
           {/* Top Brand Label */}
           <span className="font-[Inter] text-[10px] md:text-[12px] uppercase tracking-[0.6em] text-[#8B7355] font-bold mb-8 block italic">
-            Common Time
+            common time
           </span>
 
           {/* Main Shimmer Heading */}
@@ -66,7 +66,7 @@ const ComingSoon = () => {
           <div className="max-w-md mx-auto space-y-6 mb-16">
             <p className="font-[Inter] text-sm md:text-base text-gray-500 leading-relaxed italic">
               "We are currently refining the architecture of this space. 
-              A new perspective on the Common Time experience is arriving soon."
+              A new perspective on the common time experience is arriving soon."
             </p>
             
             {/* Minimalist Separator */}

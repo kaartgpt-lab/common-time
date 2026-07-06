@@ -31,7 +31,7 @@ const Locations = () => {
   slug: "khan-market",
   city: "Khan Market",
   area: "Rabindra Nagar",
-  description: "An elevated perspective in Delhi's premier lifestyle destination. Experience our signature brews and bakes within a minimalist, sun-drenched sanctuary.",
+  description: "hidden on the second floor above bahrisons luxe and pure home living, common time khan market is a quiet retreat from the rhythm below. reimagined as a japanese kissaten, the space brings together coffee, vinyl, jazz, and deeply personal service — an intimate pause in the heart of new delhi.",
   address: "Second Floor, 34, Above Pure Home Living, Khan Market, New Delhi 110003",
   hours: "08:00 AM — 10:00 PM",
   imageUrl: "/locations/khan.jpg",
