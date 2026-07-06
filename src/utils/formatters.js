@@ -14,7 +14,7 @@ export function slugify(str) {
  */
 export function formatPrice(paise) {
   if (paise == null || isNaN(paise)) return "₹0";
-  const rupees = paise;
+  const rupees = Math.round(paise / 100);
   return new Intl.NumberFormat("en-IN", {
     style: "currency",
     currency: "INR",
