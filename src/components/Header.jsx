@@ -146,6 +146,7 @@ export default function Header() {
           <a href="https://www.instagram.com/itscommontime" target="_blank" rel="noreferrer" className="text-[#1A1A1A] hover:opacity-70 transition-opacity">
             <FaInstagram size={18} />
           </a>
+          <CartIcon />
         </div>
       </div>
       

@@ -3,32 +3,46 @@ import { useParams, Link } from "react-router-dom";
 import { supabase } from "../services/supabase";
 import { formatPrice, slugify } from "../utils/formatters";
 import { useCart } from "../context/CartContext";
-import { BEAN_CONTENT, MERCH_CONTENT } from "../data/productContent";
+import { PRODUCT_CATALOG } from "../data/productContent";
 import toast from "react-hot-toast";
 
-const GRIND_OPTIONS = ["espresso", "filter", "coarse", "medium", "fine"];
+/* ── Roast level visual indicator ─────────────────────── */
+function RoastDots({ level }) {
+  return (
+    <div className="flex items-center gap-1.5">
+      {[1, 2, 3, 4, 5].map((i) => (
+        <span
+          key={i}
+          className={`block w-2 h-2 rounded-full transition-all ${
+            i <= level ? "bg-[#8b7355]" : "bg-[#8b7355]/15"
+          }`}
+        />
+      ))}
+    </div>
+  );
+}
 
-/* ── Placeholder when no image ─────────────────────────── */
+/* ── Diamond placeholder ───────────────────────────────── */
 function ImagePlaceholder({ name }) {
   return (
-    <div className="w-full h-full bg-[#F5F2EC] flex flex-col items-center justify-center gap-3">
-      <div className="w-8 h-8 border border-[#8b7355]/30 rotate-45" />
-      <p className="text-[9px] uppercase tracking-[0.4em] text-[#8b7355]/50 font-[Inter] text-center px-4">
+    <div className="w-full h-full bg-[#F5F2EC] flex flex-col items-center justify-center gap-4">
+      <div className="w-10 h-10 border border-[#8b7355]/20 rotate-45" />
+      <p className="text-[9px] uppercase tracking-[0.4em] text-[#8b7355]/40 font-[Inter] text-center px-6 leading-relaxed">
         {name}
       </p>
     </div>
   );
 }
 
-/* ── Characteristic row ─────────────────────────────────── */
+/* ── Characteristics row ────────────────────────────────── */
 function CharRow({ label, value }) {
   if (!value) return null;
   return (
-    <div className="flex items-baseline gap-4 py-3 border-b border-black/5 last:border-0">
-      <span className="text-[9px] uppercase tracking-[0.35em] text-black/30 font-[Inter] w-20 flex-shrink-0">
+    <div className="flex items-start gap-4 py-3 border-b border-black/5 last:border-0">
+      <span className="text-[9px] uppercase tracking-[0.3em] text-black/30 font-[Inter] w-20 flex-shrink-0 pt-0.5">
         {label}
       </span>
-      <span className="text-[12px] text-[#1a1a1a] font-[Inter] leading-snug">
+      <span className="text-[12px] text-[#1a1a1a] font-[Inter] leading-snug flex-1">
         {value}
       </span>
     </div>
@@ -39,207 +53,179 @@ function CharRow({ label, value }) {
 function SpecRow({ label, value }) {
   return (
     <div className="flex items-start gap-4 py-3 border-b border-black/5 last:border-0">
-      <span className="text-[9px] uppercase tracking-[0.35em] text-black/30 font-[Inter] w-20 flex-shrink-0 mt-0.5">
+      <span className="text-[9px] uppercase tracking-[0.3em] text-black/30 font-[Inter] w-24 flex-shrink-0 pt-0.5">
         {label}
       </span>
-      <span className="text-[12px] text-[#1a1a1a] font-[Inter] leading-relaxed">
+      <span className="text-[12px] text-[#1a1a1a] font-[Inter] leading-relaxed flex-1">
         {value}
       </span>
     </div>
   );
 }
 
+/* ── Section label ──────────────────────────────────────── */
+function SectionLabel({ children }) {
+  return (
+    <span className="text-[8px] uppercase tracking-[0.55em] text-[#8b7355] font-[Inter] font-medium">
+      {children}
+    </span>
+  );
+}
+
 export default function ProductDetail() {
   const { slug } = useParams();
-  const [product, setProduct] = useState(null);
+  const staticData = PRODUCT_CATALOG[slug] ?? null;
+
+  const [sbProduct, setSbProduct] = useState(null);      // Supabase product or false
+  const [sbLoading, setSbLoading] = useState(true);
   const [related, setRelated] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [quantity, setQuantity] = useState(1);
   const [activeImage, setActiveImage] = useState(0);
   const [selectedGrind, setSelectedGrind] = useState("espresso");
   const [selectedSize, setSelectedSize] = useState(null);
-  const [selectedWeight, setSelectedWeight] = useState(null);
+  const [selectedWeight, setSelectedWeight] = useState(
+    staticData?.packaging?.defaultSize ?? null
+  );
   const { addItem } = useCart();
 
+  const isBean = staticData?.category === "beans";
+
   useEffect(() => {
-    async function fetchProduct() {
-      if (!slug) return;
-      setLoading(true);
+    if (!slug) return;
+    setSbLoading(true);
+    setActiveImage(0);
 
-      const isUuid = /^[0-9a-f-]{36}$/i.test(slug);
-      let data = null;
+    async function fetchFromSupabase() {
+      const { data } = await supabase
+        .from("products")
+        .select("*, product_images (*)")
+        .eq("slug", slug)
+        .eq("is_active", true)
+        .maybeSingle();
 
-      if (isUuid) {
-        const res = await supabase
-          .from("products")
-          .select(`*, product_images (*)`)
-          .eq("id", slug)
-          .eq("is_active", true)
-          .single();
-        data = res.data;
-      } else {
-        const res = await supabase
-          .from("products")
-          .select(`*, product_images (*)`)
-          .eq("slug", slug)
-          .eq("is_active", true)
-          .single();
-        if (res.data) {
-          data = res.data;
-        } else {
-          const allRes = await supabase
-            .from("products")
-            .select(`*, product_images (*)`)
-            .eq("is_active", true);
-          data = (allRes.data || []).find((p) => slugify(p.name) === slug) || null;
-        }
-      }
-
-      if (!data) {
-        setProduct(null);
-        setRelated([]);
-      } else {
-        setProduct(data);
-        // Initialise weight selection from static content
-        const beanMeta = BEAN_CONTENT[data.slug || slugify(data.name)];
-        if (beanMeta) {
-          setSelectedWeight(beanMeta.packaging.defaultSize);
-        }
+      if (data) {
+        setSbProduct(data);
+        // Fetch related products
         const { data: rel } = await supabase
           .from("products")
-          .select(`*, product_images (*)`)
+          .select("*, product_images (*)")
           .eq("is_active", true)
           .eq("category", data.category)
           .neq("id", data.id)
           .limit(4);
         setRelated(rel || []);
+      } else {
+        setSbProduct(false);
+        // Related from static catalog
+        const staticRelated = Object.entries(PRODUCT_CATALOG)
+          .filter(([s, p]) => p.category === staticData?.category && s !== slug)
+          .slice(0, 4)
+          .map(([s, p]) => ({ slug: s, name: p.name, price: p.price ?? 0, category: p.category, _static: true }));
+        setRelated(staticRelated);
       }
-      setLoading(false);
+      setSbLoading(false);
     }
-    fetchProduct();
+
+    fetchFromSupabase();
   }, [slug]);
 
-  const handleAddToCart = () => {
-    if (!product) return;
-    addItem(product.id, quantity);
-    toast.success("added to cart");
-  };
-
-  /* ── Loading skeleton ─────────────────────────────────── */
-  if (loading) {
+  /* ── Not found ──────────────────────────────────────────── */
+  if (!staticData) {
     return (
-      <main className="min-h-screen bg-[#fafaf8] font-[Inter]">
-        <div className="max-w-[1200px] mx-auto px-5 md:px-8 pt-16 md:pt-24">
-          <div className="grid grid-cols-1 lg:grid-cols-[55%_45%] gap-10 lg:gap-20">
-            <div className="aspect-[4/5] bg-[#f0ede8] animate-pulse rounded-sm" />
-            <div className="space-y-5 pt-4">
-              <div className="h-2 w-16 bg-[#f0ede8] animate-pulse" />
-              <div className="h-8 w-2/3 bg-[#f0ede8] animate-pulse" />
-              <div className="h-4 w-full bg-[#f0ede8] animate-pulse" />
-              <div className="h-4 w-4/5 bg-[#f0ede8] animate-pulse" />
-            </div>
-          </div>
-        </div>
-      </main>
-    );
-  }
-
-  /* ── Not found ────────────────────────────────────────── */
-  if (!product) {
-    return (
-      <main className="min-h-screen bg-[#fafaf8] flex flex-col items-center justify-center gap-5">
+      <main className="min-h-screen bg-[#fafaf8] flex flex-col items-center justify-center gap-5 font-[Inter]">
         <div className="w-8 h-8 border border-[#8b7355]/30 rotate-45" />
-        <p className="font-[Inter] text-[#1a1a1a]/40 text-sm">product not found.</p>
-        <Link to="/shop" className="text-[9px] uppercase tracking-[0.35em] font-[Inter] text-[#8b7355]">
+        <p className="text-[#1a1a1a]/40 text-sm">product not found.</p>
+        <Link to="/shop" className="text-[9px] uppercase tracking-[0.35em] text-[#8b7355]">
           ← back to shop
         </Link>
       </main>
     );
   }
 
-  const productSlug = product.slug || slugify(product.name);
-  const isBean = product.category === "beans";
-  const beanMeta = isBean ? BEAN_CONTENT[productSlug] : null;
-  const merchMeta = !isBean ? MERCH_CONTENT[productSlug] : null;
+  /* ── Derived values ─────────────────────────────────────── */
+  const hasSupabase = !!sbProduct;
+  const canAddToCart = hasSupabase;
 
-  /* Displayed price — updates with weight selection for beans */
-  let displayedPrice = product.price; // paise from Supabase
-  if (beanMeta && selectedWeight) {
-    const staticPrice = beanMeta.packaging.prices[selectedWeight];
-    if (staticPrice != null) displayedPrice = staticPrice * 100; // convert ₹ to paise
-  }
-
-  /* Images */
+  /* Images — prefer Supabase product_images, then image_url, then static placeholder */
   const images =
-    product.product_images?.length > 0
-      ? [...product.product_images].sort((a, b) => a.position - b.position)
-      : product.image_url
-      ? [{ image_url: product.image_url }]
+    sbProduct?.product_images?.length > 0
+      ? [...sbProduct.product_images].sort((a, b) => a.position - b.position)
+      : sbProduct?.image_url
+      ? [{ image_url: sbProduct.image_url }]
       : [];
 
-  const hasImage = images.length > 0;
+  /* Price */
+  let displayedPrice = null;
+  if (isBean && selectedWeight) {
+    const staticPrice = staticData.packaging.prices[selectedWeight];
+    if (staticPrice != null) displayedPrice = staticPrice; // already in ₹
+    else if (sbProduct?.price) displayedPrice = Math.round(sbProduct.price / 100);
+  } else if (!isBean) {
+    displayedPrice = sbProduct?.price
+      ? Math.round(sbProduct.price / 100)
+      : staticData.price;
+  }
 
-  /* Tasting notes (beans from static, or from Supabase fallback) */
-  const tastingNotes =
-    beanMeta?.tastingNotes ||
-    (() => {
-      const raw = product.tasting_notes || product.notes || product.flavor_notes;
-      if (!raw) return [];
-      return Array.isArray(raw) ? raw : raw.split(",").map((n) => n.trim());
-    })();
-
-  const description = beanMeta?.intro || merchMeta?.description || product.description;
+  const handleAddToCart = () => {
+    if (!sbProduct) return;
+    addItem(sbProduct.id, quantity);
+    toast.success("added to cart");
+  };
 
   return (
     <main className="min-h-screen bg-[#fafaf8] font-[Inter]">
       <style>{`
         @keyframes fadeUp {
-          from { opacity: 0; transform: translateY(12px); }
+          from { opacity: 0; transform: translateY(14px); }
           to   { opacity: 1; transform: translateY(0); }
         }
-        .fade-up { animation: fadeUp 0.5s ease forwards; }
+        .fade-up { animation: fadeUp 0.55s ease forwards; }
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to   { opacity: 1; }
+        }
+        .fade-in { animation: fadeIn 0.4s ease forwards; }
       `}</style>
 
-      {/* ── Breadcrumb ─────────────────────────────────── */}
+      {/* ── Breadcrumb ─────────────────────────────────────── */}
       <div className="max-w-[1200px] mx-auto px-5 md:px-8 pt-8 md:pt-12">
-        <nav className="flex items-center gap-2 text-[9px] uppercase tracking-[0.3em] text-[#1a1a1a]/30 font-[Inter]">
+        <nav className="flex items-center gap-2 text-[9px] uppercase tracking-[0.3em] text-[#1a1a1a]/30">
           <Link to="/" className="hover:text-[#8b7355] transition-colors">home</Link>
           <span>·</span>
           <Link to="/shop" className="hover:text-[#8b7355] transition-colors">shop</Link>
           <span>·</span>
-          <span className="text-[#1a1a1a]/50">{product.name}</span>
+          <span className="text-[#1a1a1a]/50">{staticData.name}</span>
         </nav>
       </div>
 
-      {/* ── Main layout ────────────────────────────────── */}
-      <div className="max-w-[1200px] mx-auto px-5 md:px-8 pt-8 pb-20 md:pt-10 md:pb-32">
-        <div className="grid grid-cols-1 lg:grid-cols-[55%_45%] gap-10 lg:gap-16 fade-up">
+      {/* ═══════════════════════════════════════════════════════
+          SECTION 1 — HERO (image + product info)
+      ═══════════════════════════════════════════════════════ */}
+      <section className="max-w-[1200px] mx-auto px-5 md:px-8 pt-8 pb-16 md:pt-10 md:pb-20">
+        <div className="grid grid-cols-1 lg:grid-cols-[54%_46%] gap-10 lg:gap-16 fade-up">
 
-          {/* ═══ LEFT: Image gallery ══════════════════════ */}
+          {/* ─── Left: Image gallery ─────────────────────── */}
           <div>
-            {/* Main image */}
             <div className="aspect-[4/5] overflow-hidden bg-[#F5F2EC] relative">
-              {hasImage ? (
+              {images.length > 0 ? (
                 <img
                   src={images[activeImage]?.image_url}
-                  alt={product.name}
-                  className="w-full h-full object-cover transition-opacity duration-300"
+                  alt={staticData.name}
+                  className="w-full h-full object-cover"
                 />
               ) : (
-                <ImagePlaceholder name={product.name} />
+                <ImagePlaceholder name={staticData.name} />
               )}
-
-              {/* Bean roast badge */}
-              {beanMeta?.roast && (
-                <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1.5">
-                  <span className="text-[8px] uppercase tracking-[0.35em] text-[#8b7355] font-[Inter]">
-                    {beanMeta.roast} roast
+              {/* Roast badge */}
+              {isBean && staticData.roast && (
+                <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-2">
+                  <span className="text-[8px] uppercase tracking-[0.4em] text-[#8b7355]">
+                    {staticData.roast} roast
                   </span>
                 </div>
               )}
             </div>
-
-            {/* Thumbnail strip */}
+            {/* Thumbnails */}
             {images.length > 1 && (
               <div className="flex gap-2 mt-3">
                 {images.map((img, i) => (
@@ -249,7 +235,7 @@ export default function ProductDetail() {
                     className={`overflow-hidden flex-shrink-0 transition-all duration-200 ${
                       activeImage === i
                         ? "ring-1 ring-[#1a1a1a] opacity-100"
-                        : "opacity-40 hover:opacity-70"
+                        : "opacity-35 hover:opacity-65"
                     }`}
                   >
                     <img src={img.image_url} alt="" className="w-16 h-16 object-cover" />
@@ -259,55 +245,53 @@ export default function ProductDetail() {
             )}
           </div>
 
-          {/* ═══ RIGHT: Product info ══════════════════════ */}
+          {/* ─── Right: Product info ──────────────────────── */}
           <div className="flex flex-col lg:pt-1">
 
             {/* Category + subtitle */}
             <div className="flex items-center gap-3 mb-5">
-              <span className="text-[9px] uppercase tracking-[0.45em] text-[#8b7355] font-[Inter]">
-                {isBean ? "specialty coffee" : product.category}
-              </span>
-              {(beanMeta?.subtitle || isBean) && (
+              <SectionLabel>{isBean ? "specialty coffee" : staticData.category}</SectionLabel>
+              {staticData.subtitle && (
                 <>
-                  <span className="w-4 h-px bg-[#8b7355]/30" />
-                  <span className="text-[9px] uppercase tracking-[0.3em] text-black/25 font-[Inter]">
-                    {beanMeta?.subtitle}
+                  <span className="w-5 h-px bg-[#8b7355]/25" />
+                  <span className="text-[9px] uppercase tracking-[0.25em] text-black/25">
+                    {staticData.subtitle}
                   </span>
                 </>
               )}
             </div>
 
-            {/* Product name */}
-            <h1 className="font-[Inter] font-light text-[#1a1a1a] text-3xl md:text-4xl leading-tight tracking-tight mb-4">
-              {product.name}
+            {/* Name */}
+            <h1 className="font-[Inter] font-light text-[#1a1a1a] text-[28px] md:text-[36px] leading-tight tracking-tight mb-3">
+              {staticData.name}
             </h1>
 
-            {/* Origin line (beans) */}
-            {beanMeta?.characteristics?.origin && (
-              <p className="text-[10px] uppercase tracking-[0.25em] text-[#1a1a1a]/30 mb-5 font-[Inter]">
-                {beanMeta.characteristics.origin}
+            {/* Origin line */}
+            {isBean && staticData.characteristics?.origin && (
+              <p className="text-[10px] uppercase tracking-[0.25em] text-[#1a1a1a]/30 mb-5">
+                {staticData.characteristics.origin}
               </p>
             )}
 
-            {/* Description */}
-            <p className="text-[13px] md:text-[14px] text-[#1a1a1a]/55 leading-relaxed mb-7 font-[Inter]">
-              {description || product.description}
+            {/* Intro / Description */}
+            <p className="text-[13px] md:text-[14px] text-[#1a1a1a]/55 leading-relaxed mb-8">
+              {isBean ? staticData.intro : staticData.description}
             </p>
 
-            {/* ── BEANS: tasting notes + characteristics ── */}
-            {beanMeta && (
+            {/* ─── BEANS content ──────────────────────────── */}
+            {isBean && (
               <>
-                {/* Tasting notes */}
-                {tastingNotes.length > 0 && (
+                {/* Tasting notes pills */}
+                {staticData.tastingNotes?.length > 0 && (
                   <div className="mb-7">
-                    <p className="text-[8px] uppercase tracking-[0.45em] text-black/25 font-[Inter] mb-3">
+                    <p className="text-[8px] uppercase tracking-[0.5em] text-black/25 mb-3">
                       tasting notes
                     </p>
                     <div className="flex flex-wrap gap-2">
-                      {tastingNotes.map((note) => (
+                      {staticData.tastingNotes.map((note) => (
                         <span
                           key={note}
-                          className="text-[9px] uppercase tracking-[0.2em] text-[#8b7355] border border-[#8b7355]/25 px-3 py-1.5 font-[Inter] bg-[#8b7355]/5"
+                          className="text-[9px] uppercase tracking-[0.2em] text-[#8b7355] border border-[#8b7355]/20 px-3 py-1.5 bg-[#8b7355]/5"
                         >
                           {note}
                         </span>
@@ -318,32 +302,32 @@ export default function ProductDetail() {
 
                 {/* Characteristics */}
                 <div className="mb-7 border-t border-black/5">
-                  <CharRow label="origin" value={beanMeta.characteristics.origin} />
-                  <CharRow label="varietal" value={beanMeta.characteristics.varietal} />
-                  <CharRow label="process" value={beanMeta.characteristics.process} />
-                  <CharRow label="acidity" value={beanMeta.characteristics.acidity} />
-                  <CharRow label="body" value={beanMeta.characteristics.body} />
+                  <CharRow label="origin" value={staticData.characteristics.origin} />
+                  <CharRow label="varietal" value={staticData.characteristics.varietal} />
+                  <CharRow label="process" value={staticData.characteristics.process} />
+                  <CharRow label="acidity" value={staticData.characteristics.acidity} />
+                  <CharRow label="body" value={staticData.characteristics.body} />
                 </div>
 
-                {/* Weight + price */}
+                {/* Weight selector + price */}
                 <div className="mb-6">
                   <div className="flex items-center justify-between mb-3">
-                    <p className="text-[8px] uppercase tracking-[0.45em] text-black/25 font-[Inter]">
+                    <p className="text-[8px] uppercase tracking-[0.5em] text-black/25">
                       package size
                     </p>
                     <p className="font-[Inter] text-xl text-[#1a1a1a] tracking-tight">
-                      {displayedPrice ? `₹${Math.round(displayedPrice / 100)}` : "—"}
+                      {displayedPrice != null ? `₹${displayedPrice}` : "—"}
                     </p>
                   </div>
                   <div className="flex gap-2">
-                    {beanMeta.packaging.sizes.map((w) => {
-                      const hasPrice = beanMeta.packaging.prices[w] != null;
+                    {staticData.packaging.sizes.map((w) => {
+                      const hasPrice = staticData.packaging.prices[w] != null;
                       return (
                         <button
                           key={w}
                           onClick={() => hasPrice && setSelectedWeight(w)}
                           disabled={!hasPrice}
-                          className={`text-[10px] uppercase tracking-[0.2em] font-[Inter] px-5 py-2.5 border transition-all duration-200 ${
+                          className={`text-[10px] uppercase tracking-[0.2em] px-5 py-2.5 border transition-all duration-200 ${
                             selectedWeight === w
                               ? "bg-[#1a1a1a] text-white border-[#1a1a1a]"
                               : hasPrice
@@ -354,7 +338,7 @@ export default function ProductDetail() {
                           {w}
                           {!hasPrice && (
                             <span className="ml-1.5 text-[7px] normal-case tracking-normal opacity-60">
-                              coming soon
+                              soon
                             </span>
                           )}
                         </button>
@@ -363,17 +347,17 @@ export default function ProductDetail() {
                   </div>
                 </div>
 
-                {/* Grind */}
+                {/* Grind selector */}
                 <div className="mb-8">
-                  <p className="text-[8px] uppercase tracking-[0.45em] text-black/25 font-[Inter] mb-3">
+                  <p className="text-[8px] uppercase tracking-[0.5em] text-black/25 mb-3">
                     grind
                   </p>
                   <div className="flex flex-wrap gap-2">
-                    {beanMeta.grindOptions.concat(["coarse", "medium", "fine"]).map((g) => (
+                    {["espresso", "filter", "coarse", "medium", "fine"].map((g) => (
                       <button
                         key={g}
                         onClick={() => setSelectedGrind(g)}
-                        className={`text-[9px] uppercase tracking-[0.15em] font-[Inter] px-4 py-2 border transition-all duration-200 ${
+                        className={`text-[9px] uppercase tracking-[0.15em] px-4 py-2 border transition-all duration-200 ${
                           selectedGrind === g
                             ? "bg-[#1a1a1a] text-white border-[#1a1a1a]"
                             : "bg-white text-[#1a1a1a]/45 border-black/12 hover:border-[#1a1a1a]/40 hover:text-[#1a1a1a]"
@@ -387,30 +371,30 @@ export default function ProductDetail() {
               </>
             )}
 
-            {/* ── MERCH: specs + size ──────────────────── */}
-            {merchMeta && (
+            {/* ─── MERCH content ──────────────────────────── */}
+            {!isBean && (
               <>
                 {/* Specs */}
-                {merchMeta.specs.length > 0 && (
+                {staticData.specs?.length > 0 && (
                   <div className="mb-7 border-t border-black/5">
-                    {merchMeta.specs.map((s) => (
+                    {staticData.specs.map((s) => (
                       <SpecRow key={s.label} label={s.label} value={s.value} />
                     ))}
                   </div>
                 )}
 
-                {/* Size selector (apparel) */}
-                {merchMeta.sizeOptions && (
+                {/* Size selector */}
+                {staticData.sizeOptions && (
                   <div className="mb-7">
-                    <p className="text-[8px] uppercase tracking-[0.45em] text-black/25 font-[Inter] mb-3">
+                    <p className="text-[8px] uppercase tracking-[0.5em] text-black/25 mb-3">
                       size
                     </p>
                     <div className="flex flex-wrap gap-2">
-                      {merchMeta.sizeOptions.map((s) => (
+                      {staticData.sizeOptions.map((s) => (
                         <button
                           key={s}
                           onClick={() => setSelectedSize(s)}
-                          className={`w-11 h-11 text-[10px] uppercase tracking-[0.1em] font-[Inter] border transition-all duration-200 ${
+                          className={`w-11 h-11 text-[10px] uppercase tracking-[0.1em] border transition-all duration-200 ${
                             selectedSize === s
                               ? "bg-[#1a1a1a] text-white border-[#1a1a1a]"
                               : "bg-white text-[#1a1a1a]/50 border-black/15 hover:border-[#1a1a1a]/50 hover:text-[#1a1a1a]"
@@ -423,12 +407,12 @@ export default function ProductDetail() {
                   </div>
                 )}
 
-                {/* Collaboration credit */}
-                {merchMeta.collaboration && (
+                {/* Collaboration */}
+                {staticData.collaboration && (
                   <div className="mb-7 flex items-center gap-3">
                     <div className="w-4 h-px bg-[#8b7355]/40" />
-                    <p className="text-[9px] uppercase tracking-[0.35em] text-[#8b7355]/70 font-[Inter]">
-                      in collaboration with {merchMeta.collaboration}
+                    <p className="text-[9px] uppercase tracking-[0.35em] text-[#8b7355]/70">
+                      in collaboration with {staticData.collaboration}
                     </p>
                   </div>
                 )}
@@ -436,15 +420,14 @@ export default function ProductDetail() {
                 {/* Price */}
                 <div className="mb-8">
                   <p className="font-[Inter] text-2xl text-[#1a1a1a] tracking-tight">
-                    {formatPrice(product.price)}
+                    {displayedPrice != null ? `₹${displayedPrice}` : "—"}
                   </p>
                 </div>
               </>
             )}
 
-            {/* ── Add to cart ─────────────────────────────── */}
+            {/* ─── Add to cart ─────────────────────────────── */}
             <div className="flex gap-3 mt-auto">
-              {/* Quantity */}
               <div className="flex items-center border border-black/12 bg-white flex-shrink-0">
                 <button
                   onClick={() => setQuantity((q) => Math.max(1, q - 1))}
@@ -452,7 +435,7 @@ export default function ProductDetail() {
                 >
                   −
                 </button>
-                <span className="w-8 text-center text-[12px] font-[Inter] text-[#1a1a1a]">
+                <span className="w-8 text-center text-[12px] text-[#1a1a1a]">
                   {quantity}
                 </span>
                 <button
@@ -463,52 +446,181 @@ export default function ProductDetail() {
                 </button>
               </div>
 
-              {/* Add to cart */}
-              <button
-                onClick={handleAddToCart}
-                className="flex-1 h-12 bg-[#1a1a1a] text-white text-[9px] uppercase tracking-[0.4em] font-[Inter] hover:bg-[#8b7355] transition-colors duration-300"
-              >
-                add to cart
-              </button>
+              {canAddToCart ? (
+                <button
+                  onClick={handleAddToCart}
+                  className="flex-1 h-12 bg-[#1a1a1a] text-white text-[9px] uppercase tracking-[0.4em] hover:bg-[#8b7355] transition-colors duration-300"
+                >
+                  add to cart
+                </button>
+              ) : (
+                <button
+                  disabled
+                  className="flex-1 h-12 bg-[#f0ede8] text-[#1a1a1a]/30 text-[9px] uppercase tracking-[0.4em] cursor-not-allowed"
+                >
+                  {sbLoading ? "loading…" : "coming soon"}
+                </button>
+              )}
             </div>
 
-            {/* Shipping note */}
-            <p className="text-[9px] text-[#1a1a1a]/25 mt-4 font-[Inter] tracking-[0.1em]">
+            <p className="text-[9px] text-[#1a1a1a]/25 mt-4 tracking-[0.1em]">
               free shipping on orders above ₹999 · ships within 2–3 days
             </p>
 
           </div>
         </div>
+      </section>
 
-        {/* ── Read More (beans) ─────────────────────────── */}
-        {beanMeta?.readMore && (
-          <div className="mt-20 md:mt-28 border-t border-black/5 pt-14 max-w-2xl">
-            <p className="text-[8px] uppercase tracking-[0.5em] text-[#8b7355] font-[Inter] mb-6">
-              about this coffee
+      {/* ═══════════════════════════════════════════════════════
+          SECTION 2 — TASTING PROFILE (beans only)
+      ═══════════════════════════════════════════════════════ */}
+      {isBean && staticData.tastingNotes?.length > 0 && (
+        <section className="bg-[#F5F2EC] border-y border-black/5 py-14 md:py-20 overflow-hidden">
+          <div className="max-w-[1200px] mx-auto px-5 md:px-8">
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-10 md:gap-20">
+
+              {/* Left: label + notes */}
+              <div className="flex-1">
+                <SectionLabel>tasting profile</SectionLabel>
+                <div className="mt-5 flex flex-wrap gap-x-6 gap-y-2">
+                  {staticData.tastingNotes.map((note, i) => (
+                    <span
+                      key={note}
+                      className="font-[Inter] font-light text-[#1a1a1a] leading-none"
+                      style={{ fontSize: `${28 - i * 3}px` }}
+                    >
+                      {note}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* Right: roast level */}
+              <div className="flex-shrink-0">
+                <p className="text-[8px] uppercase tracking-[0.5em] text-black/30 mb-4">
+                  roast level
+                </p>
+                <RoastDots level={staticData.roastLevel ?? 2} />
+                <p className="text-[10px] uppercase tracking-[0.2em] text-[#8b7355] mt-2.5">
+                  {staticData.roast}
+                </p>
+              </div>
+
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* ═══════════════════════════════════════════════════════
+          SECTION 3 — THE STORY / ABOUT THIS COFFEE
+      ═══════════════════════════════════════════════════════ */}
+      {isBean && staticData.readMore && (
+        <section className="bg-white border-b border-black/5 py-16 md:py-24">
+          <div className="max-w-[1200px] mx-auto px-5 md:px-8">
+            <div className="max-w-3xl">
+              <SectionLabel>about this coffee</SectionLabel>
+              <p className="mt-6 font-[Inter] font-light text-[#1a1a1a]/65 text-[15px] md:text-[16px] leading-[1.9] tracking-[0.01em]">
+                {staticData.readMore}
+              </p>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Product story (merch) */}
+      {!isBean && staticData.story && (
+        <section className="bg-[#F5F2EC] border-y border-black/5 py-16 md:py-20">
+          <div className="max-w-[1200px] mx-auto px-5 md:px-8">
+            <div className="max-w-2xl">
+              <SectionLabel>the idea</SectionLabel>
+              <p className="mt-6 font-[Inter] font-light text-[#1a1a1a]/60 text-[15px] md:text-[16px] leading-[1.9]">
+                {staticData.story}
+              </p>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* ═══════════════════════════════════════════════════════
+          SECTION 4 — HOW TO BREW (beans only)
+      ═══════════════════════════════════════════════════════ */}
+      {isBean && staticData.howToBrew && (
+        <section className="bg-[#fafaf8] border-b border-black/5 py-16 md:py-24">
+          <div className="max-w-[1200px] mx-auto px-5 md:px-8">
+            <SectionLabel>how to brew</SectionLabel>
+            <p className="mt-2 text-[10px] uppercase tracking-[0.2em] text-black/30">
+              recommended for {staticData.howToBrew.method}
             </p>
-            <p className="font-[Inter] font-light text-[#1a1a1a]/60 text-[15px] md:text-base leading-[1.85]">
-              {beanMeta.readMore}
+
+            {/* Parameter cards */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-8 mb-8">
+              {staticData.howToBrew.params.map((p) => (
+                <div
+                  key={p.label}
+                  className="bg-white border border-black/5 px-5 py-5"
+                >
+                  <p className="text-[22px] md:text-[26px] font-light text-[#1a1a1a] tracking-tight leading-none mb-2">
+                    {p.value}
+                  </p>
+                  <p className="text-[8px] uppercase tracking-[0.45em] text-black/30">
+                    {p.label}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            {/* Brew note */}
+            <p className="text-[13px] text-[#1a1a1a]/50 leading-relaxed max-w-xl">
+              {staticData.howToBrew.note}
             </p>
           </div>
-        )}
-      </div>
+        </section>
+      )}
 
-      {/* ── Related products ──────────────────────────────── */}
+      {/* ═══════════════════════════════════════════════════════
+          SECTION 5 — COLLABORATION (merch, if applicable)
+      ═══════════════════════════════════════════════════════ */}
+      {!isBean && staticData.collaboration && (
+        <section className="bg-white border-b border-black/5 py-14 md:py-20">
+          <div className="max-w-[1200px] mx-auto px-5 md:px-8">
+            <div className="flex items-start gap-8 md:gap-16">
+              {/* Diamond mark */}
+              <div className="w-10 h-10 border border-[#8b7355]/20 rotate-45 flex-shrink-0 mt-1 hidden md:block" />
+              <div>
+                <SectionLabel>collaboration</SectionLabel>
+                <h3 className="mt-3 font-[Inter] font-light text-[#1a1a1a] text-2xl md:text-3xl tracking-tight mb-3">
+                  {staticData.collaboration}
+                </h3>
+                <p className="text-[13px] text-[#1a1a1a]/45 leading-relaxed max-w-lg">
+                  Made in collaboration with {staticData.collaboration} — a creative partnership around
+                  objects and ideas that belong in a considered everyday.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* ═══════════════════════════════════════════════════════
+          SECTION 6 — RELATED PRODUCTS
+      ═══════════════════════════════════════════════════════ */}
       {related.length > 0 && (
         <section className="bg-white border-t border-black/5 py-16 md:py-20">
           <div className="max-w-[1200px] mx-auto px-5 md:px-8">
-            <p className="text-[8px] uppercase tracking-[0.5em] text-[#8b7355] font-[Inter] mb-2">
-              you may also like
-            </p>
-            <h2 className="font-[Inter] font-light text-[#1a1a1a] text-2xl mb-10 tracking-tight">
+            <SectionLabel>you may also like</SectionLabel>
+            <h2 className="mt-3 font-[Inter] font-light text-[#1a1a1a] text-2xl md:text-3xl tracking-tight mb-10">
               more from {isBean ? "the beans collection" : "common time goods"}
             </h2>
+
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
               {related.map((p) => {
                 const pSlug = p.slug || slugify(p.name);
-                const relImg = p.product_images?.[0]?.image_url || p.image_url;
+                const relImg = p._static
+                  ? null
+                  : p.product_images?.[0]?.image_url || p.image_url || null;
+                const relPrice = p._static ? p.price : Math.round((p.price || 0) / 100);
                 return (
-                  <Link key={p.id} to={`/shop/${pSlug}`} className="group block">
+                  <Link key={pSlug} to={`/shop/${pSlug}`} className="group block">
                     <div className="aspect-[3/4] overflow-hidden bg-[#F5F2EC] mb-3 relative">
                       {relImg ? (
                         <img
@@ -520,11 +632,11 @@ export default function ProductDetail() {
                         <ImagePlaceholder name={p.name} />
                       )}
                     </div>
-                    <p className="text-[10px] uppercase tracking-[0.2em] text-[#1a1a1a] font-[Inter] leading-snug group-hover:text-[#8b7355] transition-colors">
+                    <p className="text-[10px] uppercase tracking-[0.2em] text-[#1a1a1a] leading-snug group-hover:text-[#8b7355] transition-colors">
                       {p.name}
                     </p>
-                    <p className="text-[11px] text-[#1a1a1a]/40 font-[Inter] mt-1">
-                      {formatPrice(p.price)}
+                    <p className="text-[11px] text-[#1a1a1a]/40 mt-1">
+                      {p._static ? `₹${relPrice}` : formatPrice(relPrice)}
                     </p>
                   </Link>
                 );
@@ -533,6 +645,7 @@ export default function ProductDetail() {
           </div>
         </section>
       )}
+
     </main>
   );
 }

@@ -195,7 +195,7 @@ export default function ProductCard({ product, index = 0 }) {
           </Link>
 
           {/* ── Info block ── */}
-          <Link to={`/shop/${slug}`} className="block px-2.5 pt-3 pb-3 flex-1">
+          <Link to={`/shop/${slug}`} className="block px-2.5 pt-3 pb-2 flex-1">
             {product.category && (
               <span className="block text-[8px] uppercase tracking-[0.3em] text-[#8b7355] font-[Inter] font-semibold mb-1">
                 {product.category.replace(/_/g, " ")}
@@ -204,11 +204,33 @@ export default function ProductCard({ product, index = 0 }) {
             <h3 className="text-[13px] font-light font-[Inter] text-black/85 leading-snug line-clamp-2 mb-2">
               {product.name}
             </h3>
-            <div className="flex items-center justify-end pt-2 border-t border-black/5">
+            <div className="flex items-center justify-between pt-2 border-t border-black/5">
+              <span className="text-[12px] font-[Inter] text-[#1a1a1a]/70">
+                {formatPrice(product.price)}
+              </span>
               <span className="text-[#8b7355] text-[11px] leading-none">→</span>
             </div>
           </Link>
 
+          {/* ── Add to cart button ── */}
+          <button
+            onClick={handleAddToCart}
+            className={`ct-atc-btn ${added ? "is-added" : ""} ${rippling ? "is-rippling" : ""}`}
+          >
+            {rippling && <span className="ct-ripple" />}
+            <span className="ct-atc-inner">
+              {added ? (
+                <>
+                  <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+                    <polyline points="2,7 5,10 11,3" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="ct-check" />
+                  </svg>
+                  <span className="text-[9px] uppercase tracking-[0.3em] text-white font-[Inter]">added</span>
+                </>
+              ) : (
+                <span className="text-[9px] uppercase tracking-[0.3em] text-white font-[Inter]">add to cart</span>
+              )}
+            </span>
+          </button>
 
         </div>
       </div>

@@ -9,12 +9,12 @@ export default function CartIcon() {
   return (
     <Link
       to="/cart"
-      className="relative w-9 h-9 sm:w-10 sm:h-10 grid place-items-center text-gray-900 text-lg sm:text-xl border border-gray-200 rounded-full hover:bg-gray-100 transition-colors"
+      className="relative flex items-center justify-center text-[#1A1A1A] hover:opacity-70 transition-opacity"
       title="Cart"
     >
-      <FiShoppingBag />
+      <FiShoppingBag size={18} />
       {count > 0 && (
-        <span className="absolute -top-1 -right-1 min-w-[18px] h-[18px] flex items-center justify-center bg-black text-white text-xs font-medium rounded-full px-1">
+        <span className="absolute -top-1.5 -right-1.5 min-w-[14px] h-[14px] flex items-center justify-center bg-[#8b7355] text-white text-[8px] font-medium rounded-full px-0.5 font-[Inter]">
           {count > 99 ? "99+" : count}
         </span>
       )}
