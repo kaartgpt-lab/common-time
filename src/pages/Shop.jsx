@@ -7,31 +7,7 @@ const CATEGORIES = [
     value: "all",
     label: "all",
     sublabel: "The Full Edit",
-    description: "Every drink, every bake, every bean — curated under one roof.",
-  },
-  {
-    value: "coffee",
-    label: "coffee",
-    sublabel: "The Bar",
-    description: "Espresso, cold brew, and everything in between. Crafted to order.",
-  },
-  {
-    value: "matcha",
-    label: "matcha",
-    sublabel: "Green & Clean",
-    description: "Ceremonial grade matcha in every form — hot, iced, and shaken.",
-  },
-  {
-    value: "all-day",
-    label: "all day",
-    sublabel: "Beyond Coffee",
-    description: "Chocolates, pressed juices, teas — for when you want something different.",
-  },
-  {
-    value: "bakes",
-    label: "bakes",
-    sublabel: "The Kitchen",
-    description: "Croissants, cakes, focaccia, and bagels. Baked fresh, every day.",
+    description: "Everything we carry — beans and common time goods.",
   },
   {
     value: "beans",
@@ -43,7 +19,7 @@ const CATEGORIES = [
     value: "merch",
     label: "merch",
     sublabel: "Common Time Goods",
-    description: "Wear it, carry it, live in it. CommonTime branded goods.",
+    description: "Wear it, carry it, live in it. common time branded goods.",
   },
 ];
 
@@ -63,7 +39,9 @@ export default function Shop() {
         .select(`*, product_images (*)`)
         .eq("is_active", true);
 
-      if (category !== "all") {
+      if (category === "all") {
+        query = query.in("category", ["merch", "beans"]);
+      } else {
         query = query.eq("category", category);
       }
 
@@ -147,7 +125,7 @@ export default function Shop() {
               </h1>
             </div>
             <p className="mt-4 text-sm text-black/40 font-[Inter] max-w-md leading-relaxed ml-0 md:ml-16">
-              Objects, rituals, and finishing touches — for the moments between.
+              Beans to brew at home. Goods to carry with you.
             </p>
           </div>
         </div>
