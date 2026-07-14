@@ -307,6 +307,7 @@ export default function ProductDetail() {
                   <CharRow label="process" value={staticData.characteristics.process} />
                   <CharRow label="acidity" value={staticData.characteristics.acidity} />
                   <CharRow label="body" value={staticData.characteristics.body} />
+                  <CharRow label="grind" value="Moka Pot / French Press / Whole Beans / Cold Brew / Aeropress / Pourover" />
                 </div>
 
                 {/* Weight selector + price */}
@@ -347,27 +348,6 @@ export default function ProductDetail() {
                   </div>
                 </div>
 
-                {/* Grind selector */}
-                <div className="mb-8">
-                  <p className="text-[8px] uppercase tracking-[0.5em] text-black/25 mb-3">
-                    grind
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {["espresso", "filter"].map((g) => (
-                      <button
-                        key={g}
-                        onClick={() => setSelectedGrind(g)}
-                        className={`text-[9px] uppercase tracking-[0.15em] px-4 py-2 border transition-all duration-200 ${
-                          selectedGrind === g
-                            ? "bg-[#1a1a1a] text-white border-[#1a1a1a]"
-                            : "bg-white text-[#1a1a1a]/45 border-black/12 hover:border-[#1a1a1a]/40 hover:text-[#1a1a1a]"
-                        }`}
-                      >
-                        {g}
-                      </button>
-                    ))}
-                  </div>
-                </div>
               </>
             )}
 

@@ -100,9 +100,9 @@ VALUES
     'merch', 30, true
   ),
   (
-    'Ceramic Dripper Set for Pourover',
-    'ceramic-dripper-set-for-pourover',
-    'A ceramic dripper set designed for pourover brewing. Precise, clean, and made for the ritual of a slow cup.',
+    'Ceramic Moka Pot',
+    'ceramic-moka-pot',
+    'A ceramic moka pot designed for stovetop brewing. Clean, considered, and made for the ritual of a slow cup.',
     200000, -- ₹2000 in paise
     'merch', 20, true
   ),

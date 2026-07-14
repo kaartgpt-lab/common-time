@@ -329,17 +329,17 @@ export const PRODUCT_CATALOG = {
     collaboration: "Ishita Gupta",
   },
 
-  "ceramic-dripper-set-for-pourover": {
-    name: "Ceramic Dripper Set for Pourover",
+  "ceramic-moka-pot": {
+    name: "Ceramic Moka Pot",
     category: "merch",
     price: 2000,
     description:
-      "A ceramic dripper set designed for pourover brewing. Precise, clean, and made for the ritual of a slow cup.",
+      "A ceramic moka pot designed for stovetop brewing. Clean, considered, and made for the ritual of a slow cup.",
     story:
-      "Pourover is a method that rewards attention. The right vessel makes the ritual feel considered — not just functional. This ceramic dripper set is made for those who want their brew setup to be as deliberate as the cup it produces.",
+      "Moka pot is a method that rewards patience. The right vessel makes the ritual feel considered — not just functional. This ceramic moka pot is made for those who want their brew setup to be as deliberate as the cup it produces.",
     specs: [
       { label: "Material", value: "Ceramic" },
-      { label: "Designed for", value: "Pourover brewing" },
+      { label: "Designed for", value: "Stovetop brewing" },
     ],
     sizeOptions: null,
     collaboration: null,
