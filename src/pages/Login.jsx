@@ -7,7 +7,8 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const { signIn } = useAuth();
+  const [guestLoading, setGuestLoading] = useState(false);
+  const { signIn, signInAsGuest } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from || "/";
@@ -23,6 +24,18 @@ export default function Login() {
       toast.error(err?.message || "Sign in failed");
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleGuest = async () => {
+    setGuestLoading(true);
+    try {
+      await signInAsGuest();
+      navigate(from === "/" ? "/checkout" : from, { replace: true });
+    } catch (err) {
+      toast.error(err?.message || "Guest checkout is unavailable right now");
+    } finally {
+      setGuestLoading(false);
     }
   };
 
@@ -51,12 +64,30 @@ export default function Login() {
           />
           <button
             type="submit"
-            disabled={loading}
+            disabled={loading || guestLoading}
             className="w-full bg-black text-white py-3 rounded-sm font-[Inter] text-xs tracking-[0.2em] hover:bg-gray-800 disabled:opacity-70"
           >
             {loading ? "Signing in..." : "Sign In"}
           </button>
         </form>
+
+        <div className="flex items-center gap-4 my-6">
+          <span className="h-px flex-1 bg-gray-200" />
+          <span className="text-[10px] uppercase tracking-[0.2em] text-gray-400">or</span>
+          <span className="h-px flex-1 bg-gray-200" />
+        </div>
+
+        <button
+          type="button"
+          onClick={handleGuest}
+          disabled={loading || guestLoading}
+          className="w-full border border-black py-3 rounded-sm font-[Inter] text-xs tracking-[0.2em] hover:bg-black hover:text-white transition-colors disabled:opacity-70"
+        >
+          {guestLoading ? "Please wait..." : "Continue as Guest"}
+        </button>
+        <p className="mt-3 text-center text-[11px] text-gray-400">
+          Check out without an account. You can create one later to track orders.
+        </p>
 
         <p className="mt-6 text-center text-gray-600">
           Don&apos;t have an account?{" "}

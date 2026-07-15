@@ -172,7 +172,9 @@ export default function Checkout() {
             <section>
               <div className="flex justify-between items-end mb-6">
                 <h2 className="font-[Inter] text-2xl font-light tracking-tight">Contact Information</h2>
-                <p className="text-sm opacity-70">Logged in as {user?.email}</p>
+                <p className="text-sm opacity-70">
+                  {user?.is_anonymous || !user?.email ? "Guest checkout" : `Logged in as ${user.email}`}
+                </p>
               </div>
               <div className="space-y-4">
                 <div className="flex flex-col gap-2">

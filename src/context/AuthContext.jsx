@@ -48,6 +48,12 @@ export function AuthProvider({ children }) {
   return data;
 };
 
+  const signInAsGuest = async () => {
+    const { data, error } = await supabase.auth.signInAnonymously();
+    if (error) throw error;
+    return data;
+  };
+
   const signOut = async () => {
     await supabase.auth.signOut();
   };
@@ -57,6 +63,7 @@ export function AuthProvider({ children }) {
     loading,
     signIn,
     signUp,
+    signInAsGuest,
     signOut,
   };
 
