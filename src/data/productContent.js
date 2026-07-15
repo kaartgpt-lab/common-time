@@ -30,7 +30,7 @@ export const PRODUCT_CATALOG = {
       prices: { "100g": null, "200g": 650 },
       defaultSize: "200g",
     },
-    grindOptions: ["espresso", "filter"],
+    grindOptions: ["espresso"],
     readMore:
       "Lodhi is our everyday blend — the one we built the café around and the one we keep coming back to. Named after our Lodhi Garden location, it carries a heavy body with notes of dark chocolate, a bright citrus edge and a melon sweetness that lingers long after the cup is done. It is made to be reliable. A coffee that works as espresso, as a flat white, as the pull you don't have to think about. This is the blend we'd reach for every morning.",
     howToBrew: {
@@ -69,7 +69,7 @@ export const PRODUCT_CATALOG = {
     readMore:
       "The House Pourover is our way of bringing Sirangalli home. A medium roast with a natural process, it carries malic sweetness and red berry up front, with a base of dark chocolate that grounds the cup. Familiar enough for every morning, complex enough to stay interesting. Brew it slow, let it bloom, and it rewards you with something that feels both effortless and considered. This is the coffee we recommend to most people who visit the café and ask what to take home.",
     howToBrew: {
-      method: "Pourover",
+      method: "Espresso & Filter",
       params: [
         { label: "Coffee", value: "15g" },
         { label: "Water", value: "250ml" },
@@ -100,11 +100,11 @@ export const PRODUCT_CATALOG = {
       prices: { "100g": null, "200g": 750 },
       defaultSize: "200g",
     },
-    grindOptions: ["espresso", "filter"],
+    grindOptions: ["filter"],
     readMore:
       "Jasmine Blossom is the quieter, more considered side of Sirangalli. A washed light-medium roast from Kotebetta, it has a tea-like quality that makes it feel closer to a fine tea than a conventional coffee. Jasmine and black tea float up front, followed by a gentle raspberry sweetness that drifts through as the cup cools. For those who prefer their coffee gentle, floral, and unhurried — this is the one.",
     howToBrew: {
-      method: "Pourover / Cold Brew",
+      method: "Filter",
       params: [
         { label: "Coffee", value: "15g" },
         { label: "Water", value: "250ml" },
@@ -135,11 +135,11 @@ export const PRODUCT_CATALOG = {
       prices: { "100g": 1500, "200g": null },
       defaultSize: "100g",
     },
-    grindOptions: ["espresso", "filter"],
+    grindOptions: ["filter"],
     readMore:
       "Santa Ana Sunset comes from the Bourbon variety grown in San Agustin, El Salvador — a region known for coffees with clarity and warmth. A natural process coffee with a round, full body and a delicate acidity that never overwhelms. The cup opens with fruity grape and settles into a hazelnut warmth, making it feel grounded and effortless in equal measure. An evening coffee, if there is such a thing.",
     howToBrew: {
-      method: "Pourover",
+      method: "Filter",
       params: [
         { label: "Coffee", value: "15g" },
         { label: "Water", value: "240ml" },
@@ -170,18 +170,18 @@ export const PRODUCT_CATALOG = {
       prices: { "100g": 1500, "200g": null },
       defaultSize: "100g",
     },
-    grindOptions: ["espresso", "filter"],
+    grindOptions: ["filter"],
     readMore:
       "Cherry Bomb is an expressive, vibrant Ethiopian coffee from the Tega and Tula Farm in Kaffa — one of the original heartlands of coffee. This heirloom washed coffee brings black cherry and dark chocolate to the foreground, with a full, creamy body that carries the fruit all the way through. The acidity is present but never sharp — it gives the cup life and brightness without being difficult. This is a bold cup for those who want their coffee to feel like something. It announces itself and it stays.",
     howToBrew: {
-      method: "Pourover / Espresso",
+      method: "Filter",
       params: [
         { label: "Coffee", value: "15g" },
         { label: "Water", value: "250ml" },
         { label: "Temp", value: "93–94°C" },
         { label: "Time", value: "3:30–4:00" },
       ],
-      note: "Works well as both a pourover and a light espresso pull. As espresso: 18g in, 36g out, 28–30 seconds.",
+      note: "Best as a filter brew — a clean pourover lets the sweetness and body come through. Use a medium grind and a steady, even pour.",
     },
   },
 
@@ -205,11 +205,11 @@ export const PRODUCT_CATALOG = {
       prices: { "100g": 1500, "200g": null },
       defaultSize: "100g",
     },
-    grindOptions: ["espresso", "filter"],
+    grindOptions: ["filter"],
     readMore:
       "Dinner Wine is a rich, juicy coffee with a fruit-forward profile and a layered finish. The cup brings together red grape, peach and a gentle sweetness, balanced by complex acidity and a full body. Made for those who enjoy a coffee that feels expressive, rounded, and a little unexpected. From Huila 755 in Colombia, this Castillo natural carries the character of a wine-like fermentation — deep, a little dark, with a finish that stays.",
     howToBrew: {
-      method: "Pourover",
+      method: "Filter",
       params: [
         { label: "Coffee", value: "15g" },
         { label: "Water", value: "250ml" },
@@ -240,11 +240,11 @@ export const PRODUCT_CATALOG = {
       prices: { "100g": 1500, "200g": null },
       defaultSize: "100g",
     },
-    grindOptions: ["espresso", "filter"],
+    grindOptions: ["filter"],
     readMore:
       "Aster is a gentle, refined coffee with a soft floral character and a smooth body. This natural Panama Baby Geisha from Finca Hartmann carries notes of apricot and hazelnut, with low acidity and a lingering sweetness that stays with you long after the cup is empty. Baby Geisha is a rare variety — smaller in yield, more delicate in character, and more nuanced in flavour than its full-size counterpart. A coffee made for slow mornings, for afternoons that deserve attention.",
     howToBrew: {
-      method: "Pourover",
+      method: "Filter",
       params: [
         { label: "Coffee", value: "14g" },
         { label: "Water", value: "225ml" },
