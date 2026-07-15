@@ -307,7 +307,6 @@ export default function ProductDetail() {
                   <CharRow label="process" value={staticData.characteristics.process} />
                   <CharRow label="acidity" value={staticData.characteristics.acidity} />
                   <CharRow label="body" value={staticData.characteristics.body} />
-                  <CharRow label="grind" value="Moka Pot / French Press / Whole Beans / Cold Brew / Aeropress / Pourover" />
                 </div>
 
                 {/* Weight selector + price */}
@@ -483,6 +482,12 @@ export default function ProductDetail() {
                 <RoastDots level={staticData.roastLevel ?? 2} />
                 <p className="text-[10px] uppercase tracking-[0.2em] text-[#8b7355] mt-2.5">
                   {staticData.roast}
+                </p>
+                <p className="text-[8px] uppercase tracking-[0.5em] text-black/30 mt-6 mb-1.5">
+                  grind options
+                </p>
+                <p className="text-[10px] uppercase tracking-[0.2em] text-[#1a1a1a]">
+                  Moka Pot
                 </p>
               </div>
 
