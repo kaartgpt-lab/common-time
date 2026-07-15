@@ -598,7 +598,8 @@ export default function ProductDetail() {
                 const relImg = p._static
                   ? null
                   : p.product_images?.[0]?.image_url || p.image_url || null;
-                const relPrice = p._static ? p.price : Math.round((p.price || 0) / 100);
+                // _static prices are already in ₹; Supabase prices are in paise (formatPrice divides by 100)
+                const relPrice = p._static ? p.price : (p.price || 0);
                 return (
                   <Link key={pSlug} to={`/shop/${pSlug}`} className="group block">
                     <div className="aspect-[3/4] overflow-hidden bg-[#F5F2EC] mb-3 relative">
