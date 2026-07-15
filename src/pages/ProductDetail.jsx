@@ -486,14 +486,17 @@ export default function ProductDetail() {
               {/* Left: label + notes */}
               <div className="flex-1">
                 <SectionLabel>tasting profile</SectionLabel>
-                <div className="mt-5 flex flex-wrap gap-x-6 gap-y-2">
+                <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2">
                   {staticData.tastingNotes.map((note, i) => (
-                    <span
-                      key={note}
-                      className="font-[Inter] font-light text-[#1a1a1a] leading-none"
-                      style={{ fontSize: `${28 - i * 3}px` }}
-                    >
-                      {note}
+                    <span key={note} className="flex items-center gap-x-4">
+                      {i > 0 && (
+                        <span aria-hidden className="text-[#1a1a1a]/25 text-[22px] md:text-[26px] leading-none font-light">
+                          /
+                        </span>
+                      )}
+                      <span className="font-[Inter] font-light text-[#1a1a1a] text-[22px] md:text-[26px] leading-none">
+                        {note}
+                      </span>
                     </span>
                   ))}
                 </div>
