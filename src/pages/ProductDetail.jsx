@@ -168,7 +168,10 @@ export default function ProductDetail() {
 
   const handleAddToCart = () => {
     if (!sbProduct) return;
-    addItem(sbProduct.id, quantity);
+    addItem(sbProduct.id, quantity, {
+      weight: isBean ? selectedWeight : null,
+      grind: isBean ? selectedGrind : null,
+    });
     toast.success("added to cart");
   };
 

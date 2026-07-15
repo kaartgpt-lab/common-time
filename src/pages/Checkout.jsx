@@ -258,7 +258,7 @@ export default function Checkout() {
             <h3 className="font-[Inter] text-xl font-light tracking-tight mb-8">Order Summary</h3>
             <div className="space-y-6 mb-8 max-h-[40vh] overflow-y-auto pr-2">
               {cartRows.map((row) => (
-                <div key={row.product_id} className="flex gap-4">
+                <div key={row.key} className="flex gap-4">
                   <div className="relative h-20 w-20 bg-[#493627]/10 flex-shrink-0 rounded-sm overflow-hidden">
                     <img className="h-full w-full object-cover grayscale" src={row.product.image_url} alt={row.product.name} />
                     <span className="absolute -top-1 -right-1 bg-[#493627] text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full">
@@ -268,7 +268,9 @@ export default function Checkout() {
                   <div className="flex flex-grow justify-between items-start">
                     <div>
                       <p className="font-medium text-sm">{row.product.name}</p>
-                      <p className="text-xs opacity-60 mt-1 uppercase tracking-tighter">Specialty Selection</p>
+                      <p className="text-xs opacity-60 mt-1 uppercase tracking-tighter">
+                        {[row.weight, row.grind].filter(Boolean).join(" · ") || "Specialty Selection"}
+                      </p>
                     </div>
                   </div>
                 </div>

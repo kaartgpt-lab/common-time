@@ -35,7 +35,7 @@ export default function OrderDetail() {
       // 2. Fetch items for this order
       const { data: itemsData } = await supabase
         .from("order_items")
-        .select("id, product_id, quantity, price_at_purchase")
+        .select("id, product_id, quantity, price_at_purchase, grind, weight")
         .eq("order_id", id);
 
       // 3. Fetch product details for the items
@@ -132,7 +132,9 @@ export default function OrderDetail() {
                   <p className="text-sm font-bold tracking-widest-extra uppercase mb-1">
                     {item.product?.name}
                   </p>
-                  <p className="text-xs text-[#493627]/60 tracking-normal">Specialty Selection</p>
+                  <p className="text-xs text-[#493627]/60 tracking-normal">
+                    {[item.weight, item.grind].filter(Boolean).join(" · ") || "Specialty Selection"}
+                  </p>
                   <p className="text-xs text-[#493627]/60 mt-1 uppercase tracking-widest-extra">
                     Qty: {item.quantity}
                   </p>

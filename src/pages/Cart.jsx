@@ -93,8 +93,8 @@ export default function Cart() {
             </div>
           ) : (
             cartRows.map((row) => (
-              <div 
-                key={row.product_id} 
+              <div
+                key={row.key}
                 className="flex items-start justify-between pb-8 border-b border-[#493627]/5"
               >
                 <div className="flex gap-6 md:gap-10">
@@ -113,30 +113,36 @@ export default function Cart() {
                       <h3 className="text-lg md:text-xl font-medium tracking-tight font-[Inter]">
                         {row.product.name}
                       </h3>
-                      <p className="text-[#493627]/60 text-sm mt-1 uppercase tracking-widest  font-[Inter]">
-                        Specialty Grade / Selection
-                      </p>
+                      {(row.weight || row.grind) ? (
+                        <p className="text-[#493627]/60 text-sm mt-1 uppercase tracking-widest font-[Inter]">
+                          {[row.weight, row.grind].filter(Boolean).join(" · ")}
+                        </p>
+                      ) : (
+                        <p className="text-[#493627]/60 text-sm mt-1 uppercase tracking-widest font-[Inter]">
+                          Specialty Grade / Selection
+                        </p>
+                      )}
                     </div>
 
                     {/* QUANTITY & REMOVE */}
                     <div className="flex items-center gap-6 mt-6 font-[Inter]">
                       <div className="flex items-center border border-[#493627]/10 rounded overflow-hidden">
-                        <button 
-                          onClick={() => updateQuantity(row.product_id, Math.max(1, row.quantity - 1))}
+                        <button
+                          onClick={() => updateQuantity(row.key, Math.max(1, row.quantity - 1))}
                           className="px-3 py-1 hover:bg-[#493627]/5 transition-colors"
                         >
                           <span className="text-sm font-bold">−</span>
                         </button>
                         <span className="px-4 text-sm font-medium">{row.quantity}</span>
-                        <button 
-                          onClick={() => updateQuantity(row.product_id, Math.min(row.product.stock_quantity || 99, row.quantity + 1))}
+                        <button
+                          onClick={() => updateQuantity(row.key, Math.min(row.product.stock_quantity || 99, row.quantity + 1))}
                           className="px-3 py-1 hover:bg-[#493627]/5 transition-colors"
                         >
                           <span className="text-sm font-bold">+</span>
                         </button>
                       </div>
-                      <button 
-                        onClick={() => removeItem(row.product_id)}
+                      <button
+                        onClick={() => removeItem(row.key)}
                         className="text-xs uppercase tracking-widest text-[#493627]/40 hover:text-[#493627] transition-colors"
                       >
                         Remove

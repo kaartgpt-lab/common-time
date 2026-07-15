@@ -48,7 +48,7 @@ export const PRODUCT_CATALOG = {
   "house-pourover": {
     name: "House Pourover",
     category: "beans",
-    subtitle: "everyday filter",
+    subtitle: "Designed for Espresso & Filter",
     intro: "A medium roast from Sirangalli, made for a balanced everyday pourover.",
     roast: "Medium",
     roastLevel: 3,
@@ -83,7 +83,7 @@ export const PRODUCT_CATALOG = {
   "jasmine-blossom": {
     name: "Jasmine Blossom",
     category: "beans",
-    subtitle: "floral filter",
+    subtitle: "Designed for Filter",
     intro: "A washed light-medium roast from Sirangalli Kotebetta, delicate and tea-like.",
     roast: "Light-medium",
     roastLevel: 2,
@@ -118,7 +118,7 @@ export const PRODUCT_CATALOG = {
   "santa-ana-sunset": {
     name: "Santa Ana Sunset",
     category: "beans",
-    subtitle: "single origin",
+    subtitle: "Designed for Filter",
     intro: "A Bourbon natural from San Agustin, El Salvador — round body, delicate acidity.",
     roast: "Light-medium",
     roastLevel: 2,
@@ -153,7 +153,7 @@ export const PRODUCT_CATALOG = {
   "cherry-bomb": {
     name: "Cherry Bomb",
     category: "beans",
-    subtitle: "single origin",
+    subtitle: "Designed for Filter",
     intro: "A vibrant Ethiopian coffee with black cherry, dark chocolate and a full, creamy body.",
     roast: "Medium-light",
     roastLevel: 2,
@@ -188,7 +188,7 @@ export const PRODUCT_CATALOG = {
   "dinner-wine": {
     name: "Dinner Wine",
     category: "beans",
-    subtitle: "single origin",
+    subtitle: "Designed for Filter",
     intro: "A naturally processed Colombian coffee with red grape, peach and a sweet, juicy finish.",
     roast: "Medium-light",
     roastLevel: 2,
@@ -223,7 +223,7 @@ export const PRODUCT_CATALOG = {
   aster: {
     name: "Aster",
     category: "beans",
-    subtitle: "single origin",
+    subtitle: "Designed for Filter",
     intro: "A natural Panama Baby Geisha from Finca Hartmann, floral and smooth with a soft nutty sweetness.",
     roast: "Light",
     roastLevel: 1,

@@ -12,7 +12,7 @@ import { supabaseAdmin, createUserClient } from "../_shared/supabase.ts";
 const RAZORPAY_KEY_ID = Deno.env.get("RAZORPAY_KEY_ID")!;
 const RAZORPAY_KEY_SECRET = Deno.env.get("RAZORPAY_KEY_SECRET")!;
 
-interface CartItem { product_id: string; quantity: number; }
+interface CartItem { product_id: string; quantity: number; grind?: string | null; weight?: string | null; }
 interface ShippingAddress {
   name: string; phone: string; address_line1: string;
   address_line2?: string; city: string; state: string; pincode: string;
@@ -81,7 +81,7 @@ serve(async (req: Request) => {
     );
 
     let totalPaise = 0;
-    const orderItemsRows: { product_id: string; quantity: number; price_at_purchase: number }[] = [];
+    const orderItemsRows: { product_id: string; quantity: number; price_at_purchase: number; grind: string | null; weight: string | null }[] = [];
 
     for (const item of items) {
       const product = productMap.get(item.product_id);
@@ -97,7 +97,13 @@ serve(async (req: Request) => {
         });
       }
       totalPaise += product.price * qty;
-      orderItemsRows.push({ product_id: product.id, quantity: qty, price_at_purchase: product.price });
+      orderItemsRows.push({
+        product_id: product.id,
+        quantity: qty,
+        price_at_purchase: product.price,
+        grind: typeof item.grind === "string" ? item.grind.slice(0, 40) : null,
+        weight: typeof item.weight === "string" ? item.weight.slice(0, 20) : null,
+      });
     }
 
     if (totalPaise < 100) {
