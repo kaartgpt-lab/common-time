@@ -13,15 +13,15 @@ export const PRODUCT_CATALOG = {
   "lodhi-espresso-blend": {
     name: "Lodhi Espresso Blend",
     category: "beans",
-    subtitle: "everyday espresso",
+    subtitle: "Designed for Espresso",
     intro: "Our everyday espresso blend, inspired by our first location and made for the cups we return to often.",
     roast: "Medium-dark",
     roastLevel: 4,
     tastingNotes: ["dark chocolate", "citrus", "melon sweetness"],
     characteristics: {
-      origin: null,
+      origin: "Coorg",
       varietal: null,
-      process: null,
+      process: "Washed and natural",
       acidity: null,
       body: "Heavy",
     },

@@ -81,7 +81,7 @@ export default function ProductDetail() {
   const [related, setRelated] = useState([]);
   const [quantity, setQuantity] = useState(1);
   const [activeImage, setActiveImage] = useState(0);
-  const [selectedGrind, setSelectedGrind] = useState("espresso");
+  const [selectedGrind, setSelectedGrind] = useState("Whole Beans");
   const [selectedSize, setSelectedSize] = useState(null);
   const [selectedWeight, setSelectedWeight] = useState(
     staticData?.packaging?.defaultSize ?? null
@@ -347,6 +347,28 @@ export default function ProductDetail() {
                   </div>
                 </div>
 
+                {/* Grind selector */}
+                <div className="mb-6">
+                  <p className="text-[8px] uppercase tracking-[0.5em] text-black/25 mb-3">
+                    grind
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {["Whole Beans", "Moka Pot", "French Press", "Cold Brew", "Aeropress", "Pourover"].map((g) => (
+                      <button
+                        key={g}
+                        onClick={() => setSelectedGrind(g)}
+                        className={`text-[10px] uppercase tracking-[0.15em] px-4 py-2.5 border transition-all duration-200 ${
+                          selectedGrind === g
+                            ? "bg-[#1a1a1a] text-white border-[#1a1a1a]"
+                            : "bg-white text-[#1a1a1a]/50 border-black/15 hover:border-[#1a1a1a]/50 hover:text-[#1a1a1a]"
+                        }`}
+                      >
+                        {g}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
               </>
             )}
 
@@ -482,12 +504,6 @@ export default function ProductDetail() {
                 <RoastDots level={staticData.roastLevel ?? 2} />
                 <p className="text-[10px] uppercase tracking-[0.2em] text-[#8b7355] mt-2.5">
                   {staticData.roast}
-                </p>
-                <p className="text-[8px] uppercase tracking-[0.5em] text-black/30 mt-6 mb-1.5">
-                  grind options
-                </p>
-                <p className="text-[10px] uppercase tracking-[0.2em] text-[#1a1a1a]">
-                  Moka Pot
                 </p>
               </div>
 
