@@ -1,0 +1,116 @@
+[
+  {
+    "id": "1A4qE5roibeIDGFMm8KfnAOVAO50JQ_Vy",
+    "file": "beans/aster/hero.jpg",
+    "slug": "aster",
+    "pos": 0
+  },
+  {
+    "id": "1KE3Ob99x29YhPeY9HTM-_YixFLN5ip95",
+    "file": "beans/aster/RKS05973.jpg",
+    "slug": "aster",
+    "pos": 1
+  },
+  {
+    "id": "198DsnQ9cyoHuBBAjJsV41WnY2NxNTNeV",
+    "file": "beans/aster/RKS06402.jpg",
+    "slug": "aster",
+    "pos": 2
+  },
+  {
+    "id": "1tl9oZukKCmUg1M2kuh8VEP9AC8fgLZTz",
+    "file": "beans/cherry-bomb/hero.jpg",
+    "slug": "cherry-bomb",
+    "pos": 0
+  },
+  {
+    "id": "1qLqp3Ngk73360aUOjmYiLPdDuKShHG0g",
+    "file": "beans/cherry-bomb/RKS05110.jpg",
+    "slug": "cherry-bomb",
+    "pos": 1
+  },
+  {
+    "id": "1Mo022BZBhTTK9WWzj9--qrsQsgTpmHNM",
+    "file": "beans/cherry-bomb/RKS06398.jpg",
+    "slug": "cherry-bomb",
+    "pos": 2
+  },
+  {
+    "id": "1NsA-B2KBOXAFnk6prU7QZiZiggajMQes",
+    "file": "beans/dinner-wine/hero.jpg",
+    "slug": "dinner-wine",
+    "pos": 0
+  },
+  {
+    "id": "16p7SNIZlHdonWTPv-RlKayVsyz08lHCa",
+    "file": "beans/dinner-wine/RKS06398.jpg",
+    "slug": "dinner-wine",
+    "pos": 1
+  },
+  {
+    "id": "1kM_jMGJudLW4gH5KwHB1jypvfTMIPo3D",
+    "file": "beans/house-pourover/hero.jpg",
+    "slug": "house-pourover",
+    "pos": 0
+  },
+  {
+    "id": "1T6MtMjyPrUYt2UuXwXZXSSYkR-9Q_Psh",
+    "file": "beans/house-pourover/hero-2.jpg",
+    "slug": "house-pourover",
+    "pos": 1
+  },
+  {
+    "id": "1rzVQEXzwqMLQMMcvmBWd9fjEr2MRVs5U",
+    "file": "beans/house-pourover/RKS06383.jpg",
+    "slug": "house-pourover",
+    "pos": 2
+  },
+  {
+    "id": "1cpLuOtTWmfadNpidFvR3oOS9vGhBYRhQ",
+    "file": "beans/jasmine-blossom/hero.jpg",
+    "slug": "jasmine-blossom",
+    "pos": 0
+  },
+  {
+    "id": "1eKqBpGgrhQ025p7GDSBM3ArXJdMcnjlm",
+    "file": "beans/jasmine-blossom/RKS05989.jpg",
+    "slug": "jasmine-blossom",
+    "pos": 1
+  },
+  {
+    "id": "1uqRsJJvl0qNaIiisKPf8YWhTYeY6VOg1",
+    "file": "beans/jasmine-blossom/RKS06391.jpg",
+    "slug": "jasmine-blossom",
+    "pos": 2
+  },
+  {
+    "id": "1y-klufGwcidNPRrtDtYQHpclw0Oz4X-3",
+    "file": "beans/lodhi/lodhi-hero.jpg",
+    "slug": "lodhi-espresso-blend",
+    "pos": 0
+  },
+  {
+    "id": "157BhjcdaUi8hfmS-A2ksW_6GPN750mfE",
+    "file": "beans/lodhi/RKS05986.jpg",
+    "slug": "lodhi-espresso-blend",
+    "pos": 1
+  },
+  {
+    "id": "1rCiI5aEE6tK3nI8CHFhpoLdJKk6oVRo-",
+    "file": "beans/lodhi/RKS06407.jpg",
+    "slug": "lodhi-espresso-blend",
+    "pos": 2
+  },
+  {
+    "id": "1GPjKUcsOgC3yIg515D9e2rnFPMt1u_CV",
+    "file": "beans/santa-ana-sunset/hero.jpg",
+    "slug": "santa-ana-sunset",
+    "pos": 0
+  },
+  {
+    "id": "1cLoPf7FeL1mdpBu8g1iaGQO9x4WH3oCe",
+    "file": "beans/santa-ana-sunset/RKS06386.jpg",
+    "slug": "santa-ana-sunset",
+    "pos": 1
+  }
+]
