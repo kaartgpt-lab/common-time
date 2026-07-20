@@ -3,8 +3,9 @@ import { useNavigate, Navigate } from "react-router-dom";
 import { supabase } from "../services/supabase";
 import { useAuth } from "../context/AuthContext";
 
-// ── Set your admin email here ──────────────────────────────
-const ADMIN_EMAIL = "jai@commontime.in";
+// ── Admin accounts (anyone listed here can access /admin) ──
+const ADMIN_EMAILS = ["jai@commontime.in", "sarthack0@gmail.com"];
+const isAdmin = (email) => ADMIN_EMAILS.includes((email || "").toLowerCase());
 // ──────────────────────────────────────────────────────────
 
 const CATEGORIES = ["beans", "merch", "coffee", "bakes", "matcha", "all-day"];
@@ -74,7 +75,7 @@ export default function Admin() {
   };
 
   useEffect(() => {
-    if (tab === "orders" && user?.email === ADMIN_EMAIL) fetchOrders();
+    if (tab === "orders" && isAdmin(user?.email)) fetchOrders();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tab, user?.email]);
 
@@ -184,11 +185,11 @@ export default function Admin() {
     <div className="min-h-screen flex items-center justify-center text-[11px] tracking-widest text-black/30">loading...</div>
   );
   if (!user) return <Navigate to="/login" replace />;
-  if (user.email !== ADMIN_EMAIL) return (
+  if (!isAdmin(user.email)) return (
     <div className="min-h-screen flex flex-col items-center justify-center gap-4 text-center px-6">
       <p className="text-[11px] tracking-widest text-black/40">not authorised</p>
       <p className="text-[10px] text-black/25">logged in as: <span className="text-black/50">{user.email}</span></p>
-      <p className="text-[10px] text-black/25">expected: <span className="text-black/50">{ADMIN_EMAIL}</span></p>
+      <p className="text-[10px] text-black/25">expected: <span className="text-black/50">{ADMIN_EMAILS.join(" or ")}</span></p>
     </div>
   );
 
