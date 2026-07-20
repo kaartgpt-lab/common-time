@@ -7,7 +7,7 @@ import { useAuth } from "../context/AuthContext";
 const ADMIN_EMAIL = "jai@commontime.in";
 // ──────────────────────────────────────────────────────────
 
-const CATEGORIES = ["coffee", "merchandise"];
+const CATEGORIES = ["beans", "merch", "coffee", "bakes", "matcha", "all-day"];
 
 const slugify = (str) =>
   str.toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
@@ -31,6 +31,9 @@ export default function Admin() {
   const [imgFile, setImgFile] = useState(null);
   const [imgPreview, setImgPreview] = useState("");
   const [toast, setToast] = useState(null);
+  const [tab, setTab] = useState("products"); // "products" | "orders"
+  const [orders, setOrders] = useState([]);
+  const [ordersLoading, setOrdersLoading] = useState(false);
 
   // auth guard handled via early returns below
 
@@ -58,13 +61,30 @@ export default function Admin() {
     setImgPreview(URL.createObjectURL(file));
   };
 
+  // ── Fetch orders (admin RLS policy allows reading all) ───
+  const fetchOrders = async () => {
+    setOrdersLoading(true);
+    const { data, error } = await supabase
+      .from("orders")
+      .select("*, order_items(id, quantity, price_at_purchase, grind, weight, products(name))")
+      .order("created_at", { ascending: false });
+    if (error) showToast("Could not load orders: " + error.message, "error");
+    setOrders(data || []);
+    setOrdersLoading(false);
+  };
+
+  useEffect(() => {
+    if (tab === "orders" && user?.email === ADMIN_EMAIL) fetchOrders();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [tab, user?.email]);
+
   const uploadImage = async () => {
     if (!imgFile) return form.image_url;
     const ext = imgFile.name.split(".").pop();
-    const path = `products/${Date.now()}.${ext}`;
-    const { error } = await supabase.storage.from("product-images").upload(path, imgFile, { upsert: true });
+    const path = `admin/${Date.now()}.${ext}`;
+    const { error } = await supabase.storage.from("products").upload(path, imgFile, { upsert: true });
     if (error) { showToast("Image upload failed: " + error.message, "error"); return form.image_url; }
-    const { data } = supabase.storage.from("product-images").getPublicUrl(path);
+    const { data } = supabase.storage.from("products").getPublicUrl(path);
     return data.publicUrl;
   };
 
@@ -184,19 +204,47 @@ export default function Admin() {
 
       {/* ── Header ── */}
       <div className="bg-white border-b border-black/5 px-6 md:px-12 py-5 flex items-center justify-between sticky top-0 z-50">
-        <div>
-          <p className="text-[9px] tracking-[0.35em] text-black/30 mb-0.5">common time</p>
-          <h1 className="text-sm font-[Inter] font-light tracking-tight text-black">admin panel</h1>
+        <div className="flex items-center gap-8">
+          <div>
+            <p className="text-[9px] tracking-[0.35em] text-black/30 mb-0.5">common time</p>
+            <h1 className="text-sm font-[Inter] font-light tracking-tight text-black">admin panel</h1>
+          </div>
+          <div className="flex gap-1">
+            {["products", "orders"].map((t) => (
+              <button
+                key={t}
+                onClick={() => setTab(t)}
+                className={`text-[9px] tracking-[0.3em] px-4 py-2 border transition-colors duration-200 ${
+                  tab === t
+                    ? "bg-[#1a1a1a] text-white border-[#1a1a1a]"
+                    : "bg-white text-black/40 border-black/10 hover:text-black"
+                }`}
+              >
+                {t}
+              </button>
+            ))}
+          </div>
         </div>
-        <button
-          onClick={openAdd}
-          className="bg-[#1a1a1a] text-white text-[9px] tracking-[0.3em] px-5 py-2.5 hover:bg-[#8b7355] transition-colors duration-300"
-        >
-          + add product
-        </button>
+        {tab === "products" ? (
+          <button
+            onClick={openAdd}
+            className="bg-[#1a1a1a] text-white text-[9px] tracking-[0.3em] px-5 py-2.5 hover:bg-[#8b7355] transition-colors duration-300"
+          >
+            + add product
+          </button>
+        ) : (
+          <button
+            onClick={fetchOrders}
+            className="bg-white text-black/60 border border-black/10 text-[9px] tracking-[0.3em] px-5 py-2.5 hover:text-black transition-colors duration-300"
+          >
+            refresh
+          </button>
+        )}
       </div>
 
       <div className="px-6 md:px-12 py-8">
+
+        {tab === "products" && (<>
 
         {/* ── Stats ── */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
@@ -282,6 +330,91 @@ export default function Admin() {
               </tbody>
             </table>
           </div>
+        )}
+
+        </>)}
+
+        {/* ── Orders ── */}
+        {tab === "orders" && (
+          <>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+              {[
+                { label: "total orders", val: orders.length },
+                { label: "paid", val: orders.filter((o) => o.status === "paid").length },
+                { label: "pending", val: orders.filter((o) => o.status === "pending").length },
+                { label: "revenue (paid)", val: formatPrice(orders.filter((o) => o.status === "paid").reduce((s, o) => s + (o.total_amount || 0), 0)) },
+              ].map((s) => (
+                <div key={s.label} className="bg-white border border-black/5 p-5">
+                  <p className="text-[8px] tracking-[0.3em] text-black/30 mb-2">{s.label}</p>
+                  <p className="text-2xl font-[Inter] font-light text-black">{s.val}</p>
+                </div>
+              ))}
+            </div>
+
+            {ordersLoading ? (
+              <div className="text-[11px] tracking-widest text-black/30 py-20 text-center">loading orders...</div>
+            ) : orders.length === 0 ? (
+              <div className="bg-white border border-black/5 py-20 text-center text-[11px] tracking-widest text-black/20">
+                no orders yet
+              </div>
+            ) : (
+              <div className="space-y-4">
+                {orders.map((o) => (
+                  <div key={o.id} className="bg-white border border-black/5 p-5">
+                    <div className="flex flex-wrap items-start justify-between gap-4 mb-4 pb-4 border-b border-black/5">
+                      <div>
+                        <p className="text-[8px] tracking-[0.3em] text-black/30 mb-1">
+                          {new Date(o.created_at).toLocaleString("en-IN")} · #{String(o.id).slice(0, 8)}
+                        </p>
+                        <p className="text-[13px] text-black">{o.shipping_name}</p>
+                        <p className="text-[11px] text-black/50">{o.shipping_phone}</p>
+                      </div>
+                      <div className="text-right">
+                        <span className={`inline-block text-[8px] tracking-[0.3em] px-3 py-1.5 mb-2 ${
+                          o.status === "paid" ? "bg-green-600 text-white"
+                          : o.status === "pending" ? "bg-black/10 text-black/50"
+                          : "bg-red-600 text-white"
+                        }`}>
+                          {o.status}
+                        </span>
+                        <p className="text-lg font-[Inter] font-light text-black">{formatPrice(o.total_amount || 0)}</p>
+                      </div>
+                    </div>
+
+                    <div className="grid md:grid-cols-2 gap-5">
+                      <div>
+                        <p className="text-[8px] tracking-[0.3em] text-black/30 mb-2">items</p>
+                        <div className="space-y-1.5">
+                          {(o.order_items || []).map((it) => (
+                            <div key={it.id} className="text-[12px] text-black/80">
+                              {it.quantity} × {it.products?.name || "—"}
+                              {(it.weight || it.grind) && (
+                                <span className="text-black/45">
+                                  {" "}— {[it.weight, it.grind].filter(Boolean).join(" · ")}
+                                </span>
+                              )}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                      <div>
+                        <p className="text-[8px] tracking-[0.3em] text-black/30 mb-2">ship to</p>
+                        <p className="text-[12px] text-black/70 leading-relaxed">
+                          {o.shipping_address}
+                          {o.shipping_city ? `, ${o.shipping_city}` : ""}
+                          {o.shipping_state ? `, ${o.shipping_state}` : ""}
+                          {o.shipping_pincode ? ` — ${o.shipping_pincode}` : ""}
+                        </p>
+                        {o.razorpay_payment_id && (
+                          <p className="text-[10px] text-black/35 mt-2">payment: {o.razorpay_payment_id}</p>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </>
         )}
       </div>
 
